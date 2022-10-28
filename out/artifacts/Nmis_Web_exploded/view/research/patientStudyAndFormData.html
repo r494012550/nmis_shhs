@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<style type="text/css">
+
+</style>
+<div class="easyui-layout" data-options="fit:true" style="height:400px;">
+    <div data-options="region:'north',title:'检查图像',split:true" style="height:140px;">
+    	<table id="sub_studys_dg_#(patientid)" class="easyui-datagrid"
+			data-options="singleSelect:true,fit:true,autoRowHeight:true,fitColumns:true,border:false,
+				url: '#(ctx)/research/findStudys?patientid=#(patientid)',
+				scrollbarSize:0,loadMsg:'加载中...',emptyMsg:'没有查找到检查图像数据...',">
+			<thead>
+				<tr>
+					<th data-options="field:'mods_in_study',width:50">设备类型</th>
+					<th data-options="field:'acc_no',width:100,align:'center'">检查号</th>
+					<th data-options="field:'study_desc',width:'100',align:'center'">检查描述</th>
+					<th data-options="field:'bodysite',width:'100',align:'center'">部位</th>
+					<th data-options="field:'study_datetime',width:'100',align:'center'" >检查时间</th>
+					<th data-options="field:'series_num',width:'60',align:'center'">序列数量</th>
+					<th data-options="field:'image_num',width:'60',align:'center'">图像数量</th>
+					<th data-options="field:'operate',width:80,align:'center',formatter:studys_formatter">操作</th>
+				</tr>
+			</thead>
+		</table>
+    </div>
+    <div data-options="region:'center',title:'表单数据'" style="">
+    	<table id="sub_form_datas_dg_#(patientid)" class="easyui-datagrid"
+			data-options="singleSelect:true,fit:true,autoRowHeight:true,fitColumns:true,border:false,
+				url: '#(ctx)/research/searchTestGroupDatas1?groupid=#(groupid)&patientid=#(patientid)',
+				scrollbarSize:0,loadMsg:'加载中...',emptyMsg:'没有查找到表单数据...',
+				view:groupview,
+	            groupField:'form_name',
+	            groupFormatter:groupdata_group_formatter">
+			<thead>
+				<tr>
+					<th data-options="field:'form_name',width:100,align:'center'">表单名称</th>
+					<th data-options="field:'statusdisplay',width:50,align:'center'">状态</th>
+					<th data-options="field:'patientname',width:'100',align:'center',fixed: false" >病人姓名</th>
+					<th data-options="field:'sexdisplay',width:'50',align:'center',fixed: false" >性别</th>
+					<th data-options="field:'patientid',width:'100',align:'center',fixed: false" >病人编号</th>
+					<th data-options="field:'age',width:'50',align:'center',fixed: false,formatter:age_formatter" >年龄</th>
+					<th data-options="field:'birthdate',width:'80',align:'center',fixed: false" >出生日期</th>
+					<th data-options="field:'studyid',width:'100',align:'center',fixed: false" >检查号</th>
+					<th data-options="field:'study_datetime',width:'100',align:'center',fixed: false" >检查时间</th>
+					<th data-options="field:'modality_type',width:'60',align:'center',fixed: false" >设备类型</th>
+					<th data-options="field:'studyitems',width:'100',align:'center',fixed: false" >检查项目</th>
+					<th data-options="field:'createtime',align:'center',width:100">创建时间</th>
+					<th data-options="field:'creator_name',align:'center',width:50">创建人</th>
+					<th data-options="field:'audittime',align:'center',width:100">审核时间</th>
+					<th data-options="field:'auditor_name',align:'center',width:50">审核人</th>
+					<th data-options="field:'operate',width:80,align:'center',formatter:form_data_formatter_sub">操作</th>
+				</tr>
+			</thead>
+		</table>
+    </div>
+</div>
+<script type="text/javascript">
+$(function() {
+	
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div style="padding:10px;">
+	<table style="width:420px;">
+         <tr>
+             <td style="background:#E0ECFF;width:100%;"><b>添加备注</b></td>
+         </tr>
+         <tr>
+             <td class="blank"><input id="remark_content" name="notes" class="easyui-textbox" multiline="true" 
+		style="width:100%;height:120px" prompt="可以在此输入备注信息"></td>
+         </tr>
+         <tr>
+             <td style="text-align:right;"><a class="easyui-linkbutton" style="width:80px;height:28px" 
+				onclick="savereportremark('#(studyid)',#(record))">保存</a></td>
+         </tr>
+     <table>
+
+
+
+#for(i=0;i<remarks.size();i++)
+	<table>
+         <tr>
+             <td style="background:#E0ECFF;width:150px;"><b>#(remarks.get(i).get("creator_name"))</b></td>
+             <td style="background:#E0ECFF;width:290px;"><b>#(remarks.get(i).get("modifytime"))</b></td>
+             
+         </tr>
+         <tr>
+             <td colspan="2" style="color:#FF6A00;">#(remarks.get(i).get("remarkcontent"))</td>
+         </tr>
+         <tr style="height:5px">
+             
+         </tr>
+     <table>
+#end
+
+</div>
+</body>
+</html>

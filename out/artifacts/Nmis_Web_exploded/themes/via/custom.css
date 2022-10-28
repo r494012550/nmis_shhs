@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+/*
+	statistics module
+*/
+.flex-container {
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.flex-container .item {
+	background-color: #100c2a;
+	width: 16%;
+	margin: 3px;
+	height: 80px;
+	border: 1px solid #2a2a2a;
+}
+
+.flex-container .item_header{
+	height: 22px;
+	padding: 3px;
+	font-size: 14px;
+	text-align: center;
+}
+
+.flex-container .item_body{
+	text-align: center;
+	font-size: 25px;
+}

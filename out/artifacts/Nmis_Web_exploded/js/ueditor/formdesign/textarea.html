@@ -1,0 +1,319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>文本框</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <meta name="generator" content="www.rebound.com" />
+    
+    <link rel="stylesheet" type="text/css" href="/report/themes/metro-blue/easyui.css">
+    <!--[if lte IE 6]><link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css"><link rel="stylesheet" href="leipi.style.css">
+    <![endif]
+    
+    <script type="text/javascript" src="../dialogs/internal.js"></script>-->
+</head>
+<body>
+<form id="textarea_form" method="post">
+<div style="padding:20px 10px 5px 10px;margin-left:auto;margin-right:auto;width:350px;height:300px;">
+	<div style="margin-bottom:10px">
+				<input id="orgname" class='easyui-textbox tb' label="名称：" style="width:280px;height:30px;" 
+					data-options="prompt:'请输入名称...',required:true,missingMessage:'必填'" name="name" value=""/>
+	</div>
+	
+	<div style="margin-bottom:10px">
+		<input id="orgwidth" class="easyui-numberbox tb" label="长度：" value="300" style="width:280px;height:30px;"  data-options="prompt:'请输入组件长度...'"/> px
+	</div>
+	<div style="margin-bottom:10px">
+		<input id="orgheight" class="easyui-numberbox tb" label="高度：" value="80" style="width:280px;height:30px;"  data-options="prompt:'请输入组件高度...'"/> px
+	</div>
+	<!-- 
+	<div style="margin-bottom:10px">
+				<label class="checkbox"><input id="orgrich" type="checkbox"  /> 富文本形式 </label>
+	</div> -->
+	<div style="margin-bottom:10px">
+		<input class="easyui-textbox" label="默认值：" id="orgvalue" multiline="true" data-options="prompt:'多行文本框默认值...'" value="" style="width:280px;height:100px">
+	</div>
+    <div style="margin-bottom:10px">
+       	<input id="textarea_code" class='easyui-textbox tb' label="编码：" name="code" style="width:280px;height:30px;"  
+       		data-options="prompt:'请选择编码...',required:true,missingMessage:'必填'" readonly='readonly' value=""/>
+       	<a class="easyui-linkbutton"  style="width:60px;height:28px;margin-left:3px;" onclick="openStandardCodWindow_('textarea_code')">编码</a>
+    </div>
+    <div style="margin-bottom:10px">
+    	<!-- <input class="easyui-switchbutton tb" label="必填：" style="width:110px;" id="textarea_required" gchecked="" name="required"
+    		data-options="onText:'开',offText:'关',handleText:'必填项',handleWidth:70" /> -->
+    	<input class="easyui-checkbox" id="textarea_required" name="required" label=" 必填：" labelWidth="50">
+    </div>
+    
+    <input type="hidden" name="id"  id="textareaid"/>
+    <input type="hidden" name="uid" id="textareauid"/>
+    <input type="hidden" name="html" id="textareahtml"/>
+    <input type="hidden" name="type" value="2"/>
+</div>
+</form>
+<script type="text/javascript">
+var oNode = null,thePlugins = 'textarea';
+
+$(document).ready(function(){
+	
+	if( UE.plugins[thePlugins].editdom ){
+        oNode = UE.plugins[thePlugins].editdom;
+        var gValue = oNode.getAttribute('value').replace(/&quot;/g,"\""),
+        gTitle=oNode.getAttribute('title').replace(/&quot;/g,"\""),
+        //gFontSize=oNode.getAttribute('orgfontsize'),
+        gWidth=oNode.getAttribute('orgwidth'),
+        gHeight=oNode.getAttribute('orgheight'),
+        code=oNode.getAttribute('code'),
+        //gRich=oNode.getAttribute('orgrich');
+        ret=oNode.getAttribute('required'),
+        id=oNode.getAttribute('id'),
+        uid=oNode.getAttribute('uid');
+        //console.log(ret);
+
+        
+        
+        gValue = gValue==null ? '' : gValue;
+        gTitle = gTitle==null ? '' : gTitle;
+        $('#orgvalue').val(gValue);
+        //$G('orgvalue').value = gValue;
+        $('#orgname').val(gTitle);
+        //$G('orgname').value = gTitle;
+       // if ( gRich == '1' ) {
+            //$G('orgrich').checked = true ;
+        //}
+        //$('#orgfontsize').val(gFontSize)
+        //$G('orgfontsize').value = gFontSize;
+        $('#orgwidth').val(gWidth);
+        //$G('orgwidth').value = gWidth;
+        $('#orgheight').val(gHeight);
+        $('#textarea_code').val(code);
+
+        if(ret=="required"){
+        	//$('#textarea_required').switchbutton({checked:true});
+        	$('#textarea_required').attr("data-options","checked:true");
+        }
+
+        $('#textareaid').val(id);
+        $('#textareauid').val(uid);
+        //$G('orgheight').value = gHeight;
+    }
+});
+
+oncancel = function () {
+    if( UE.plugins[thePlugins].editdom ) {
+        delete UE.plugins[thePlugins].editdom;
+    }
+    if( UE.plugins[thePlugins].editway) {
+    	delete UE.plugins[thePlugins].editway;
+    }
+};
+onok = function (editor){
+    if(!$('#orgname').val()||!$('#textarea_code').val()){
+        return false;
+    }
+    var gValue=$('#orgvalue').val().replace(/\"/g,"&quot;"),
+    gTitle=$('#orgname').textbox('getValue').replace(/\"/g,"&quot;"),
+    //gFontSize=$('#orgfontsize').val(),
+    gWidth=$('#orgwidth').val(),
+    gHeight=$('#orgheight').val(),
+    code=$('#textarea_code').val(),
+    //req=$('#textarea_required').switchbutton('options').checked,
+    req=$('#textarea_required').checkbox('options').checked,
+    id=$('#textareaid').val(),
+    uid=$('#textareauid').val();
+
+   $.getJSON( window.localStorage.ctx+"/srtemplate/checkComponentName?name="+gTitle+"&id="+$('#textareaid').val(), function(json){
+
+	   if(json.code == 0){
+			 
+			 if(json.data){
+				 $.messager.show({
+						title : '提示',
+						msg : "组件名已存在！",
+						timeout : 3000,
+						border:'thin',
+						showType : 'slide'
+				 });
+				 $('#orgname').textbox("setValue",'');
+			 }
+			 else{
+
+				 $('#textarea_form').form('submit', {
+					    url:window.localStorage.ctx+"/srtemplate/saveComponent_Input",
+					    onSubmit: function(){
+					    	if( !oNode ) {
+					        	oNode=pluginHandle.createElement("textarea","textareaComponent");
+					        	oNode.setAttribute('id','@id@');
+					            oNode.setAttribute('uid','@uid@');
+					        }
+
+					        oNode.setAttribute('title', gTitle);
+					        oNode.setAttribute('value',gValue);
+					        oNode.setAttribute('code',code);
+					        oNode.innerHTML = gValue;
+
+					        oNode.setAttribute('onchange',"textarea_onchange_handle(this);");
+					        
+					        if(req){
+					        	oNode.setAttribute('required','required');
+					        	oNode.removeAttribute('optional');
+					        }
+					        else{
+					        	oNode.setAttribute('optional','optional');
+					        	oNode.removeAttribute('required');
+					        }
+					        
+					        if( gWidth != '' ) {
+					            oNode.style.width = gWidth+ 'px';
+					            oNode.setAttribute('orgwidth',gWidth );
+					        }else{
+					            oNode.setAttribute('orgwidth', '');
+					        }
+					        if( gHeight != '' ) {
+					            oNode.style.height = gHeight+ 'px';
+					            oNode.setAttribute('orgheight',gHeight );
+					        }else{
+					            oNode.setAttribute('orgheight', '');
+					        }
+
+					        $('#textareahtml').val(oNode.outerHTML);
+					        
+					    },
+					    success:function(data){
+					    	var json = validationDataAll(data);
+					        if(json.code==0){
+					        	
+					        	if(!UE.plugins[thePlugins].editway){
+						        	if(uid!=""){
+						        		delete UE.plugins[thePlugins].editdom;
+						        	}
+						        	else{
+						        		oNode.setAttribute('id',json.data.id);
+							        	oNode.setAttribute('uid',json.data.uid);
+	
+							        	editor.execCommand('insertHtml',oNode.outerHTML);
+						        	}
+					        	}
+ 					        	else{
+ 					        		updateComponentInSRTemplate(json.data,editor);
+ 					        		delete UE.plugins[thePlugins].editdom;
+ 	 	 					    }
+ 					        	delete UE.plugins[thePlugins].editway;
+					        	
+					        	//$("#templets").datagrid('reload');
+					        	$('#admin_common_dialog').dialog('close');
+					        }
+					    }
+					});
+				 
+			 }
+	   }
+	   else{
+			$.messager.show({
+				title : '提示',msg : "发生错误！",timeout : 3000,border:'thin',showType : 'slide'
+		 	});
+		}
+
+	   
+   });
+
+/*
+    if( !oNode ) {
+        try {
+
+        	
+
+        	oNode.setAttribute("title",gTitle);
+        	oNode.setAttribute("name","textareaComponent");
+        	oNode.setAttribute("code",code);
+        	oNode.setAttribute("value",gValue);
+        	if(req){
+            	oNode.setAttribute("required","required");
+            }
+
+        	if( gWidth != '' ) {
+                oNode.setAttribute("orgwidth",gWidth);
+                oNode.style.width=gWidth+"px";
+            } else {
+                oNode.setAttribute("orgwidth","");
+            }
+            if(gHeight != '') {
+                oNode.setAttribute("orgheight",gHeight);
+                oNode.style.height=gHeight+"px";
+            } else {
+                oNode.setAttribute("orgheight","");
+            }
+        	//oNode.setAttribute("style","");
+        	
+        	oNode.value=gValue;
+
+        	console.log(oNode.outerHTML);*/
+
+            
+            /*var html = '<textarea ';
+            html += ' title = "' + gTitle + '"';
+            html += ' name = "textareaComponent"';
+            html += ' code = "' + code + '"';
+            //html += ' leipiPlugins = "'+thePlugins+'"';
+            html += ' value = "' + gValue + '"';
+            //if ( $('#orgrich') ) {
+            //    html += ' orgrich = "1"';
+            //} else {
+            //    html += ' orgrich = "0"';
+            //}
+            //if( gFontSize != '' ) {
+            //    html += ' orgfontsize = "' + gFontSize + '"';
+            //} else {
+            //    html += ' orgfontsize = ""';
+            //}
+            
+            if(req){
+            	html += ' required = "required"';
+            }
+            
+            if( gWidth != '' ) {
+                html += ' orgwidth = "' + gWidth + '"';
+            } else {
+                html += ' orgwidth = ""';
+            }
+            if(gHeight != '') {
+                html += ' orgheight = "' + gHeight + '"';
+            } else {
+                html += ' orgheight = ""';
+            }
+            
+            html += ' style = "';
+            //if( gFontSize != '' ) {
+            //    html += 'font-size:' + gFontSize + 'px;';
+            //}
+            if( gWidth != '' ) {
+                html += 'width:' + gWidth + 'px;';
+            }
+            if( gHeight != '' ) {
+                html += 'height:' + gHeight + 'px;';
+            }
+            html += '">';
+            html += gValue + '</textarea>';
+            editor.execCommand('insertHtml',html);
+        } catch (e) {
+            console.log(e)
+            try {
+                editor.execCommand('error');
+            } catch ( e ) {
+                alert('控件异常，请到 [雷劈网] 反馈或寻求帮助！');
+            }
+            return false;
+        }
+    } else {
+        
+        delete UE.plugins[thePlugins].editdom;
+    }
+
+    $('#admin_common_dialog').dialog('close');*/
+};
+</script>
+</body>
+</html>

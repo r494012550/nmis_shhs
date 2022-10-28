@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="申请科室阴阳性" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="39c6879d-1c3f-4499-a59a-79a27555413a">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="KS_Nmis_TJ.xml"/>
+	<parameter name="datefrom" class="java.lang.String"/>
+	<parameter name="dateto" class="java.lang.String"/>
+	<parameter name="where" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT appdeptname
+   ,SUM( CASE WHEN report.pos_or_neg = 'n' THEN 1 ELSE 0 END ) AS '阴性'
+   ,SUM( CASE WHEN report.pos_or_neg = 'p' THEN 1 ELSE 0 END ) AS '阳性'
+   ,CONCAT(CONVERT(decimal(18,2),SUM( CASE WHEN report.pos_or_neg = 'n' THEN 1.00 ELSE 0.00 END )*100/COUNT(*)),'%') AS '阴性率'
+   ,CONCAT(CONVERT(decimal(18,2),SUM( CASE WHEN report.pos_or_neg = 'p' THEN 1.00 ELSE 0.00 END )*100/COUNT(*)),'%') AS '阳性率'
+   ,COUNT(*) AS '总数'
+  FROM studyorder
+  INNER JOIN report ON report.studyorderfk = studyorder.id
+  WHERE reportstatus = '31' and  $P!{where} 
+  GROUP BY appdeptname]]>
+	</queryString>
+	<field name="appdeptname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="appdeptname"/>
+	</field>
+	<field name="阴性" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="阴性"/>
+	</field>
+	<field name="阳性" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="阳性"/>
+	</field>
+	<field name="阴性率" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="阴性率"/>
+	</field>
+	<field name="阳性率" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="阳性率"/>
+	</field>
+	<field name="总数" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="总数"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="170" y="1" width="221" height="31" uuid="7512cad2-20ce-4350-9061-54ee52504307"/>
+				<textElement textAlignment="Center">
+					<font fontName="宋体" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[各科室阴阳率统计]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="417" y="40" width="62" height="20" uuid="04554b9a-1039-4337-9600-f4b272ea637e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datefrom}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="491" y="40" width="62" height="20" uuid="c64cf9d4-3f4c-4a4b-959a-f121fb68d6e5"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="40" width="61" height="20" uuid="ae5a5ae1-aaaf-4b2e-9b70-529257ce2f46">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[统计时间：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="473" y="40" width="20" height="20" uuid="ab6b3b05-c31e-4c56-9606-26f903cc1466">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[至]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle>
+				<reportElement x="0" y="1" width="50" height="25" uuid="f8b07b5d-d7f7-4ab1-86fe-4d03093fc308">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="131" y="1" width="81" height="25" uuid="0f559b0e-a76e-409d-aa11-625dfae4ef18">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="212" y="1" width="81" height="25" uuid="babe880f-a207-43bb-a0be-1b3d5084763e">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="293" y="1" width="81" height="25" uuid="7e5c4f5a-9608-4d34-9290-859b06b92422">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="374" y="1" width="81" height="25" uuid="16f6c02e-413c-40c0-bab1-52687ffd1b8d">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="50" y="1" width="81" height="25" uuid="8692d4a7-6eb6-42ab-a327-4a6400b675cb">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="455" y="1" width="100" height="25" uuid="aa61d494-8d5f-453c-9337-6df56c054393">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="50" y="1" width="81" height="25" backcolor="#FFFFFF" uuid="0a94b5c8-00a2-4966-a349-21fdb3b120d2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[科室]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="131" y="1" width="81" height="25" backcolor="#FFFFFF" uuid="de4bbc41-6326-4cf0-a377-40a9dda8688d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[阴性人数]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="212" y="1" width="81" height="25" backcolor="#FFFFFF" uuid="46896635-b280-4dec-ad36-1f7109c70d14">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[阳性人数]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="293" y="1" width="81" height="25" backcolor="#FFFFFF" uuid="694808cc-403f-4c7b-88c8-a0c8b2774a47">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[阴性率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="1" width="81" height="25" backcolor="#FFFFFF" uuid="a6bdce77-f581-4492-80f0-e200eb103685">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[阳性率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="1" width="100" height="25" backcolor="#FFFFFF" uuid="097bf7f4-5e36-4b8d-8a61-d8a2f0dc9b54">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[总人数]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="50" height="25" backcolor="#FFFFFF" uuid="3bba8f11-c803-49bb-af51-96c4182f00d0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[序号]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle>
+				<reportElement x="0" y="0" width="50" height="21" uuid="c3c1420c-ef30-4ce7-9dfe-957bed09a708"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="50" y="0" width="81" height="21" uuid="17ccad8b-7e8b-4f0f-8610-f5294f031452">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="131" y="0" width="81" height="21" uuid="d2a82d53-8676-46e0-bdbf-46a9f5379bb5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="131" y="0" width="81" height="21" uuid="977e1b36-421b-4552-bdc4-d32837fc05b0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="212" y="0" width="81" height="21" uuid="b8193f8b-b92b-4868-9012-9ee3f4c36a6d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="293" y="0" width="81" height="21" uuid="28e819cd-5464-4b1a-954d-e97a2e2eedd1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="374" y="0" width="81" height="21" uuid="f9f3c4a9-4f03-4461-8176-8f96004bf6af">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="455" y="0" width="100" height="21" uuid="f291d9f1-aa12-4572-ac3e-2918cc4755ef">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="50" height="21" uuid="d32c3707-0d01-4a62-84c7-417a0e04fa13">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="50" y="0" width="81" height="21" uuid="6e3441dd-c2ce-461f-a085-abe954a7cfef">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{appdeptname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="131" y="0" width="81" height="21" uuid="163a4226-6e10-4af3-b68a-ee0750c13694">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{阴性}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="212" y="0" width="81" height="21" uuid="1b34659a-9d06-4f2e-9c21-d979a8069317">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{阳性}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="293" y="0" width="81" height="21" uuid="f9a2dec5-404e-44ac-b7ef-685e5c15504c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{阴性率}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="374" y="0" width="81" height="21" uuid="fdae04b3-c1f5-4eb1-b63d-e9570578c07a">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{阳性率}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="21" uuid="8360812f-faf7-4efa-bf9f-d0bcaa08ec61">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{总数}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="27" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="205" y="6" width="80" height="20" uuid="e0eaea29-0529-48f1-be54-21846814d907"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["第 "+$V{PAGE_NUMBER}+" 页"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="255" y="6" width="82" height="20" uuid="81a34dbc-dd2a-4166-90c4-027cbaa62335"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" / 共 " + $V{PAGE_NUMBER}+" 页"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

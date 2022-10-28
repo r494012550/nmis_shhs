@@ -1,0 +1,157 @@
+[
+	{
+		"rid": 11,
+		"name": "project_management",
+		"display_zh_CN": "项目管理",
+		"display_en_US": "Project management",
+		"module": "research_project",
+		"resource": "",
+		"children": [
+			{
+				"rid": 1101,
+				"name": "edit_project",
+				"display_zh_CN": "编辑项目",
+				"display_en_US": "Edit project",
+				"module": "research_project",
+				"resource": "/saveProject"
+			},
+			{
+				"rid": 1102,
+				"name": "delete_project",
+				"display_zh_CN": "删除项目",
+				"display_en_US": "Delete project",
+				"module": "research_project",
+				"resource": "/deleteProject"
+			},
+			{
+				"rid": 1103,
+				"name": "maintain_project_member",
+				"display_zh_CN": "添加项目成员",
+				"display_en_US": "Maintain project member",
+				"module": "research_project",
+				"resource": "/saveProjectMember"
+			},
+			{
+				"rid": 1104,
+				"name": "delete_project_member",
+				"display_zh_CN": "删除项目成员",
+				"display_en_US": "Delete project member",
+				"module": "research_project",
+				"resource": "/deleteProjectMember"
+			}
+		]
+	},{
+		"rid": 12,
+		"name": "project",
+		"display_zh_CN": "课题",
+		"display_en_US": "Project",
+		"module": "project",
+		"resource": "",
+		"children": [
+			{
+				"rid": 1201,
+				"name": "edit_testgroup",
+				"display_zh_CN": "编辑实验组",
+				"display_en_US": "Edit test group",
+				"module": "project",
+				"resource": "/saveTestGroup"
+			},
+			{
+				"rid": 1202,
+				"name": "delete_testgroup",
+				"display_zh_CN": "删除实验组",
+				"display_en_US": "Delete test group",
+				"module": "project",
+				"resource": "/deleteTestGroup"
+			},
+			{
+				"rid": 1203,
+				"name": "input_form_data",
+				"display_zh_CN": "录入表单数据",
+				"display_en_US": "Input form data",
+				"module": "project",
+				"resource": "/openForm"
+			},
+			{
+				"rid": 1204,
+				"name": "manage_project_dicom_images",
+				"display_zh_CN": "管理影像",
+				"display_en_US": "Manage project dicom images",
+				"module": "project",
+				"resource": "/manageProjectDicomImages"
+			},
+			{
+				"rid": 1205,
+				"name": "add_form_to_testgroup",
+				"display_zh_CN": "添加表单至实验组",
+				"display_en_US": "Add form template to test group",
+				"module": "project",
+				"resource": "/addFormToGroup"
+			},
+			{
+				"rid": 1206,
+				"name": "submit_form_data",
+				"display_zh_CN": "提交表单",
+				"display_en_US": "Submit form data",
+				"module": "project",
+				"resource": "/submitFormData"
+			},
+			{
+				"rid": 1207,
+				"name": "audit_form_data",
+				"display_zh_CN": "审核表单",
+				"display_en_US": "Audit form data",
+				"module": "project",
+				"resource": "/auditFormData"
+			},
+			{
+				"rid": 1208,
+				"name": "cancel_audit_form_data",
+				"display_zh_CN": "取消审核表单",
+				"display_en_US": "Cancel audit form data",
+				"module": "project",
+				"resource": "/cancelAuditFormData"
+			},
+			{
+				"rid": 1209,
+				"name": "audit_form_data_batch",
+				"display_zh_CN": "批量审核表单",
+				"display_en_US": "Audit form data batch",
+				"module": "project",
+				"resource": "/auditFormDataBatch"
+			},
+			{
+				"rid": 1210,
+				"name": "delete_form_data",
+				"display_zh_CN": "删除表单",
+				"display_en_US": "Delete form data",
+				"module": "project",
+				"resource": "/deleteFormData"
+			},
+			{
+				"rid": 1211,
+				"name": "delete_form_data_batch",
+				"display_zh_CN": "批量删除表单",
+				"display_en_US": "Delete form data batch",
+				"module": "project",
+				"resource": "/deleteFormDataBatch"
+			},
+			{
+				"rid": 1212,
+				"name": "import_form_data_excel",
+				"display_zh_CN": "导入表单数据",
+				"display_en_US": "Import form data by excel",
+				"module": "project",
+				"resource": "/importFormData"
+			},
+			{
+				"rid": 1213,
+				"name": "export_testgroup_data_excel",
+				"display_zh_CN": "导出实验组数据至excel",
+				"display_en_US": "Export data to excel",
+				"module": "project",
+				"resource": "/exportFormData"
+			}
+		]
+	}
+]		

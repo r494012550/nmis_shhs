@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="easyui-panel" data-options="fit:true,border:false" style="padding:10px;">
+		<div class="easyui-layout" data-options="fit:true,border:false">
+			<div data-options="region:'north',split:true,collapsible:false" title="第一步：选择领域" style="height:140px;">
+				<div class="easyui-datalist" data-options="fit:true,textField:'name',valueField:'id',border:false,
+			         url: 'srtemplate/getDomains',onSelect:on_select_domain">
+				</div>
+			</div>
+			<div data-options="region:'center',title:'第二步：选择模型'">
+				<div class="easyui-datalist" id="newform_models_dg" data-options="fit:true,textField:'name',valueField:'id',border:false,emptyMsg: '请选择领域...'">
+			    </div>
+			</div>	
+		</div>
+	</div>
+</body>
+</html>

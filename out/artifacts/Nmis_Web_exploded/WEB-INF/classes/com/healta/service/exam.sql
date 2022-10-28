@@ -1,0 +1,3 @@
+#sql("queueup_node")
+select patient.patientname,admission.patientsource,studyorder.studyid,studyorder.sequencenumber,studyorder.modality_type,studyorder.modalityid,(select modality_name from dic_modality where dic_modality.id=studyorder.modalityid) as modality_name,(select location from dic_modality where dic_modality.id=studyorder.modalityid) as location from patient,admission,studyorder where patient.id=admission.patientidfk and admission.id=studyorder.admissionidfk and studyorder.id=?
+#end

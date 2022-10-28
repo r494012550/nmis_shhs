@@ -1,0 +1,240 @@
+<style type="text/css">
+        .right_shift{
+            float:left;
+            width:100%;
+            overflow-y: auto;
+			overflow-x: hidden;
+        }
+        
+        .right_shift td.drop{
+        	text-align:center;
+            border:1px solid #CCC;
+            background:#fafafa;
+            color:#444;
+            width:11%;
+            height:100px
+        }
+        .right_shift td.undrop{
+            background:#808080;
+            width:130px;
+            height:80px
+        }
+        .right_shift td.over{
+            background:#FBEC88;
+        }
+        
+        /* .shift_shift{
+            text-align:center;
+            border:1px solid #CCC;
+            background:#fafafa;
+            color:#444;
+            width:11%;
+            height:90px
+        } */
+        .worktimes_shift{
+        	width:5%;
+        	text-align:center;
+        	border:1px solid #CCC;
+        	color: #888888;
+        }
+        .blank_shift{
+        	width:5%;
+        }
+        /* .assigned{
+            border:1px solid #BC2A4D;
+        } 
+        .trash{
+            background-color:red;
+        } */
+        .title_shift{
+        	text-align:center;
+        	width:11%;
+        	height:40px;
+        	color: #888888;
+        }
+        
+        .employee_shift{
+        	float:left;
+        	text-align:center;
+            color:#444;
+            width:70px;
+            height:40px;
+            line-height: 40px;
+        }
+        .employee_container_shift{
+        	float:left;
+        	border:1px solid #CCC;
+        	margin-bottom:5px;
+            margin-right:5px;
+            background:#FFFFFF;
+        }
+        
+</style>
+<script>
+var edititem_shift;
+var editemp_shift;
+$(function(){
+	$('.employee_shift').draggable({
+		revert:true,
+		proxy : function(source){
+			if($("#employees_list_div .checkbox-checked").length == 0||!$("#select_employee_"+$(source).attr("emid")).checkbox('options').checked){
+				var clone = $(source).clone();
+				clone.insertBefore($(source));
+				return clone;
+			}else{
+				var div = $("<div/>");
+				$("#employees_list_div .checkbox-checked").each(function(){
+					var emid=$(this).parent('span').children('input')[0].value.split('-')[0];
+					var clone = $('#employee_shift_'+emid).clone();
+					div.append(clone);
+				});
+				div.insertBefore($(source));
+				return div;
+			}
+		}
+	});
+            
+		$('.right_shift td.drop').droppable({
+			accept: '.employee_shift',
+			onDragEnter:function(){
+				$(this).addClass('over');
+			},
+           	onDragLeave:function(){
+               	$(this).removeClass('over');
+           	},
+           	onDrop:function(e,source){
+           		$(this).removeClass('over');
+           		var td=$(this);
+				if($("#employees_list_div .checkbox-checked").length == 0||!$("#select_employee_"+$(source).attr("emid")).checkbox('options').checked){
+					console.log(td.has("[emid='"+$(source).attr("emid")+"']"))
+					if(td.has("[emid='"+$(source).attr("emid")+"']").length==0){
+                		if(checkOverlaps($(source).attr("emid"),td)){
+                			_message("时间冲突！");
+              			} else {
+                 			var str="<a class='easyui-menubutton' data-options='menu:\"#mm_shift_item\",showEvent:\"click\",hasDownArrow:false' emid='"
+                  			+$(source).attr("emid")+"' style='height:20px' onClick='editemp_shift=this;'>"+$(source).attr("emname")+"</a>";
+                 			saveDeptShiftWork($(source).attr("userid"),$(source).attr("emid"),td,str);
+              			}
+               		}
+				} else {
+					var str="";
+					var userids="";
+					var emids="";
+					$("#employees_list_div .checkbox-checked").each(function(){
+						var val=$(this).parent('span').children('input')[0].value;
+						var emid=val.split('-')[0];
+						var userid=val.split('-')[1];
+						if(td.has("[emid='"+emid+"']").length==0){
+							if(checkOverlaps(emid,td)){
+	                    		_message("时间冲突！");
+			                } else {
+								str+="<a class='easyui-menubutton' data-options='menu:\"#mm_shift_item\",showEvent:\"click\",hasDownArrow:false' emid='"
+	    							+$('#employee_shift_'+emid).attr("emid")+"' style='height:20px' onClick='editemp_shift=this;'>"+$('#employee_shift_'+emid).attr("emname")+"</a>";
+								emids+=emid+",";
+								userids+=userid+",";
+			                }
+						}
+					});
+					if(userids){
+						saveDeptShiftWork(userids,emids,td,str);	
+	   				}
+				}
+			}
+		});
+
+		$('.right_shift td.drop').bind('contextmenu',function(e){
+			edititem_shift=e.target;
+			e.preventDefault();
+			$('#mm_shift_td').menu('show', {
+				left: e.pageX,
+				top: e.pageY
+				});
+            });
+		});
+    </script>
+
+<div class="right_shift">
+	<table style="background:#ebeced;width:100%;margin-left: -1px;">
+	    <tr>
+	        <td class="blank_shift"></td>
+	        <td class="blank_shift"></td>
+	        <td class="title_shift">周一(#(weeklist[0]))</td>
+	        <td class="title_shift">周二(#(weeklist[1]))</td>
+	        <td class="title_shift">周三(#(weeklist[2]))</td>
+	        <td class="title_shift">周四(#(weeklist[3]))</td>
+	        <td class="title_shift">周五(#(weeklist[4]))</td>
+	        <td class="title_shift" style="color:#1a7bc9;">周六(#(weeklist[5]))</td>
+	        <td class="title_shift" style="color:#1a7bc9;">周日(#(weeklist[6]))</td>
+	    </tr>
+	    #if(shifts.size()==0)
+	    	<tr><td class="title_shift" colspan="9"><span style="font-weight: bold;">该科室的岗位还没有设置班次，请至科“科室班次管理”设置班次。</span></td></tr>
+	    #end
+	    
+		#for(i=0;i<shifts.size();i++)
+		<tr>
+			#if(shifts.get(i).rowspan>0)
+			<td class="worktimes_shift" rowspan="#(shifts.get(i).rowspan)">#(shifts.get(i).shiftname)</td>
+			# end
+			<td class="worktimes_shift">#(shifts.get(i).name)<br/><span style="font-size:9px;">(#(shifts.get(i).starttime)-#(shifts.get(i).endtime))</span></td>
+
+			#for(j=0;j<weeklist.length;j++)
+				<td class="drop" shiftid="#(shifts.get(i).shiftid)" shiftname="#(shifts.get(i).shiftname)" worktimeid="#(shifts.get(i).worktimeid)" 
+					starttime="#(shifts.get(i).starttime)" endtime="#(shifts.get(i).endtime)"
+					worktime_name="#(shifts.get(i).name)" workdate="#(weeklist[j])">
+					
+					#set(swlist = map.get(shifts.get(i).shiftid+"-"+shifts.get(i).worktimeid+"-"+weeklist[j]))
+					#if(swlist)
+						#for(k=0;k<swlist.size();k++)
+							<a class="easyui-menubutton" id="#(swlist.get(k).id)" data-options="menu:'#mm_shift_item',showEvent:'click',hasDownArrow:false" 
+								onClick="editemp_shift=this;" style="height:20px" emid="#(swlist.get(k).employeeid)">#(swlist.get(k).employeename)</a>
+						#end
+					#end
+				</td>
+			#end
+			
+		</tr>
+		#end
+	</table>
+</div>
+<div style="float:left;width:100%;height:40px;border-bottom:1px solid #ddd;">
+	<div style="float:left;">
+		<h3 style="padding:15px 0 0 10px;font-weight:bold;width:200px;">可排班#(postname)</h3>
+	</div>
+	<div style="float:right;height:100%;padding:10px 10px 0px 10px;">
+		<!-- <input class="easyui-checkbox" name="selectAll" value="selectAll" label="全选" labelAlign="right" onChange="console.log('dd');selectAllEmployee(checked);"> -->
+		<a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g10',plain:true" onClick="selectAllEmployee(true)">全选</a>
+		<a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g10',plain:true,selected:true" onClick="selectAllEmployee(false)">取消全选</a>
+	</div>
+	
+</div>
+	#if(employeelist.size()==0)
+    	<div style="width:95%;height:250px;padding:20px 20px;float:left;line-height: 250px;text-align: center;">
+    		<span style="font-weight: bold;">无可排班#(postname)。</span>
+    	</div>
+    #end
+<div class="right_shift" id="employees_list_div" style="width:95%;height:200px;padding:10px 20px;">
+	#for(i=0;i<employeelist.size();i++)
+		<div class="employee_container_shift">
+			<div style="padding:2px;">
+				<input class="easyui-checkbox" id="select_employee_#(employeelist.get(i).id)" name="select_employee" value="#(employeelist.get(i).id)-#(employeelist.get(i).userid)" userid="#(employeelist.get(i).userid)">
+				<div style="float: right;padding:2px 0px 0px 2px;">
+					<span style="width:45px;height:20px;display:block;overflow: hidden;font-size:10px;text-align:right;color:#c2c2c2">放射科</span>
+				</div>
+			</div>
+			<div class="employee_shift" id="employee_shift_#(employeelist.get(i).id)" emid="#(employeelist.get(i).id)" emname="#(employeelist.get(i).name)" userid="#(employeelist.get(i).userid)">
+				<span style="width:70px;height:30px;display:block;overflow: hidden;">#(employeelist.get(i).name)</span>
+			</div>
+		</div>
+	#end
+
+</div>
+<div id="mm_shift_td" class="easyui-menu" style="width:120px;">
+    <div onclick="javascript:alert('new')">排班</div>
+    <div class="menu-sep"></div>
+    <div onclick="clearAllEmpl()">清空</div>
+</div>
+<div id="mm_shift_item" class="easyui-menu" style="width:120px;">
+    <div onclick="javascript:alert('new')">排班</div>
+    <div class="menu-sep"></div>
+    <div onclick="removeEmployeeFromShift();">删除</div>
+</div>

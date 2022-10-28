@@ -1,0 +1,16 @@
+           
+#for(i=8;i<17;i++)
+
+ #for(j=0;j<60;j=j+interval)
+ 		
+ 		#if(!(map.get(i+":"+j)??))
+ 			#if(map3.get(i+":"+j)??)
+ 			<a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true,selected:true" onclick="setValue_schtime('#((i<10?'0'+i:i)+':'+(j<10?'0'+j:j))')">#((i<10?"0"+i:i)+":"+(j<10?"0"+j:j))</a>
+ 			#else
+ 			<a href="#" class="easyui-linkbutton" data-options="toggle:true,group:'g2',plain:true" onclick="setValue_schtime('#((i<10?'0'+i:i)+':'+(j<10?'0'+j:j))')">#((i<10?"0"+i:i)+":"+(j<10?"0"+j:j))</a>
+ 			#end
+ 		#end
+ 
+ #end
+
+#end

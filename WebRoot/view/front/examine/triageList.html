@@ -1,0 +1,25 @@
+<table id="studyorderdg_exam_apply" class="easyui-datagrid" sortName="studyid" sortOrder="asc"
+	data-options="url:'#(ctx)/examine/getTriageList?modalityId=#(modalityId)',rownumbers: true,singleSelect:false,fit:true,border:false,
+	loadMsg:'加载中...',emptyMsg:'没有查找到登记信息...',
+	rowStyler: function(index,row){
+                 if (row.patientsource == 'E'){
+                     return 'background-color:#F00;font-weight:bold;';
+                 }
+        }
+	">
+	<thead>
+		<tr>
+			<th data-options="field:'ck',checkbox:true"></th>
+			<th data-options="field:'orderstatus',width:70" sortable="true">检查状态</th>
+			<th data-options="field:'sequencenumber',width:80" sortable="true">序号</th>
+			<th data-options="field:'studyid',width:80" sortable="true">检查号</th>
+			<th data-options="field:'patientid',width:80" sortable="true">病人编号</th>
+			<th data-options="field:'patientname',width:80" sortable="true">姓名</th>
+			<th data-options="field:'age',width:50,formatter:age_formatter" sortable="true">年龄</th>
+			<th data-options="field:'birthdate',width:80" sortable="true">出生日期</th>
+			<th data-options="field:'studyitems',width:200,align:'center'" sortable="true">检查项目</th>
+			<th data-options="field:'regdatetime',width:200,align:'center'" sortable="true">登记日期</th>
+			<th data-options="field:'triagemodalityname',width:200,align:'center'" sortable="true">申请分诊设备</th>
+		</tr>
+	</thead>
+</table>

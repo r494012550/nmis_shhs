@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="0" uuid="bfd60632-ca28-4bae-9e67-af5ac4c504e9">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="KS_nmis.xml"/>
+	<parameter name="reportid" class="java.lang.String"/>
+	<parameter name="reportFontSize" class="java.lang.String"/>
+	<parameter name="patientid" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select studyorder.studyid,studyorder.modality_type,studyorder.studyitems,studyorder.appdatetime,studyorder.appointmenttime,
+patient.patientname,patient.patientid,
+admission.age,admission.inno,admission.outno,
+(select name_zh from syscode where syscode.code=admission.ageunit and syscode.type='0008')as ageunitdisplay,
+(select name_zh from syscode where syscode.type='0001' and syscode.code=patient.sex)as sex,
+(select name_zh from syscode where syscode.type='0002' and syscode.code=admission.patientsource)as patientsource
+ from studyorder,patient,admission
+ where patient.id = studyorder.patientidfk
+ and admission.id = studyorder.admissionidfk
+ and patient.patientid= $P{patientid} ]]>
+	</queryString>
+	<field name="studyid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="studyid"/>
+	</field>
+	<field name="modality_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="modality_type"/>
+	</field>
+	<field name="studyitems" class="java.sql.Clob">
+		<property name="com.jaspersoft.studio.field.label" value="studyitems"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="studyorder"/>
+	</field>
+	<field name="appdatetime" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="appdatetime"/>
+	</field>
+	<field name="appointmenttime" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="appointmenttime"/>
+	</field>
+	<field name="patientname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="patientname"/>
+	</field>
+	<field name="patientid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="patientid"/>
+	</field>
+	<field name="age" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="age"/>
+	</field>
+	<field name="inno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="inno"/>
+	</field>
+	<field name="outno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="outno"/>
+	</field>
+	<field name="ageunitdisplay" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ageunitdisplay"/>
+	</field>
+	<field name="sex" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sex"/>
+	</field>
+	<field name="patientsource" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="patientsource"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="140" y="0" width="320" height="40" uuid="3f55aaf8-045e-41c8-9584-70fde4012c48"/>
+				<textElement textAlignment="Center">
+					<font fontName="宋体" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[喀什第一人民医院]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="36" width="260" height="30" uuid="f4198e1c-d4f7-4199-a487-223b4e5a9eb4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PET/CT检查知情同意书]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="220" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="556" height="190" uuid="33645171-ac4c-4410-9ce2-d59868ad95b9"/>
+				<textElement>
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[  PET/CT检查对恶性肿瘤的分期、疗效诊断、诊断残留或复发、生物活性定位、寻找原发灶、肿块辅助定性及对特殊人群的体检有很大的帮助，但PET/CT检查昂贵，且任何医学检查都不能达到百分之百的准确，故在您决定做该检查之前，了解相关内容非常必要，请您认真阅读并咨询医生。
+  1.PET/CT为自费检查项目；
+  2.全身的检查范围仅限于头颅至大腿上段，不包括四肢；
+  3.少部分葡萄糖代谢较低的肿瘤易漏诊：如消化道印戒细胞癌、肾透明细胞癌、恶性程度低的肝癌等；
+  4.脑组织葡萄糖代谢高，易掩盖脑内较小病灶；
+  5.肿瘤过小，超出设备分辨率极限时易漏诊；
+  6.急性或慢性活动性炎症、感染、葡萄糖代谢较高等良性疾病，可能误诊为恶性病变；
+  7.三日内进行过钡剂造影类检查，将影响显像结果，必须告知医师；
+  8.注入体内的显像剂和CT扫描具有辐射，生育年龄妇女应确认自己没有怀孕：对射线敏感者慎行检查。
+  9.如家中有孕妇或婴幼儿，建议检查后隔离24小时。]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="190" width="239" height="30" uuid="777d1f2f-e0e6-489c-bcc5-36e1c4c4f3f7"/>
+				<textElement>
+					<font fontName="宋体" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[（无任何资料留在我科）]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="430" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="-30" width="239" height="30" uuid="a77a3132-82bb-47c1-8654-16edeb9ccfa8"/>
+				<textElement>
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[留存病史资料：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="1" width="555" height="29" uuid="63a8847e-57ae-4b67-91c2-140bedcd184e"/>
+				<textElement>
+					<font fontName="宋体" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[  我本人以下的签名表明我或代理人已清楚PET/CT检查的相关情况尤其是该检查的局限性，愿意接受检查。同时已确认留存在科室的资料数量。本单一式两份，受检者和医院各执一份。]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="80" height="30" uuid="157fd8af-8856-40b3-a928-2cfa47dea781"/>
+				<textElement textAlignment="Right">
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[受检者姓名:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="153" width="80" height="30" uuid="dd88f404-2322-4bb3-82af-679bf09c55e6"/>
+				<textElement textAlignment="Right">
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[签字日期:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="123" width="80" height="30" uuid="e748c4d1-14f4-4965-842d-55780f694331"/>
+				<textElement textAlignment="Right">
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[与受检者关系:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="93" width="80" height="30" uuid="c21f686e-1b5e-44f5-aaf7-03e656592083"/>
+				<textElement textAlignment="Right">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[受检者签名:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="123" width="80" height="30" uuid="e6da3b61-2bde-4c07-b544-ac3aca21ab78"/>
+				<textElement textAlignment="Right">
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[家属签名:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="153" width="80" height="30" uuid="77b344bb-2474-457c-9752-cb5d2c52d3a8"/>
+				<textElement textAlignment="Right">
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[医师签名:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="93" width="80" height="30" uuid="f485a384-487c-4ef0-a645-ac1a0c0cc338"/>
+				<textElement textAlignment="Right">
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[检查日期:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="50" width="80" height="30" uuid="1e6b5db6-70e6-4314-a6ae-c5dbf5a29c4f"/>
+				<textElement textAlignment="Right">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[请确认电话:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="85" y="168" width="130" height="1" uuid="07213ec6-0680-4cab-b893-97bfaa6060f7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="366" y="168" width="130" height="1" uuid="a99ab7a8-23ad-4ae9-a58a-35a4551cf022">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="85" y="138" width="130" height="1" uuid="cc63863f-8c5c-4a78-a243-5c4bee5a8364">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="366" y="138" width="130" height="1" uuid="27ab4078-2b6c-489a-9919-bb0248c276d2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="366" y="109" width="130" height="1" uuid="e0503638-7344-4db1-97ee-1c47296b723b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="366" y="65" width="130" height="1" uuid="83c5ba17-aba4-467c-b5bc-900fab4d05c9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="85" y="109" width="130" height="1" uuid="b235f1ee-cb69-4f59-8da8-9caf59d21e07">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="85" y="65" width="130" height="1" uuid="a2d1b2ce-823e-4c4b-8028-ffad71cb02fd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="80" y="84" width="141" height="21" uuid="1e7b4ae8-d3c3-4f39-aede-b32dabb4be31"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="宋体" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ (                 )]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="90" y="44" width="121" height="25" uuid="07cbfd9d-1be7-4188-9b4b-248a9b64450e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{patientname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="72" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+</jasperReport>

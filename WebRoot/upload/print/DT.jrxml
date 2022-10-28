@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reg" pageWidth="240" pageHeight="160" orientation="Landscape" columnWidth="240" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="1" isSummaryNewPage="true" uuid="33ab8b91-ac3c-47fa-b216-d58bae54a268">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="KS_nmis.xml"/>
+	<parameter name="orderid" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select studyorder.studyid,studyorder.modality_type,studyorder.studyitems,studyorder.appdatetime,patient.patientname,patient.patientid,studyorder.creatorname,
+studyorder.appointmenttime,
+patient.patientname,patient.patientid,
+patient.telephone,
+admission.age,admission.inno,admission.outno,
+(select name_zh from syscode where syscode.code=admission.ageunit and syscode.type='0008')as ageunitdisplay,
+(select name_zh from syscode where syscode.type='0001' and syscode.code=patient.sex)as sex,
+(select name_zh from syscode where syscode.type='0002' and syscode.code=admission.patientsource)as patientsource
+ from studyorder,patient,admission
+ where patient.id = studyorder.patientidfk
+ and admission.id = studyorder.admissionidfk
+ and studyorder.id =  $P{orderid}]]>
+	</queryString>
+	<field name="studyid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="studyid"/>
+	</field>
+	<field name="modality_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="modality_type"/>
+	</field>
+	<field name="studyitems" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="studyitems"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="studyorder"/>
+	</field>
+	<field name="appdatetime" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="appdatetime"/>
+	</field>
+	<field name="patientname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="patientname"/>
+	</field>
+	<field name="patientid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="patientid"/>
+	</field>
+	<field name="creatorname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="creatorname"/>
+	</field>
+	<field name="appointmenttime" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="appointmenttime"/>
+	</field>
+	<field name="COLUMN_9" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="patientname"/>
+	</field>
+	<field name="COLUMN_10" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="patientid"/>
+	</field>
+	<field name="telephone" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="telephone"/>
+	</field>
+	<field name="age" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="age"/>
+	</field>
+	<field name="inno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="inno"/>
+	</field>
+	<field name="outno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="outno"/>
+	</field>
+	<field name="ageunitdisplay" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ageunitdisplay"/>
+	</field>
+	<field name="sex" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sex"/>
+	</field>
+	<field name="patientsource" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="patientsource"/>
+	</field>
+	<title>
+		<band height="50" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="mm"/>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="98" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="17" y="-42" width="155" height="33" uuid="a7ed6e27-f7c4-48f8-ac5c-ce7addadd520"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patientname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="160" y="-38" width="49" height="25" uuid="ea3d45f4-f61b-443d-853e-6f6743b72077">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sex}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="191" y="-38" width="49" height="25" uuid="1b52aaf2-bac7-441a-9cd9-402faa599ed6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{age}+" "+$F{ageunitdisplay}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="17" y="42" width="60" height="25" uuid="3b765b6d-9ce5-4c4a-9b48-67b3100a749c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modality_type}+":"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="67" width="56" height="25" uuid="63ec3a1e-4fa3-4b52-8dbd-61cfb0fcf54a">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[医生:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="73" y="67" width="167" height="25" uuid="fb1f1d23-4165-4c78-a577-e65940aa9671">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{creatorname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="17" width="60" height="25" uuid="845a4e64-248c-4a24-a4b7-1c3e40e763ac">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[日期:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="71" y="17" width="169" height="25" uuid="f43c8b67-2587-483c-949a-11f572346b89">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DATEFORMAT($F{appointmenttime}, "yyyy-MM-dd HH:mm:ss")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="-8" width="60" height="25" uuid="216270a2-4168-4850-8ea5-4ceae3527790">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[电话:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="71" y="-8" width="169" height="25" uuid="b5ba34a6-2fff-4418-bb19-6fc64962ebcb">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telephone}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="76" y="42" width="164" height="25" uuid="8f1a07c6-53ee-4ac9-b068-5fcce5768e93">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{studyitems}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>

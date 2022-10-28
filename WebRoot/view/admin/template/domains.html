@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="easyui-layout" data-options="fit:true">
+    
+    <div data-options="region:'center',border:false">
+    	<div class="easyui-layout" data-options="fit:true,border:false">
+    		<div data-options="region:'north',split:true,collapsible:false" title="第一步：选择领域" style="height:140px;">
+		    	<div class="easyui-datalist" id="domains_dg" data-options="fit:true,textField:'name',valueField:'id',border:false,
+			            url: 'srtemplate/getDomains',onSelect:select_domain">
+			    </div>
+		    </div>
+		    <div data-options="region:'center',title:'第二步：选择模型'">
+		    	<div class="easyui-datalist" id="models_dg" data-options="fit:true,textField:'name',valueField:'id',border:false,emptyMsg: '请选择领域...',
+		        		onSelect:select_model">
+		        </div>
+		    </div>
+    	
+    	</div>
+    </div>
+    <div data-options="region:'east',split:true,collapsible:false" title="第三步：选择属性" style="width:270px;">
+    	<!-- <ul class="easyui-tree" id="model_tree" data-options="fit: true,
+	                border:false"></ul> -->
+    
+    	<table class="easyui-treegrid" id="model_tree" 
+	            data-options="
+	                method: 'get',
+	                emptyMsg: '请选择属性...',
+	                fit: true,
+	                border:false,
+	                fitColumns: true,
+	                idField: 'id',
+	                treeField: 'name',
+	                onDblClickRow:select_attr
+	            ">
+	        <thead>
+	            <tr>
+	                <th data-options="field:'name',formatter:function(value,row){
+                            return row.name+'  ('+(row.attributes.datatype_displayname||'')+')';
+                        }" width="190">属性名称</th>
+	               <!--  <th data-options="field:'datatype',
+	                	formatter:function(value,row){
+                            return row.attributes.datatype_displayname;
+                        }" width="80">数据类型</th> -->
+                    <th data-options="field:'code',
+	                	formatter:function(value,row){
+                            return row.attributes.code;
+                        }" width="80">编码</th>
+	            </tr>
+	        </thead>
+	    </table>
+    </div>
+</div>
+</body>
+</html>

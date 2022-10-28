@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="flex-container">
+		<div class="item report_item">
+			<div class="item_header">报告总数</div>
+			<div class="item_body" id="rt_count" style="color:#fd7704">0</div>
+		</div>
+		<div class="item report_item">
+			<div class="item_header">未写报告总数</div>
+			<div class="item_body" id="rt_noresult_count" style="color:#fd7704">0</div>
+		</div>
+		<div class="item report_item">
+			<div class="item_header">未审报告总数</div>
+			<div class="item_body" id="rt_no_audit_count" style="color:#fd7704">0</div>
+		</div>
+		<div class="item report_item">
+			<div class="item_header">已审报告总数</div>
+			<div class="item_body" id="rt_audit_count" style="color:#fd7704">0</div>
+		</div>
+		<div class="item report_item">
+			<div class="item_header">查询条件</div>
+			<div style="color:#fd7704;text-align: center;">
+				<span id="report_time_span">2022-04-23</span>
+				<a href="#" class="easyui-linkbutton" data-options="plain:true" title="选择时间" style="height:20px;" onclick="selectDatatime();">
+					<i class="icon iconfont icon-shijian" style="color:#b0afc6;font-size:18px;"></i></a>
+				#if(userdac!=null && userdac.institution_ids !=null)
+				<select class="easyui-combobox" name="institution" id="institution_dac" style="width:90%;height:25px;" dac="true"
+					labelPosition="top" data-options="valueField:'id',textField:'name',url:'#(ctx)/dic/getInstitutionDAC',editable:false,
+					onLoadSuccess:function(data){if(data){$(this).combobox('select', data[0].id)}},
+					panelHeight:'auto',onChange:report_changeInstitution_db">
+	        	</select>
+	        	#end
+			</div>
+		</div>
+	</div>
+	<div class="flex-container">
+		<div class="item" style="width:50%;height:350px;">
+			<div id="container_report_modality" style="height:350px;" crossorigin="Anonymous"></div>
+		</div>
+		<div class="item" style="width:50%;height:350px;">
+			<div id="container_report_patientsource" style="height:350px;" crossorigin="Anonymous"></div>
+		</div>
+	</div>
+	<div class="flex-container">
+		<div class="item" style="width:50%;height:350px;">
+			<div id="container_noresult_report_modality" style="height:350px;" crossorigin="Anonymous"></div>
+		</div>
+		<div class="item" style="width:50%;height:350px;">
+			<div id="container_noaudit_report_modality" style="height:350px;" crossorigin="Anonymous"></div>
+		</div>
+	</div>
+	<div class="flex-container">
+		<div class="item" style="width:50%;height:350px;">
+			<div id="container_imagequality" style="height:350px;" crossorigin="Anonymous"></div>
+		</div>
+		<div class="item" style="width:50%;height:350px;">
+			<div id="container_reportquality" style="height:350px;" crossorigin="Anonymous"></div>
+		</div>
+	</div>
+	<div class="flex-container">
+		<div class="item" style="width:50%;height:350px;">
+			<div id="container_diagnosis_coincidence" style="height:350px;" crossorigin="Anonymous"></div>
+		</div>
+		<div class="item" style="width:50%;height:350px;">
+			<div id="container_pos_or_neg" style="height:350px;" crossorigin="Anonymous"></div>
+		</div>
+	</div>
+</body>
+</html>

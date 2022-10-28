@@ -1,0 +1,101 @@
+<style type="text/css">
+.score_head{
+	text-align:center;
+	border:1px solid #CCC;
+	color: #888888;
+	height: 25px;
+	background:#ebeced;
+}
+.score_item{
+	text-align:center;
+	border:1px solid #CCC;
+	color: #888888;
+	height: 25px;
+}
+</style>
+<script>
+$(function(){
+	
+});
+</script>
+
+<div>
+	<span style="width:300px;">报告医生报告数量列表：</span>
+	#if(shiftmap==null||shiftmap.size()==0)
+		<span style="font-weight: bold;">该科室的岗位还没有设置班次，请至“科室班次管理”设置班次。</span><br>
+	#else
+	
+	<table style="width:100%;margin-left: -1px;">
+		<tr>
+			<td class="score_head" colspan="2"></td>
+			#for(x:physicianlist.get(0).getModality_map())
+			<td class="score_head">#(x.key)</td>
+			#end
+		</tr>
+		
+		#for(a:physicianlist)
+		<tr>
+			#if(shiftmap.get(a.getDept_id()+'-23-'+a.getShiftid()+'-'+a.getWorktimeid()+'-'+a.getPhysician_id())>0)
+			<td class="score_head" rowspan="#(shiftmap.get(a.getDept_id()+'-23-'+a.getShiftid()+'-'+a.getWorktimeid()+'-'+a.getPhysician_id()))">#(a.getWorktimename())</td>
+	        #end
+	        <td class="score_head">#(a.getPhysician_name())</td>
+	        #for(x:a.getModality_map())
+	        <td class="score_item" colspan="1">#(x.value)</td>
+	        #end
+	    </tr>
+	    #end
+		
+	</table>
+	#end
+	#if(preauditphysicianlist!=null&&preauditphysicianlist.size()>0)
+	<span style="width:300px;">初审医生报告数量列表：</span>
+	<table style="width:100%;margin-left: -1px;">
+		<tr>
+			<td class="score_head" colspan="2"></td>
+			#for(x:preauditphysicianlist.get(0).getModality_map())
+			<td class="score_head">#(x.key)</td>
+			#end
+		</tr>
+		
+		#for(a:preauditphysicianlist)
+		<tr>
+			#if(shiftmap.get(a.getDept_id()+'-27-'+a.getShiftid()+'-'+a.getWorktimeid()+'-'+a.getPhysician_id())>0)
+			<td class="score_head" rowspan="#(shiftmap.get(a.getDept_id()+'-27-'+a.getShiftid()+'-'+a.getWorktimeid()+'-'+a.getPhysician_id()))">#(a.getWorktimename())</td>
+	        #end
+	        <td class="score_head">#(a.getPhysician_name())</td>
+	        #for(x:a.getModality_map())
+	        <td class="score_item" colspan="1">#(x.value)</td>
+	        #end
+	    </tr>
+	    #end
+	</table>
+	#end
+	
+	<span style="width:300px;">审核医生报告数量列表：</span>
+	#if(shiftmap==null||shiftmap.size()==0)
+		<span style="font-weight: bold;">该科室的岗位还没有设置班次，请至“科室班次管理”设置班次。</span>
+	#else if(auditphysicianlist==null||auditphysicianlist.size()==0)
+		<span style="font-weight: bold;">没有排班审核医生，请至“科室班次管理”设置审核医生班次。</span>
+	#else
+	<table style="width:100%;margin-left: -1px;">
+		<tr>
+			<td class="score_head" colspan="2"></td>
+			#for(x:auditphysicianlist.get(0).getModality_map())
+			<td class="score_head">#(x.key)</td>
+			#end
+		</tr>
+		
+		#for(a:auditphysicianlist)
+		<tr>
+			#if(shiftmap.get(a.getDept_id()+'-31-'+a.getShiftid()+'-'+a.getWorktimeid()+'-'+a.getPhysician_id())>0)
+			<td class="score_head" rowspan="#(shiftmap.get(a.getDept_id()+'-31-'+a.getShiftid()+'-'+a.getWorktimeid()+'-'+a.getPhysician_id()))">#(a.getWorktimename())</td>
+	        #end
+	        <td class="score_head">#(a.getPhysician_name())</td>
+	        #for(x:a.getModality_map())
+	        <td class="score_item" colspan="1">#(x.value)</td>
+	        #end
+	    </tr>
+	    #end
+	</table>
+	#end
+</div>

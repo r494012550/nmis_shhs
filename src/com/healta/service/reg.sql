@@ -1,0 +1,89 @@
+
+#sql("his_orders")
+SELECT distinct
+	patientid,
+	patientname,
+	sex,
+	birthdate,
+	height,
+	weight,
+	telephone,
+	address,
+	idnumber,
+	patientsource,
+	cardno,
+	inno,
+	outno,
+	wardno,
+	bedno,
+	admittingdiagnosis,
+	adm_date,
+	dis_date,
+	clinicaldiagnosis,
+	briefhistory,
+	operationdatetime,
+	operationmethod,
+	pathology,
+	last_chemotherapy_datetime,
+	last_radiotherapy_datetime,
+	image_result,
+	tumor_removal,
+	gallbladder_datetime,
+	thyroid_datetime,
+	spleen_datetime,
+	left_kidney_datetime,
+	right_kidney_datetime,
+	menstruation_conditions,
+	menarche_age,
+	menstruation_periods,
+	menstruation_days,
+	menstruation_recent,
+	recent_fever_history,
+	recent_fever_duration,
+	cerebral_infarction_history,
+	cerebral_vessels_history,
+	trauma_place,
+	diabetes,
+	hypertension,
+	trauma_datetime,
+	family_tumor,
+	recent_examine,
+	recent_leukocyte_medicine,
+	tuberculosis,
+	schistosomiasis_history,
+	hepatitis_and_sclerosis,
+	hemorrhoids_history,
+	smoking_history,
+	other_medical_history,
+	requestno,
+	visitSqNo,
+	emrid,
+	appdeptcode,
+	studyitems,
+	billingTime,
+	billingDoctorCode,
+	billingDoctorName,
+	applyDepartmentCode,
+	applyDepartmentName,
+	icd10
+  FROM his_apply_hyx
+#end
+
+#sql("his_orders_item")
+SELECT id
+      ,eorderfk
+      ,itemid
+      ,modality
+      ,item_code
+      ,item_name
+      ,organ_code
+      ,organ
+      ,suborgan_code
+      ,suborgan
+      ,price
+      ,realprice
+      ,charge_status
+      ,createtime
+  FROM eorderitem where eorderfk=?
+#end
+

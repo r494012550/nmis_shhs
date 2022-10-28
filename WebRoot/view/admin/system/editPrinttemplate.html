@@ -1,0 +1,59 @@
+
+	<div style="padding:5px;margin-left:auto;margin-right:auto;">
+		<form name="printtemplateform" id="printtemplateform" method="POST">
+		<div style="margin-bottom:3px;padding:3px;">
+	    	<select  class="easyui-combobox" id="printtemplatetype" name="type" label="类型：" labelPosition="left" labelAlign="right" labelWidth="100px" style="width:300px;"
+	        	data-options="prompt:'请选择类型...',required:true,editable:false"  value="">
+	        	#for(x:types)
+	        		<option value="#(x.getName())">#(x.getDisplayname())</option>
+	        	#end
+	        </select>
+	    	<input class="easyui-combobox" id="modality_type" name="modality_type" label="检查类型：" labelPosition="left" labelAlign="right" labelWidth="100px" style="width:300px;"
+			        	data-options="valueField:'code',textField:'name_zh',url:'#(ctx)/syscode/getCode?type=0004',
+			        	editable:false,panelHeight:'200px',prompt:'请选择类型...',required:true,missingMessage:'必填',
+			        	<!-- onLoadSuccess:function(){$(this).combobox('select', '${printtemplate.modality_type}')}, -->
+			        	onChange:function(newValue,oldValue){getExamitemdg(newValue,'')}" >
+		    <!-- <input class="easyui-numberbox" id="fontsize" name="fontsize" label="字号：" labelPosition="left" labelWidth="150px" style="width:300px;height:25px;"
+		        	data-options="prompt:'请输入字体大小...',required:true,missingMessage:'必填',min:1" value="${printtemplate.fontsize}">
+	        <input class="easyui-textbox" id="description" name="description" label="描述：" labelPosition="left" labelWidth="100px" style="width:605px;"
+	        	data-options="prompt:'请输入描述...'"  value="${printtemplate.description}"> -->
+	    </div>
+		<div style="margin-bottom:3px;padding:3px;">
+		        <input class="easyui-textbox" id="template_name" name="template_name" label="打印模板名：" labelPosition="left" labelAlign="right" labelWidth="100px" style="width:300px;"
+		        	data-options="prompt:'请输入模板名...',required:true,missingMessage:'必填'"  value="">
+		    	<input class="easyui-textbox" id="description" name="description" label="描述：" labelPosition="left" labelAlign="right" labelWidth="100px" style="width:300px;"
+	        		data-options="prompt:'请输入描述...'"  value="">
+	    </div>
+	    <!-- <div style="margin-bottom:3px;padding:3px;">
+		        <input class="easyui-numberbox" id="desc_maxlength" name="desc_maxlength" label="所见最大字符长度：" labelPosition="left" labelWidth="150px" style="width:300px;height:25px;"
+		        	data-options="prompt:'请输入最大字符长度...',required:true,missingMessage:'必填',min:0" value="${printtemplate.desc_maxlength}">
+		        <input class="easyui-numberbox" id="result_maxlength" name="result_maxlength" label="所得最大字符长度：" labelPosition="left" labelWidth="150px" style="width:300px;height:25px;"
+		        	data-options="prompt:'请输入最大字符长度...',required:true,missingMessage:'必填',min:0" value="${printtemplate.result_maxlength}">
+	    </div> -->
+	    
+	    
+	    
+	    <!-- <input id="printtemplateid" name="id" type="hidden" value="${printtemplate.id}"> -->
+	    <!-- <input id="printtemplatetype" name="type"  type="hidden" value="reporttemplate"> -->
+	    </form>
+   	</div>
+   	<div style="margin-left:auto;margin-right:auto;width:100%;height:300px;border-top:1px solid #a9c3cf">
+	    <table id="examitemdg" class="easyui-datagrid"
+				data-options="rownumbers: true,singleSelect:false,fit:true,border:false,fitColumns:true,scrollbarSize:0,
+				toolbar:'#toolbar_examitemdg',
+				loadMsg:'加载中...',emptyMsg:'没有查找到检查项目...'">
+				<thead>
+					<tr>
+						<th data-options="field:'ck',checkbox:true"></th>
+						<th data-options="field:'item_name',width:200">项目名</th>
+						<th data-options="field:'organ',width:80">部位</th>
+						<th data-options="field:'suborgan',width:80">子部位</th>
+						<th data-options="field:'price',width:60">价格</th><!-- 					
+						<th data-options="field:'fulldescription',width:150">具体描述</th> -->
+					</tr>
+				</thead>
+		</table>
+		<div id="toolbar_examitemdg" style="padding:2px 2px;text-align:right;">
+			<input class="easyui-searchbox" data-options="prompt:'请输入检查项目名称...',searcher:function(value){getExamitemdg('',value)}" style="width:300px;">	
+		</div>
+	</div>

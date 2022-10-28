@@ -1,0 +1,168 @@
+<style type="text/css">
+        /*.left{
+            width:120px;
+            float:left;
+        }
+        .left table{
+            background:#E0ECFF;
+        }
+        .left td{
+            background:#eee;
+        }
+        
+        
+        .right table{
+            background:#E0ECFF;
+            width:100%;
+        }
+        
+        .right td{
+            background:#E0ECFF;
+            color:#444;
+            text-align:center;
+            padding:2px;
+        }
+        */
+        .right{
+            float:left;
+            
+        }
+        
+        
+        .right td.drop{
+            background:#fafafa;
+            width:73px;
+            height:24px
+        }
+        .right td.undrop{
+            background:#808080;
+            width:73px;
+            height:24px
+        }
+        .right td.over{
+            background:#FBEC88;
+        }
+        
+        .item{
+            text-align:center;
+            border:1px solid #499B33;
+            background:#fafafa;
+            color:#444;
+            width:70px;
+            height:20px
+        }
+        .time{
+        	width:50px;
+        	text-align:center;
+        }
+        .assigned{
+            border:1px solid #BC2A4D;
+        }
+        .trash{
+            background-color:red;
+        }
+        
+    </style>
+<script>
+        $(function(){
+            $('.right .item').draggable({
+                revert:true,
+                proxy:'clone'
+            });
+            $('.right td.drop').droppable({
+                accept: '.item',
+                onDragEnter:function(){
+                    $(this).addClass('over');
+                },
+                onDragLeave:function(){
+                    $(this).removeClass('over');
+                },
+                onDrop:function(e,source){
+                	$(this).removeClass('over');
+                	var child=$(this).find("div");
+                	
+                    if(child.length==1){
+                    	$(source).parent().append(child);
+                    	$(this).empty().append(source);
+                    }
+                    else{
+                    	$(this).append(source);
+                    	console.log($(this).attr("time"));
+                    	console.log($(source).attr("orderid"));
+                    }
+                    
+                    /*if ($(source).hasClass('assigned')){
+                        $(this).append(source);
+                    } else {
+                        var c = $(source).clone().addClass('assigned');
+                        $(this).empty().append(c);
+                        c.draggable({
+                            revert:true
+                        });
+                    }*/
+                }
+            });
+            $('.left').droppable({
+                accept:'.assigned',
+                onDragEnter:function(e,source){
+                    $(source).addClass('trash');
+                },
+                onDragLeave:function(e,source){
+                    $(source).removeClass('trash');
+                },
+                onDrop:function(e,source){
+                    $(source).remove();
+                }
+            });
+        });
+    </script>
+
+<div class="right">
+	<table style="background:#E0ECFF;width:100%;">
+           <tr>
+               <td class="blank"></td>
+               <td class="title">00</td>
+               <td class="title">30</td>
+               <td class="title"></td>
+               <td class="title"></td>
+               <td class="title"></td>
+               <td class="title"></td>
+               <td class="title"></td>
+               <td class="title"></td>
+               <td class="title"></td>
+               <td class="title"></td>
+           </tr>
+           #for(i=0;i<24;i++)
+           <tr>
+               <td class="time">#(i):00</td>
+               <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):00">
+                #if(map.get(i+":0")??)
+                    #if(map.get(i+":0").modifytime??)
+                        <div class="item" style="background-color: red;" orderid="#(map.get(i+':0').orderid)">#(map.get(i+":0").patientname)</div>
+                    #else
+                        <div class="item" orderid="#(map.get(i+':0').orderid)">#(map.get(i+":0").patientname)</div>
+                    #end
+				#end
+			</td>
+               <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):05">
+               	#if(map.get(i+":30")??)
+               	    #if(map.get(i+":30").modifytime??)
+                        <div class="item" style="background-color: red;" orderid="#(map.get(i+':30').orderid)">#(map.get(i+":30").patientname)</div>
+                    #else
+                        <div class="item" orderid="#(map.get(i+':30').orderid)">#(map.get(i+":30").patientname)</div>
+                    #end
+				#end
+               </td>
+               <td class="undrop"></td>
+               <td class="undrop"></td>
+               <td class="undrop"></td>
+               <td class="undrop"></td>
+               <td class="undrop"></td>
+               <td class="undrop"></td>
+               <td class="undrop"></td>
+               <td class="undrop"></td>
+           </tr>
+           #end
+           
+       </table>
+</div>

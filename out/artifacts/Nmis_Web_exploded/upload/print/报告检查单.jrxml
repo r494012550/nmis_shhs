@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CT、MR、OT、DR检查项目统计" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="93316aed-5d93-4311-abd4-2b987a8439cc">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter1.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="398"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="597"/>
+	<parameter name="datefrom" class="java.lang.String"/>
+	<parameter name="dateto" class="java.lang.String"/>
+	<parameter name="where" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="140" splitType="Stretch">
+			<staticText>
+				<reportElement x="150" y="80" width="200" height="30" uuid="18e7e555-78ab-4bb3-b037-9425ae1c2089">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="宋体" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PET   检查报告单]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="36" width="464" height="30" uuid="b409c056-1ffb-4771-813d-2da90023b09a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[复旦大学附属肿瘤医院   核医学科]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="0" width="100" height="30" uuid="dba9159d-c034-4a7b-9739-c71844edb133"/>
+				<textElement>
+					<font fontName="宋体" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[黄鑫附图]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="3e613116-b473-4725-80bf-1dd23ae13bf6"/>
+				<textElement>
+					<font fontName="宋体" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[黄鑫附图]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="200" height="30" uuid="39284526-7fb4-4246-a3d7-c584aa140d58">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="宋体" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[影像号：[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="110" width="200" height="30" uuid="8578ebe7-e331-4cfa-afc5-e45b33e97af8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font fontName="宋体" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查日期：[书签]]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="150" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="33" y="0" width="90" height="25" uuid="19b90c46-cd85-474c-bfd1-cfbdb44ade74">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[姓名:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="0" width="90" height="25" uuid="152968cf-7c8c-4308-822c-329079aae28b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[性别:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="0" width="90" height="25" uuid="8a8f5abd-15dc-42c9-a76b-df1ce520f044">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[年龄:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="0" width="154" height="25" uuid="3472ab02-cd8b-4645-ae2e-773ed3db723b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[[门诊/住院]号:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="25" width="120" height="25" uuid="02663aaf-9d6b-49aa-a206-fd77f8e83c44">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查方式:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="25" width="90" height="25" uuid="a4b14506-87e8-4ad6-91ba-0009cdab853c">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[床号:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="25" width="120" height="25" uuid="58c601af-277b-4474-9fcb-24089ac58830">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查部位:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="50" width="90" height="25" uuid="d5770761-9a92-43a0-bf8c-572155b9a3b9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[核素:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="50" width="90" height="25" uuid="03640993-2762-44b5-b617-c7c1dc452a85">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[药物:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="50" width="112" height="25" uuid="d6874581-c20e-4a8e-9ce2-a2f4eb8e2795">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[血糖：mmol/L]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="50" width="120" height="25" uuid="9e463126-2c9a-4c55-8055-420a4ea18f51">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[给药方式:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="75" width="120" height="25" uuid="ebe19270-1a4b-4ce4-a587-10cd8c7da637">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[申请科室:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="75" width="120" height="25" uuid="5c634297-1552-4d6a-a95b-15f8a2d4e88a">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查项目:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="75" width="120" height="25" uuid="9b37e26a-bb59-46ba-b711-230b3498f917">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[注射部位:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="100" width="120" height="25" uuid="bc49cac6-39ff-4df9-a08a-ed6811cb7f59">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[临床诊断:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="33" y="125" width="120" height="25" uuid="51af80c6-d0e6-4595-a08d-181802aa8919">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[简要病史:[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="253" y="100" width="120" height="25" uuid="c62d9a3f-d14e-43a6-95f7-9506af31c6b4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[1231]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="100" width="120" height="25" uuid="01411bc9-d87a-4987-bdc2-719320f9f7ba">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ssacccz]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="166" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="1" y="0" width="120" height="25" uuid="57525bb1-956c-41dd-8321-0b59f26753d7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查所见：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="30" width="120" height="25" uuid="5ff1e46a-087a-4881-bbfc-c347773f9ef7">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[[书签]]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="111" width="120" height="25" uuid="b5099067-ba8b-447e-9434-a9ed2d875491">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查所得：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="141" width="120" height="25" uuid="80dccef5-a2f5-4602-b589-e8a9f1f42de1">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[[书签]]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<staticText>
+				<reportElement x="47" y="0" width="70" height="30" uuid="c3470fce-be56-4549-bbc8-616a55e40702"/>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[报告医生:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="0" width="70" height="30" uuid="17c5bf1d-f76c-4c23-bfe2-92e409139d13"/>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[审核时间:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="297" y="0" width="70" height="30" uuid="bd795314-c5fc-4bb1-93cd-422028cd76b3"/>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[审核医生:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="127" y="30" width="280" height="20" uuid="5176c37e-104a-4ae0-84c4-d7ff33483a90">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="宋体" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[此报告仅供临床参考]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="0" width="70" height="30" uuid="63cd5a6e-309d-45a4-bda3-019f652f5a03"/>
+				<textElement>
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[报告时间:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

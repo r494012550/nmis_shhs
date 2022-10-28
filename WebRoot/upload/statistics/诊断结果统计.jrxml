@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="诊断结果统计" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="69ff247b-13c8-4287-982c-fe6769f3599f">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="KS_Nmis_TJ.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="New Dataset 1" uuid="fbc60034-fbab-43fa-b94c-6e10bfde7231">
+		<parameter name="paramDataSet" class="java.lang.String">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT studyorder.studyid as '检查号',
+ studyorder.studyitems as '检查项目',
+ studyorder.regdatetime as '登记日期',
+ patient.patientname as '姓名',
+ report.checkresult_txt as '诊断结果'
+ FROM studyorder
+ INNER JOIN patient ON patient.id = studyorder.patientidfk
+ INNER JOIN admission ON admission.id = studyorder.admissionidfk
+ INNER JOIN report ON report.studyorderfk = studyorder.id
+ WHERE report.reportstatus >= '31' AND $P!{paramDataSet}
+ ORDER BY studyorder.regdatetime]]>
+		</queryString>
+		<field name="检查号" class="java.lang.String"/>
+		<field name="检查项目" class="java.lang.String"/>
+		<field name="登记日期" class="java.sql.Timestamp"/>
+		<field name="姓名" class="java.lang.String"/>
+		<field name="诊断结果" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="where" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="datefrom" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dateto" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT studyorder.studyid as '检查号',
+ studyorder.studyitems as '检查项目',
+ studyorder.regdatetime as '登记日期',
+ patient.patientname as '姓名',
+ report.checkresult_txt as '诊断结果'
+ FROM studyorder
+ INNER JOIN patient ON patient.id = studyorder.patientidfk
+ INNER JOIN admission ON admission.id = studyorder.admissionidfk
+ INNER JOIN report ON report.studyorderfk = studyorder.id
+ WHERE report.reportstatus >= '31' AND $P!{where}
+ ORDER BY studyorder.regdatetime]]>
+	</queryString>
+	<field name="检查号" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="检查号"/>
+	</field>
+	<field name="检查项目" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="检查项目"/>
+	</field>
+	<field name="登记日期" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="登记日期"/>
+	</field>
+	<field name="姓名" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="姓名"/>
+	</field>
+	<field name="诊断结果" class="java.sql.Clob">
+		<property name="com.jaspersoft.studio.field.label" value="诊断结果"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="report"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="155" y="2" width="234" height="33" uuid="cc3d1718-e10d-4f2e-b798-0be175ffc624"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[诊断结果统计]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="485" y="42" width="62" height="20" uuid="36963a71-75b1-4953-9c26-7dbae103008c"/>
+				<textElement>
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="403" y="42" width="62" height="20" uuid="f24f92e9-33af-4d22-b33e-12940971346d"/>
+				<textElement>
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datefrom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="343" y="42" width="60" height="20" uuid="c9f7e250-365e-45cf-86f5-af98880f9608"/>
+				<textElement>
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[统计日期：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="42" width="20" height="20" uuid="c32b1003-a7ad-4b52-bd03-433908e1832a"/>
+				<textElement>
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[至]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="205" y="6" width="80" height="20" uuid="74ab1c66-3012-403f-9b64-d62499a5aaa8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["第 "+$V{PAGE_NUMBER}+" 页"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="255" y="6" width="82" height="20" uuid="4dfae358-03ab-4b11-bfea-7d2b06dbe1a4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" / 共 " + $V{PAGE_NUMBER}+" 页"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="60" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="0" width="555" height="60" uuid="203a6b3e-4d4f-4c70-b053-257a704bdc40"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="New Dataset 1" uuid="76784c6f-1167-4033-8c2d-65cd6d1630ff">
+						<datasetParameter name="paramDataSet">
+							<datasetParameterExpression><![CDATA[$P{where}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="40" uuid="4eb17d4f-b7d1-4d97-bd70-0405d3bc13f3">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="0684edaf-1b80-4c3d-967c-4223863012d6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<text><![CDATA[序号]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="40" uuid="a58a7390-e7c8-4820-8ee6-db55e4892822"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="88410efe-a6a0-4e47-8ce8-a010857d899b">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="c80909de-b3c7-47f1-b0c1-c5832dfdbb8b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<text><![CDATA[姓名]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="60" height="40" uuid="3daf9bad-6de2-4c6d-9f77-9bc74a5b752e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{姓名}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="02acb7fd-d0bf-4d66-a15b-113c09ecca32">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="30" uuid="859bc1fb-a743-480e-be7c-2a7c2b2ea7ff"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<text><![CDATA[检查号]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="60" height="40" uuid="24eb311e-0649-44e5-9694-9d0d07b72112"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{检查号}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="00dad4bc-54d2-44ba-91fb-4d878c550666">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="100" height="30" uuid="59f5b83d-1658-470f-81e7-18b7527223d2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<text><![CDATA[检查项目]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="100" height="40" uuid="168a5b15-fb94-4dfa-94dd-699c40dfeb8a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{检查项目}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="200" uuid="1eade167-f545-4c1c-955d-05e550f1ea77">
+						<jr:tableFooter style="table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="200" height="30" uuid="4f9c0257-43a4-4f99-8861-6a2637457042"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font fontName="宋体" isBold="true"/>
+								</textElement>
+								<text><![CDATA[总计：]]></text>
+							</staticText>
+						</jr:tableFooter>
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="200" height="30" uuid="dcbdccaa-fc2b-4257-bf11-26c97b7c89e1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<text><![CDATA[诊断结果]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="200" height="40" uuid="8a35f3b8-f343-42e0-a4e4-f6b7dbd5caae"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{诊断结果}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="bfa1c7b4-d31c-4051-a9f6-7a0740bb8f0c">
+						<jr:tableFooter style="table_TH" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="30" uuid="ab01c1f1-b26f-4acf-98c9-df73d345b4f1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体" isBold="false"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="2021a60f-cf4c-4e62-b306-3dc2898755d5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<text><![CDATA[登记日期]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="40" rowSpan="1">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="90" height="40" uuid="97cdaf8e-e70e-49ad-bad6-142f10f0bf1e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="宋体"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{登记日期}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

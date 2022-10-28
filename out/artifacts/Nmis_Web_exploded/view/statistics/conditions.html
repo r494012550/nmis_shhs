@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<body>
+<form name="generatestatisticsform" id="generatestatisticsform" method="POST">
+	#for(i=0;list!=null&&i<list.length;i++)
+	#if(list[i].startsWith("datetime"))
+	#set(date_type = list[i].substring(list[i].indexOf("(")+1, list[i].indexOf(")")))
+	#set(datetime_label="")
+
+	#switch(date_type)
+	#case ("regdatetime")
+	#set(datetime_label="登记时间")
+	#case ("studydatetime")
+	#set(datetime_label="检查时间")
+	#case ("reporttime")
+	#set(datetime_label="报告时间")
+	#case ("audittime")
+	#set(datetime_label="审核时间")
+	#end
+
+	<div class="condition_div">
+		<!-- <select class="easyui-combobox" name="datetype" id="date_type" style="width:100px;" data-options="editable:false,panelHeight:'auto'">
+            <option value="regdatetime">登记时间</option>
+            <option value="studytime">检查时间</option>
+            <option value="reporttime">报告时间</option>
+            <option value="auditime">审核时间</option>
+        </select> -->
+
+		<input id="date_type" name="datetype" type="hidden" value="#(date_type)">
+		<input id="date_from" name="datefrom" class="easyui-datebox" label="#(datetime_label)" labelWidth="103" labelAlign="right" style="width: 215px;" required="required">&nbsp;&nbsp;--&nbsp;
+		<input id="date_to" name="dateto" class="easyui-datebox" style="width: 110px;" required="required">
+	</div>
+	#else if(list[i]=="date_time_group")
+	<div class="condition_div">
+		<select class="easyui-combobox" name="group" id="sta_group" label="分组" labelWidth="103" labelAlign="right" style="width:346px;"
+				data-options="prompt:'分组',editable:false,panelHeight:'auto'">
+			<option value=""></option>
+			<option value="year">年</option>
+			<option value="month">月</option>
+			<option value="week">周</option>
+			<option value="day">日</option>
+		</select>
+	</div>
+	#else if(list[i]=="patientsource")
+	<div class="condition_div">
+		<input id="patientsource_reg" name="patientsource" class="easyui-combobox" label="来源" labelWidth="103" labelAlign="right" style="width:346px;"
+			   data-options="valueField:'code',textField:'name_zh',url:'#(ctx)/syscode/getCode?type=0002&addempty=1',editable:false,panelHeight:'auto'">
+	</div>
+	#else if(list[i]=="mod_type")
+	<div class="condition_div">
+		<input id="sta_modality" name="modality" class="easyui-combobox" label="设备类型" labelWidth="103" labelAlign="right" style="width:346px;"
+			   data-options="prompt:'设备类型',valueField:'code',textField:'name_zh',url:'#(ctx)/syscode/getCode?type=0004',panelHeight:'300px',editable:false">
+	</div>
+	#else if(list[i]=="modality")
+	<div class="condition_div">
+		<input id="modality_dic_reg" name="modalityid" class="easyui-combobox" label="设备" labelWidth="103" labelAlign="right"
+			   style="width:346px;" data-options="prompt:'设备',url:'#(ctx)/dic/getModalityDicByType',multiple:true,groupField:'type',
+	                    valueField:'id',textField:'modality_name',panelHeight:'300px',editable:false">
+	</div>
+	#else if(list[i]=="institution")
+	<div class="condition_div">
+		<input id="institution" name="institution" class="easyui-combobox" label="送检医院" labelWidth="103" labelAlign="right"
+			   style="width:346px;" data-options="prompt:'送检医院',url:'#(ctx)/dic/getInstitutionFromCache',multiple:true,
+	                    valueField:'id',textField:'name',panelHeight:'300px',editable:false">
+	</div>
+	#else if(list[i].startsWith("regoperator"))
+	#set(regoperator = list[i].substring(list[i].indexOf("(")+1, list[i].indexOf(")")))
+	<div class="condition_div">
+		<input id="modality_dic_reg" name="regoperator" class="easyui-combobox" label="登记员" labelWidth="103" labelAlign="right"
+			   style="width:346px;" data-options="prompt:'登记医生',url:'#(ctx)/getUsersByRoles?roleid=#(regoperator)',multiple:true,groupField:'type',
+	                    valueField:'username',textField:'name',panelHeight:'300px',editable:false">
+	</div>
+	#else if(list[i].startsWith("technologists"))
+	#set(technologists = list[i].substring(list[i].indexOf("(")+1, list[i].indexOf(")")))
+	<div class="condition_div">
+		<input id="modality_dic_reg" name="technologists" class="easyui-combobox" label="技师" labelWidth="103" labelAlign="right"
+			   style="width:346px;" data-options="prompt:'技师',url:'#(ctx)/getUsersByRoles?roleid=#(technologists)',multiple:true,groupField:'type',
+	                    valueField:'username',textField:'name',panelHeight:'300px',editable:false">
+	</div>
+	#else if(list[i].startsWith("reportphysician"))
+	#set(reportphysician = list[i].substring(list[i].indexOf("(")+1, list[i].indexOf(")")))
+	<div class="condition_div">
+		<input id="sta_reportphysician" name="reportphysician" class="easyui-combobox" style="width:346px;" label="报告医生" labelWidth="103" labelAlign="right"
+			   data-options="prompt:'报告医生',url:'#(ctx)/getUsersByRoles?roleid=#(reportphysician)',multiple:true,groupField:'type',
+	                    valueField:'username',textField:'name',panelHeight:'300px',editable:false">
+	</div>
+	#else if(list[i].startsWith("auditphysician"))
+	#set(auditphysician = list[i].substring(list[i].indexOf("(")+1, list[i].indexOf(")")))
+	<div class="condition_div">
+		<input id="sta_auditphysician" name="auditphysician" class="easyui-combobox" label="审核医生" labelWidth="103" labelAlign="right"
+			   style="width:346px;" data-options="prompt:'审核医生',url:'#(ctx)/getUsersByRoles?roleid=#(auditphysician)',multiple:true,groupField:'type',
+	                    valueField:'username',textField:'name',panelHeight:'300px',editable:false">
+	</div>
+	#end
+	#end
+
+
+	#for(i=0;cclist!=null&&i<cclist.size();i++)
+	<div class="condition_div">
+		<input name="customconditions_#(cclist.get(i).id)" class="easyui-textbox" label="#(cclist.get(i).label+'  '+cclist.get(i).operator)" labelWidth="103" labelAlign="right"
+			   style="width:346px;">
+	</div>
+	#end
+</form>
+<div class="button_div">
+	<a href="#" class="easyui-linkbutton" data-options="" style="width:100px" onClick="generateStatisticalReport_pdf('#(id)');">生成报表</a>
+	<a href="#" class="easyui-menubutton" data-options="plain:false,menu:'#exportmenu'" style="width:100px" onClick="exportStatisticalReport('#(id)','excel');">导出(excel)</a>
+</div>
+<div id="exportmenu" style="width:80px;">
+	<div onclick="exportStatisticalReport('#(id)','pdf');">PDF</div>
+	<div onclick="exportStatisticalReport('#(id)','excel');">excel</div>
+	#if(notsql)
+	<div onclick="exportStatisticalReport('#(id)','word');">word</div>
+	<div onclick="exportStatisticalReport('#(id)','csv');">csv</div>
+	<div onclick="exportStatisticalReport('#(id)','rtf');">rtf</div>
+	#end
+</div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<style type="text/css">
+        
+        .mytable{
+        	background-color:#E0ECFF;
+        }
+		.mytable td.select{
+			text-align:center;
+            background:#fafafa;
+            width:100px;
+            height:22px
+        }
+        .mytable td.unselect{
+        	text-align:center;
+            background:#808080;
+            width:100px;
+            height:22px
+        }
+        .item{
+            text-align:center;
+            border:1px solid #499B33;
+            background:#fafafa;
+            color:#444;
+            width:100px;
+            height:20px
+        }
+        
+        .title{
+        	text-align:center;
+        }
+        
+        .mytd{
+        	padding: 0px 0px 0px 0px;
+        }
+        .times{
+        	width:100px;
+        	text-align:center;
+        	background:#D4D4D4;
+        }
+</style>
+
+<table class="mytable">
+<tr>
+<td class="mytd" valign="top">
+	<table>
+		<tr>
+		<td class="title">时间段</td>
+		<td class="title">预约情况</td>
+		</tr>
+#for(i=0;i<times.size();i++)
+	#if(i>0&&i%(times.size()/3)==0)
+	
+		</table>
+		</td>
+		<td class="mytd" valign="top">
+		<table>
+			<tr>
+			<td class="title">时间段</td>
+			<td class="title">预约情况</td>
+			</tr>
+	
+	#end
+	<tr>
+		<td class="times">#(com.healta.util.SequenceNo_Generator::timeFormat(times.get(i))+"--"+com.healta.util.SequenceNo_Generator::timeFormat(times.get(i)+appointment_time))</td>
+		#if(map.get(times.get(i))==null)
+			<td class="select">
+				<a href="#" class="easyui-linkbutton" style="width:90px;height:20px;" 
+					data-options="toggle:true,group:'schgroup',plain:true" onclick="setValue_schtime('#(com.healta.util.SequenceNo_Generator::timeFormat(times.get(i)))')">0/#(appointment_number)</a>
+			</td>
+		#else
+		
+			#if(map.get(times.get(i)).thisorder)
+			<td class="select">
+				<a href="#" class="easyui-linkbutton" style="width:90px;height:20px;" 
+					data-options="toggle:true,group:'schgroup',plain:true,selected:true" onclick="setValue_schtime('#(com.healta.util.SequenceNo_Generator::timeFormat(times.get(i)))')">#((map.get(times.get(i))).num)/#(appointment_number)</a>
+			</td>
+			#else if(appointment_number > (map.get(times.get(i))).num)
+			<td class="select">
+				<a href="#" class="easyui-linkbutton" style="width:90px;height:20px;" 
+					data-options="toggle:true,group:'schgroup',plain:true" onclick="setValue_schtime('#(com.healta.util.SequenceNo_Generator::timeFormat(times.get(i)))')">#((map.get(times.get(i))).num)/#(appointment_number)</a>
+			</td>
+			#else
+			<td class="unselect">
+			#(appointment_number)/#(appointment_number)
+			</td>
+			#end
+		#end
+	</tr>
+
+#end
+		</table>
+	</td>
+</tr>
+</table>

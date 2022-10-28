@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>图片查看器</title>
+    <link rel="stylesheet" href="photoGallery.css"/>
+    <script src="../jquery-1.7.2.min.js"></script>
+    <script src="jquery.photo.gallery.js"></script>
+</head>
+<body class="hellbody">
+<div class="box">
+	<header drag>
+		<div class="winControl" noDrag>
+	        <!-- <span class="closeWin" title="关闭"><i class="icon_close-big"></i></span>-->
+	        <span class="count_thumb"></span>
+	    </div> 
+	</header>
+	<div class="gallery"></div>
+	<span></span>
+</div>
+<script>
+	$.initGallery();
+	/* var isMove = false;
+	 $(".gallery").mousedown(function(event) {
+		isMove = true; 
+		var abs_x = event.pageX;  //鼠标按下的位置
+		var abs_y = event.pageY; //鼠标按下的位置
+		console.log(abs_x + '--' + abs_y)
+		var $obj = $('#J_pg', parent.document);
+		var oriLeft = parseInt($obj.css("left").replace("px",""));
+		var oriTop = parseInt($obj.css("top").replace("px",""));
+		$(document).mousemove(function(event) {
+			if (isMove) {
+				$obj.css({'left': event.pageX-(abs_x-oriLeft) + 'px', 'top': event.pageY- (abs_y-oriTop) + 'px'});
+			}
+		})
+	}).mouseup(function() {
+		isMove = false;
+	}) */
+ 	
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:amq="http://activemq.apache.org/schema/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/> 
+	<!--<bean class="io.fabric8.insight.log.log4j.Log4jLogQuery" destroy-method="stop" init-method="start" scope="singleton" lazy-init="false" id="logQuery"> </bean>-->
+	<broker useJmx="true" brokerName="broker" xmlns="http://activemq.apache.org/schema/core" schedulerSupport="true"> 
+		<networkConnectors> 
+		<!-- <networkConnector uri="multicast://default?initialReconnectDelay=100" /> <networkConnector uri="static://(tcp://localhost:61616)" /> --> 
+		</networkConnectors> 
+		
+		<managementContext>
+            <managementContext createConnector="true" jmxDomainName="myDomain" connectorPath="/jmxrmi" connectorPort="11099"/>
+		</managementContext>
+		<systemUsage>
+            <systemUsage>
+                <memoryUsage>
+                    <memoryUsage limit="128 mb" />
+                </memoryUsage>
+                <storeUsage>
+                    <storeUsage limit="100 gb" />
+                </storeUsage>
+                <tempUsage>
+                    <tempUsage limit="50 gb" />
+                </tempUsage>
+            </systemUsage>
+        </systemUsage>
+		
+		<persistenceFactory> 
+			 
+			<journalPersistenceAdapterFactory journalLogFiles="5" dataSource="#mysql-ds"/>
+			<!-- To use a different dataSource, use the following syntax : --> 
+			<!-- <journalPersistenceAdapterFactory journalLogFiles="5" dataDirectory="${basedir}/target" /> --> 
+		</persistenceFactory> 
+		<transportConnectors> 
+			<transportConnector uri="tcp://localhost:61616" /> 
+		</transportConnectors> 
+	</broker> 
+	<!-- MySql DataSource Sample Setup --> 
+	<bean id="mysql-ds" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close"> 
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/activemq?characterEncoding=utf8"/> 
+		<property name="username" value="activemq"/> 
+		<property name="password" value="Admin123"/> 
+		<property name="poolPreparedStatements" value="true"/> 
+	</bean>
+</beans>

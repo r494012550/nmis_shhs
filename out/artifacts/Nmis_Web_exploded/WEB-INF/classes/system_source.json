@@ -1,0 +1,1183 @@
+[{
+	"rid":11,
+	"name":"Setting",
+	"display_zh_CN":"设置",
+	"display_en_US":"Setting",
+	"module": "admin",
+	"resource":"",
+	"children":[{
+		"rid":1101,
+		"name":"User",
+		"display_zh_CN":"用户",
+		"display_en_US":"User",
+		"module": "admin",
+		"resource":"",
+		"children":[{
+				"rid":110101,
+				"name":"edit_user",
+				"display_zh_CN":"用户编辑",
+				"display_en_US":"edit_user",
+				"module": "admin",
+				"resource":"/saveUser/**;/deleteUser/**"
+			},{
+				"rid":110102,
+				"name":"search_user",
+				"display_zh_CN":"用户查询",
+				"display_en_US":"search_user",
+				"module": "admin",
+				"resource":"/getAllUsers/**"
+			},{
+                "rid": 110103,
+                "name": "modify_userpassword",
+                "display_zh_CN": "修改用户密码",
+                "display_en_US": "modify_userpassword",
+                "module": "admin",
+                "resource": "/modifyUserPassword/**"
+            }]
+		},{
+			"rid":1102,
+			"name":"Role",
+			"display_zh_CN":"角色",
+			"display_en_US":"Role",
+			"module": "admin",
+			"resource":"",
+			"children":[{
+				"rid":110201,
+				"name":"edit_role",
+				"display_zh_CN":"角色编辑",
+				"display_en_US":"edit_role",
+				"module": "admin",
+				"resource":"/saveRole/**;/checkRoleName/**;/getAuthorityByRoleId/**;/deleteRole/**;"
+			},{
+				"rid":110202,
+				"name":"search_role",
+				"display_zh_CN":"角色查询",
+				"display_en_US":"search_role",
+				"module": "admin",
+				"resource":"/getAllRole/**;"
+			
+			}]
+		},{
+			"rid":1103,
+			"name":"Authority",
+			"display_zh_CN":"权限",
+			"display_en_US":"Authority",
+			"module": "admin",
+			"resource":"",
+			"children":[{
+				"rid":110301,
+				"name":"edit_authority",
+				"display_zh_CN":"权限编辑",
+				"display_en_US":"edit_auth",
+				"module": "admin",
+				"resource":"/saveAuth/**;/checkAuthName/**;/deleteAuthority/**;/getResourceByAuthorityId/**;"
+			},{
+				"rid":110302,
+				"name":"search_authority",
+				"display_zh_CN":"权限查询",
+				"display_en_US":"search_auth",
+				"module": "admin",
+				"resource":"/getAllAuth/**"
+			
+			}]
+		},{
+			"rid":1104,
+			"name":"Resource",
+			"display_zh_CN":"资源",
+			"display_en_US":"Resource",
+			"module": "admin",
+			"resource":"",
+			"children":[{
+				"rid":110401,
+				"name":"search_res",
+				"display_zh_CN":"资源查询",
+				"display_en_US":"search_res",
+				"module": "admin",
+				"resource":"/getAllResource/**"
+			
+			}]
+		},{
+			"rid":1105,
+			"name":"Template",
+			"display_zh_CN":"模板",
+			"display_en_US":"Template",
+			"module": "admin",
+			"resource":"",
+			"children":[{
+				"rid":110501,
+				"name":"Template",
+				"display_zh_CN":"普通模板",
+				"display_en_US":"Template",
+				"module": "admin",
+				"resource":"",
+				"children":[{
+					"rid":11050101,
+					"name":"edit_temp",
+					"display_zh_CN":"模板编辑",
+					"display_en_US":"edit_temp",
+					"module": "admin",
+					"resource":"/template/saveTemplate/**"
+				},{
+					"rid":11050102,
+					"name":"delete_temp",
+					"display_zh_CN":"模板删除",
+					"display_en_US":"delete_temp",
+					"module": "admin",
+					"resource":"/template/delTemplate/**"
+				},{
+					"rid":11050103,
+					"name":"edit_tempNode",
+					"display_zh_CN":"模板节点编辑",
+					"display_en_US":"edit_temp_node",
+					"module": "admin",
+					"resource":"/template/addTemplateNode/**"
+				},{
+					"rid":11050104,
+					"name":"delete_tempNnode",
+					"display_zh_CN":"模板节点删除",
+					"display_en_US":"delete_temp_node",
+					"module": "admin",
+					"resource":"/template/delTemplateNode/**"
+				}]
+			},{
+				"rid":110502,
+				"name":"Srtemplate",
+				"display_zh_CN":"结构化模板",
+				"display_en_US":"Srtemplate",
+				"module": "admin",
+				"resource":"",
+				"children":[{
+					"rid":11050201,
+					"name":"open_srtemp",
+					"display_zh_CN":"打开结构化模板",
+					"display_en_US":"open_srtemp",
+					"module": "admin",
+					"resource":"/srtemplate/openSRTemplateList/**"
+				},{
+					"rid":11050202,
+					"name":"save_srtemp",
+					"display_zh_CN":"保存结构化模板",
+					"display_en_US":"save_srtemp",
+					"module": "admin",
+					"resource":"/srtemplate/openSaveSRTemplateDialog/**"
+				},{
+					"rid":11050203,
+					"name":"delete_srtemp",
+					"display_zh_CN":"删除结构化模板和组件",
+					"display_en_US":"delete_srtemp",
+					"module": "admin",
+					"resource":"/srtemplate/delSRTemplateAndComponent/**"
+				}]
+			},{
+				"rid":110503,
+				"name":"Component",
+				"display_zh_CN":"组件",
+				"display_en_US":"Component",
+				"module": "admin",
+				"resource":"",
+				"children":[{
+					"rid":11050301,
+					"name":"add_StandardCode",
+					"display_zh_CN":"新建编码",
+					"display_en_US":"add_StandardCode",
+					"module": "admin",
+					"resource":"/field/addStandardCode/**"
+				
+				},{
+					"rid":11050302,
+					"name":"save_Component",
+					"display_zh_CN":"自定义组件",
+					"display_en_US":"save_Component",
+					"module": "admin",
+					"resource":"/srtemplate/saveComponent_input/**"
+				}]
+			},{
+				"rid":110504,
+				"name":"XsltTemplate",
+				"display_zh_CN":"病症所见样式",
+				"display_en_US":"XsltTemplate",
+				"module": "admin",
+				"resource":"",
+				"children":[{
+					"rid":11050401,
+					"name":"edit_XsltTemplate",
+					"display_zh_CN":"编辑病症所见样式",
+					"display_en_US":"edit_XsltTemplate",
+					"module": "admin",
+					"resource":"/template/saveXslt/**"
+				},{
+					"rid":11050402,
+					"name":"delete_XsltTemplate",
+					"display_zh_CN":"删除病症所见样式",
+					"display_en_US":"delete_XsltTemplate",
+					"module": "admin",
+					"resource":"/template/delXsltTemplate/**"
+				},{
+					"rid":11050403,
+					"name":"upload_XsltTemplate",
+					"display_zh_CN":"上传病症所见样式文件",
+					"display_en_US":"uplode_XsltTemplate",
+					"module": "admin",
+					"resource":"/template/uploadXslt/**"
+				},{
+					"rid":11050404,
+					"name":"download_XsltTemplate",
+					"display_zh_CN":"下载病症所见样式文件",
+					"display_en_US":"download_XsltTemplate",
+					"module": "admin",
+					"resource":"/template/downloadXslt/**"
+				
+				}]
+			}]
+	},{
+		"rid":1106,
+		"name":"Dictionary",
+		"display_zh_CN":"字典管理",
+		"display_en_US":"Dictionary",
+		"module": "admin",
+		"resource":"",
+		"children":[{
+			"rid":110601,
+			"name":"edit_modalitydic",
+			"display_zh_CN":"设备字典编辑",
+			"display_en_US":"edit_modalitydic",
+			"module": "admin",
+			"resource":"/dic/goEditDic/**;/dic/deleteDic/**"
+		},{
+			"rid":110602,
+			"name":"edit_examItem",
+			"display_zh_CN":"检查项目编辑",
+			"display_en_US":"edit_examItem",
+			"module": "admin",
+			"resource":"/dic/editExamitemdic/**;/dic/deletExamitemdic/**"
+		},{
+			"rid":110603,
+			"name":"edit_equipGroup",
+			"display_zh_CN":"设备组编辑",
+			"display_en_US":"edit_equipGroup",
+			"module": "admin",
+			"resource":"/dic/editGroup/**;/dic/deleteGroup/**"
+		},{
+			"rid":110604,
+			"name":"edit_organdic",
+			"display_zh_CN":"部位字典编辑",
+			"display_en_US":"edit_organdic",
+			"module": "admin",
+			"resource":"/dic/addOrgandic/**;/dic/addsubOrgandic/**;/dic/editOrgandic/**;/dic/deleteOrgandic/**"
+		},{
+			"rid":110605,
+			"name":"edit_departmentdic",
+			"display_zh_CN":"科室字典编辑",
+			"display_en_US":"edit_departmentdic",
+			"module": "admin",
+			"resource":"/dic/Modifydepartment/**;/dic/deleteDepartment/**"
+		},{
+			"rid":110606,
+			"name":"edit_employeedic",
+			"display_zh_CN":"员工字典编辑",
+			"display_en_US":"edit_employeedic",
+			"module": "admin",
+			"resource":"/dic/goEditEmployee/**;/dic/deleteEmployee/**"
+		}]
+	},{
+		"rid":1107,
+		"name":"Statistics",
+		"display_zh_CN":"统计",
+		"display_en_US":"Statistics",
+		"module": "admin",
+		"resource":"",
+		"children":[{
+			"rid":110701,
+			"name":"edit_statistics",
+			"display_zh_CN":"报表编辑",
+			"display_en_US":"edit_statistics",
+			"module": "admin",
+			"resource":"/statistics/gotoEditStatistics/**"
+		},{
+			"rid":110702,
+			"name":"manageStatisticsClassify",
+			"display_zh_CN":"报表分类管理",
+			"display_en_US":"manageStatisticsClassify",
+			"module": "admin",
+			"resource":"/statistics/gotoManageClassify/**"
+		}]
+	},{
+		"rid":1108,
+		"name":"System",
+		"display_zh_CN":"系统管理",
+		"display_en_US":"System",
+		"module": "admin",
+		"resource":"",
+		"children":[{
+			"rid":110801,
+			"name":"edit_syscode",
+			"display_zh_CN":"系统代码编辑",
+			"display_en_US":"edit_syscode",
+			"module": "admin",
+			"resource":"/syscode/openEditSysCode/**;/syscode/deleteSysCode/**"
+		},{
+			"rid":110802,
+			"name":"edit_label",
+			"display_zh_CN":"标签编辑",
+			"display_en_US":"edit_label",
+			"module": "admin",
+			"resource":"/system/saveLabelFolder/**;/system/saveLabel/**;/system/delLabelFolder/**;/system/delLabel/**"
+		},{
+			"rid":110803,
+			"name":"edit_printer",
+			"display_zh_CN":"打印机编辑",
+			"display_en_US":"edit_printer",
+			"module": "admin",
+			"resource":"/system/ModifyPrinter/**;/system/deletePrinter/**"
+		},{
+			"rid":110804,
+			"name":"edit_client",
+			"display_zh_CN":"客户端编辑",
+			"display_en_US":"edit_client",
+			"module": "admin",
+			"resource":"/system/ModifyClient/**;/system/deleteClient/**"
+		}]
+	},{
+		"rid": 1109,
+		"name": "project_management",
+		"display_zh_CN": "项目管理",
+		"display_en_US": "Project management",
+		"module": "research_project",
+		"resource": "",
+		"children": [
+			{
+				"rid": 110901,
+				"name": "edit_project",
+				"display_zh_CN": "编辑项目",
+				"display_en_US": "Edit project",
+				"module": "research_project",
+				"resource": "/saveProject"
+			},
+			{
+				"rid": 110902,
+				"name": "delete_project",
+				"display_zh_CN": "删除项目",
+				"display_en_US": "Delete project",
+				"module": "research_project",
+				"resource": "/deleteProject"
+			},
+			{
+				"rid": 110903,
+				"name": "maintain_project_member",
+				"display_zh_CN": "添加项目成员",
+				"display_en_US": "Maintain project member",
+				"module": "research_project",
+				"resource": "/saveProjectMember"
+			},
+			{
+				"rid": 110904,
+				"name": "delete_project_member",
+				"display_zh_CN": "删除项目成员",
+				"display_en_US": "Delete project member",
+				"module": "research_project",
+				"resource": "/deleteProjectMember"
+			},
+			{
+				"rid": 110905,
+				"name": "edit_project_role",
+				"display_zh_CN": "编辑项目角色",
+				"display_en_US": "Edit project role",
+				"module": "research_project",
+				"resource": "/saveProjectRole"
+			},
+			{
+				"rid": 110906,
+				"name": "delete_project_role",
+				"display_zh_CN": "删除项目角色",
+				"display_en_US": "Delete project role",
+				"module": "research_project",
+				"resource": "/deleteProjectRole"
+			},
+			{
+				"rid": 110907,
+				"name": "edit_project_authority",
+				"display_zh_CN": "编辑项目权限",
+				"display_en_US": "Edit project authority",
+				"module": "research_project",
+				"resource": "/saveResearchAuthority"
+			},
+			{
+				"rid": 110908,
+				"name": "delete_project_authority",
+				"display_zh_CN": "删除项目权限",
+				"display_en_US": "Delete project authority",
+				"module": "research_project",
+				"resource": "/deleteProjectAuthority"
+			},
+			{
+				"rid": 110909,
+				"name": "add_form_template",
+				"display_zh_CN": "新建表单",
+				"display_en_US": "Add new form template",
+				"module": "research_project",
+				"resource": "/newFormTemp"
+			},
+			{
+				"rid": 110910,
+				"name": "save_form_template",
+				"display_zh_CN": "保存表单",
+				"display_en_US": "Save form template",
+				"module": "research_project",
+				"resource": "/saveFormTemplate"
+			},
+			{
+				"rid": 110911,
+				"name": "saveas_form_template",
+				"display_zh_CN": "另存为表单",
+				"display_en_US": "Save as form template",
+				"module": "research_project",
+				"resource": "/saveAsFormTemplate"
+			},
+			{
+				"rid": 110912,
+				"name": "import_form_template",
+				"display_zh_CN": "导入表单",
+				"display_en_US": "Import form template",
+				"module": "research_project",
+				"resource": "/importFormTemplate"
+			},
+			{
+				"rid": 110913,
+				"name": "export_form_template",
+				"display_zh_CN": "导出表单",
+				"display_en_US": "Export form template",
+				"module": "research_project",
+				"resource": "/exportFormTemplate"
+			},
+			{
+				"rid": 110914,
+				"name": "delete_form_template",
+				"display_zh_CN": "删除表单和组件",
+				"display_en_US": "Delete form template",
+				"module": "research_project",
+				"resource": "/delFormAndComponent"
+			}
+		]
+	}]
+},{
+	"rid":12,
+	"name":"Report",
+	"display_zh_CN":"报告",
+	"display_en_US":"Report",
+	"module": "worklist",
+	"resource":"",
+	"children":[{
+		"rid":1201,
+		"name":"Image",
+		"display_zh_CN":"图像",
+		"display_en_US":"Image",
+		"module": "worklist",
+		"resource":"",
+		"children":[{
+			"rid":120101,
+			"name":"get_ViaImage",
+			"display_zh_CN":"获取via图像",
+			"display_en_US":"getViaImage",
+			"module": "worklist",
+			"resource":"/image/getViaImage/**"
+		},{
+			"rid":120102,
+			"name":"open_Image",
+			"display_zh_CN":"打开图像",
+			"display_en_US":"openImage",
+			"module": "worklist",
+			"resource":"/report/openReport/**"
+		},{
+			"rid":120103,
+			"name":"getApply_wl",
+			"display_zh_CN":"查看申请单",
+			"display_en_US":"getApply",
+			"module": "worklist",
+			"resource":"/worklist/getImage/**;"
+		},{
+			"rid":120104,
+			"name":"getStudyprocess_wl",
+			"display_zh_CN":"查看检查流程",
+			"display_en_US":"getStudyprocess",
+			"module": "worklist",
+			"resource":"/worklist/gotoStudyProcess/**;"
+		}]
+	},{
+		"rid":1202,
+		"name":"Report",
+		"display_zh_CN":"报告",
+		"display_en_US":"Report",
+		"module": "worklist",
+		"resource":"",
+		"children":[{
+			"rid":120201,
+			"name":"open_report",
+			"display_zh_CN":"打开报告",
+			"display_en_US":"open_report",
+			"module": "worklist",
+			"resource":"/report/openReport/**"
+		},{
+			"rid":120202,
+			"name":"save_report",
+			"display_zh_CN":"保存报告",
+			"display_en_US":"save_report",
+			"module": "worklist",
+			"resource":"/report/saveReport/**;/srreport/saveStructReport/**"
+		},{
+			"rid":120203,
+			"name":"audit_report",
+			"display_zh_CN":"审核报告",
+			"display_en_US":"audit_report",
+			"module": "worklist",
+			"resource":"/report/auditReport/**;/srreport/auditStructReport/**"
+		},{
+			"rid":120204,
+			"name":"favorites_report",
+			"display_zh_CN":"收藏报告",
+			"display_en_US":"favorites_report",
+			"module": "worklist",
+			"resource":"/report/goFavorites/**"
+		},{
+			"rid":120205,
+			"name":"print_report",
+			"display_zh_CN":"打印报告",
+			"display_en_US":"print_report",
+			"module": "worklist",
+			"resource":"/print/print/**"
+		},{
+			"rid":120206,
+			"name":"delete_report",
+			"display_zh_CN":"删除检查报告",
+			"display_en_US":"delete_report",
+			"module": "worklist",
+			"resource":"/worklist/deleteSR/**"
+		},{
+			"rid":120207,
+			"name":"cancel_audireport",
+			"display_zh_CN":"取消报告审核",
+			"display_en_US":"cancel_audireport",
+			"module": "worklist",
+			"resource":"/report/cancelAudiReport/**"
+		},{
+			"rid":120208,
+			"name":"cancel_blockreport",
+			"display_zh_CN":"取消报告锁定",
+			"display_en_US":"cancel_blockreport",
+			"module": "worklist",
+			"resource":"/report/cancelBlock/**"
+		},{
+			"rid":120209,
+			"name":"reject_report",
+			"display_zh_CN":"驳回报告",
+			"display_en_US":"rejectreport",
+			"module": "worklist",
+			"resource":"/report/rejectReport/**"
+		},{
+			"rid":120210,
+			"name":"submit_report",
+			"display_zh_CN":"提交报告",
+			"display_en_US":"submitreport",
+			"module": "worklist",
+			"resource":"/report/submitReport/**;/srreport/submitStructReport/**"
+		},{
+			"rid":120211,
+			"name":"preaudit_report",
+			"display_zh_CN":"初审报告",
+			"display_en_US":"preauditreport",
+			"module": "worklist",
+			"resource":"/report/preAuditReport/**;/srreport/auditPreStructReport/**"
+		},{
+			"rid":120212,
+			"name":"open_report_report",
+			"display_zh_CN":"报告医生打开同级报告权限",
+			"display_en_US":"open_report_report",
+			"module": "worklist",
+			"resource":""
+		},{
+			"rid":120213,
+			"name":"open_report_audit",
+			"display_zh_CN":"审核医生打开同级报告权限",
+			"display_en_US":"open_report_audit",
+			"module": "worklist",
+			"resource":""
+		},{
+			"rid":120214,
+			"name":"open_report_all",
+			"display_zh_CN":"打开所有报告权限",
+			"display_en_US":"open_report_all",
+			"module": "worklist",
+			"resource":""
+		},{
+			"rid":120215,
+			"name":"reset_report",
+			"display_zh_CN":"临床报告重置",
+			"display_en_US":"reset_report",
+			"module": "worklist",
+			"resource":""
+		},{
+			"rid":120216,
+			"name":"delete_report_vip",
+			"display_zh_CN":"删除VIP报告",
+			"display_en_US":"delete_report_vip",
+			"module": "worklist",
+			"resource":""
+		}]
+	},{
+		"rid":1203,
+		"name":"Filter",
+		"display_zh_CN":"过滤器",
+		"display_en_US":"Filter",
+		"module": "worklist",
+		"resource":"",
+		"children":[{
+			"rid":120301,
+			"name":"save_WLfilter",
+			"display_zh_CN":"过滤器保存",
+			"display_en_US":"save_filter",
+			"module": "worklist",
+			"resource":"/worklist/openSaveFilterDialog/**;/worklist/saveFilter/**;"
+		},{
+			"rid":120302,
+			"name":"manage_WLfilter",
+			"display_zh_CN":"过滤器管理",
+			"display_en_US":"manage_filter",
+			"module": "worklist",
+			"resource":"/worklist/filterManage/**;/worklist/deleteFilter/**;"
+		}]
+	},{
+		"rid":1204,
+		"name":"Temp_report",
+		"display_zh_CN":"报告模板",
+		"display_en_US":"Temp_report",
+		"module": "worklist",
+		"resource":"",
+		"children":[{
+			"rid":120401,
+			"name":"switch_template",
+			"display_zh_CN":"切换模板",
+			"display_en_US":"switch_report",
+			"module": "worklist",
+			"resource":"/report/openSwitchTemplateDialog/**"
+		},{
+			"rid":120402,
+			"name":"edit_publicTemplate",
+			"display_zh_CN":"编辑公共模板",
+			"display_en_US":"edit_publicTemplate",
+			"module": "worklist",
+			"resource":"/template/editPublicTemplate/**"
+		}]
+	}]
+},{
+	"rid":13,
+	"name":"Register",
+	"display_zh_CN":"登记",
+	"display_en_US":"Register",
+	"module": "register",
+	"resource":"",
+	"children":[{
+		"rid":1301,
+		"name":"Register",
+		"display_zh_CN":"登记录入",
+		"display_en_US":"Register",
+		"module": "register",
+		"resource":"",
+		"children":[{
+			"rid":130101,
+			"name":"save_register",
+			"display_zh_CN":"登记保存",
+			"display_en_US":"save_register",
+			"module": "register",
+			"resource":"/register/register/**"
+		},{
+			"rid":130102,
+			"name":"saveAndprint_register",
+			"display_zh_CN":"登记并打印",
+			"display_en_US":"saveAndprint_register",
+			"module": "register",
+			"resource":"/register/register/**"
+		}]
+	},{
+		"rid":1302,
+		"name":"OtherOperations",
+		"display_zh_CN":"其它操作",
+		"display_en_US":"OtherOperations ",
+		"module": "register",
+		"resource":"",
+		"children":[{
+			"rid":130201,
+			"name":"filter",
+			"display_zh_CN":"过滤器",
+			"display_en_US":"filter",
+			"module": "register",
+			"resource":"",
+			"children":[{
+				"rid":13020101,
+				"name":"save_Regfilter",
+				"display_zh_CN":"新增我的条件",
+				"display_en_US":"save_filter",
+				"module": "register",
+				"resource":"/register/openFilterSaveDialog/**;/register/saveFilter/**"
+			},{
+				"rid":13020102,
+				"name":"manage_Regfilter",
+				"display_zh_CN":"管理我的条件",
+				"display_en_US":"manage_filter ",
+				"module": "register",
+				"resource":"/register/openFilterManageDialog/**;/register/getFilters/**;/register/deleteFilters/**;"
+			}]
+		},{
+			"rid":130202,
+			"name":"deleteStudyorder_reg",
+			"display_zh_CN":"删除检查",
+			"display_en_US":"deleteStudyOrder ",
+			"module": "register",
+			"resource":"/register/deleteStudyOrder/**;"
+		},{
+			"rid":130203,
+			"name":"cancelStudyorder_reg",
+			"display_zh_CN":"取消检查",
+			"display_en_US":"cancelStudyOrder ",
+			"module": "register",
+			"resource":"/register/cancelStudyOrder/**;"
+		},{
+			"rid":130204,
+			"name":"deletePatient_reg",
+			"display_zh_CN":"删除病人",
+			"display_en_US":"deletePatient",
+			"module": "register",
+			"resource":"/register/deletePatient/**;"
+		},{
+			"rid":130205,
+			"name":"reg_to_sch",
+			"display_zh_CN":"登记转预约",
+			"display_en_US":"reg_to_sch",
+			"module": "register",
+			"resource":"/register/openScheduleDlg/**;"
+		},{
+			"rid":130206,
+			"name":"mergePatient_reg",
+			"display_zh_CN":"合并病人",
+			"display_en_US":"mergePatient",
+			"module": "register",
+			"resource":"/register/mergePatient/**;"
+		},{
+			"rid":130207,
+			"name":"printStudyorder_reg",
+			"display_zh_CN":"打印检查单",
+			"display_en_US":"printStudyorder",
+			"module": "register",
+			"resource":"/print/preview/**;"
+		},{
+			"rid":130208,
+			"name":"getApply_reg",
+			"display_zh_CN":"查看申请单",
+			"display_en_US":"getApply",
+			"module": "register",
+			"resource":"/register/getImage/**;"
+		},{
+			"rid":130209,
+			"name":"getStudyprocess_reg",
+			"display_zh_CN":"查看检查流程",
+			"display_en_US":"getStudyprocess",
+			"module": "register",
+			"resource":"/register/gotoStudyProcess/**;"
+		}]
+	}]
+},{
+	"rid":14,
+	"name":"Schedule",
+	"display_zh_CN":"预约",
+	"display_en_US":"Schedule",
+	"module": "schedule",
+	"resource":"",
+	"children":[{
+		"rid":1401,
+		"name":"Schedule",
+		"display_zh_CN":"预约录入",
+		"display_en_US":"Schedule",
+		"module": "schedule",
+		"resource":"",
+		"children":[{
+			"rid":140101,
+			"name":"save_schedule",
+			"display_zh_CN":"预约保存",
+			"display_en_US":"save_schedule",
+			"module": "schedule",
+			"resource":"/schedule/saveSchedule/**;"
+		},{
+			"rid":140102,
+			"name":"saveAndprint_schedule",
+			"display_zh_CN":"预约并打印",
+			"display_en_US":"saveAndprint_schedule",
+			"module": "schedule",
+			"resource":"/schedule/saveSchedule/**;"
+		}]
+	},{
+		"rid":1402,
+		"name":"OtherOperations",
+		"display_zh_CN":"其它操作",
+		"display_en_US":"OtherOperations",
+		"module": "schedule",
+		"resource":"",
+		"children":[{
+			"rid":140201,
+			"name":"filter",
+			"display_zh_CN":"过滤器",
+			"display_en_US":"filter",
+			"module": "schedule",
+			"resource":"",
+			"children":[{
+				"rid":14020101,
+				"name":"save_Schfilter",
+				"display_zh_CN":"新增我的条件",
+				"display_en_US":"save_filter",
+				"module": "schedule",
+				"resource":"/schedule/openSaveFilterDialog/**;/schedule/saveFilter/**;"
+			},{
+				"rid":14020102,
+				"name":"manage_Schfilter",
+				"display_zh_CN":"管理我的条件",
+				"display_en_US":"manage_filter",
+				"module": "schedule",
+				"resource":"/schedule/filterManage/**;/schedule/deleteFilter/**;"
+			}]
+		},{
+			"rid":140202,
+			"name":"deleteScheduleOrder_sch",
+			"display_zh_CN":"删除预约信息",
+			"display_en_US":"deleteScheduleOrder",
+			"module": "schedule",
+			"resource":"/schedule/deleteScheduleOrder/**;"
+		},{
+			"rid":140203,
+			"name":"cancelScheduleOrder_sch",
+			"display_zh_CN":"取消预约",
+			"display_en_US":"cancelScheduleOrder",
+			"module": "schedule",
+			"resource":"/schedule/cancelScheduleOrder/**;"
+		},{
+			"rid":140204,
+			"name":"deletePatient_sch",
+			"display_zh_CN":"删除病人信息",
+			"display_en_US":"deletePatient",
+			"module": "schedule",
+			"resource":"/schedule/deletePatient/**;"
+		},{
+            "rid":140205,
+            "name":"sch_to_reg",
+            "display_zh_CN":"预约转登记",
+            "display_en_US":"sch_to_reg",
+            "module": "schedule",
+            "resource":"/schedule/sch_to_reg/**;"
+        },{
+			"rid":140206,
+			"name":"getApply_sch",
+			"display_zh_CN":"查看申请单",
+			"display_en_US":"getApply",
+			"module": "schedule",
+			"resource":"/schedule/getImage/**;"
+		},{
+			"rid":140207,
+			"name":"getStudyprocess_sch",
+			"display_zh_CN":"查看检查流程",
+			"display_en_US":"getStudyprocess",
+			"module": "schedule",
+			"resource":"/schedule/gotoStudyProcess/**"
+		},{
+            "rid":140208,
+            "name":"printStudyorder_sch",
+            "display_zh_CN":"打印预约单",
+            "display_en_US":"printreservation",
+            "module": "schedule",
+            "resource":"/print/preview/**;"
+        },{
+            "rid":140209,
+            "name":"advance_signin",
+            "display_zh_CN":"提前登记",
+            "display_en_US":"signin",
+            "module": "schedule",
+            "resource":"/schedule/advanceSignin/**;"
+        }]
+	}]
+},{
+	"rid":15,
+	"name":"Examine",
+	"display_zh_CN":"检查",
+	"display_en_US":"Examine",
+	"module": "examine",
+	"resource":"",
+	"children":[{
+		"rid":1501,
+		"name":"Examine",
+		"display_zh_CN":"检查",
+		"display_en_US":"Examine",
+		"module": "examine",
+		"resource":"",
+		"children":[{
+			"rid":150101,
+			"name":"startStudyOrder",
+			"display_zh_CN":"检查开始",
+			"display_en_US":"startStudyOrder",
+			"module": "examine",
+			"resource":"/examine/startStudyOrder**"
+		},{
+			"rid":150102,
+			"name":"repeatCall",
+			"display_zh_CN":"重复叫号",
+			"display_en_US":"repeatCall",
+			"module": "examine",
+			"resource":"/examine/repeatCall/**"
+		},{
+			"rid":150103,
+			"name":"completeStudyOrder",
+			"display_zh_CN":"检查完成",
+			"display_en_US":"completeStudyOrder",
+			"module": "examine",
+			"resource":"/examine/completeStudyOrder/**"
+		},{
+			"rid":150104,
+			"name":"cancelStudyOrder",
+			"display_zh_CN":"检查取消",
+			"display_en_US":"cancelStudyOrder",
+			"module": "examine",
+			"resource":"/examine/cancelStudyOrder/**"
+		},{
+			"rid":150105,
+			"name":"skipStudyOrder",
+			"display_zh_CN":"过号",
+			"display_en_US":"skipStudyOrder",
+			"module": "examine",
+			"resource":"/examine/skipStudyOrder/**"
+		},{
+			"rid":150106,
+			"name":"saveConsumables",
+			"display_zh_CN":"保存检查耗材",
+			"display_en_US":"saveConsumables",
+			"module": "examine",
+			"resource":"/examine/saveApp/**"
+		},{
+			"rid":150107,
+			"name":"getApply",
+			"display_zh_CN":"查看申请单",
+			"display_en_US":"getApply",
+			"module": "examine",
+			"resource":"/examine/getImage/**"
+		},{
+			"rid":150108,
+			"name":"getStudyprocess",
+			"display_zh_CN":"查看检查流程",
+			"display_en_US":"getStudyprocess ",
+			"module": "examine",
+			"resource":"/examine/gotoStudyProcess/**;"
+		},{
+			"rid":150109,
+			"name":"openRemark_examine",
+			"display_zh_CN":"查看病人备注",
+			"display_en_US":"openRemark ",
+			"module": "examine",
+			"resource":"/examine/goToEditremark/**"
+		}]
+	},{
+		"rid":1502,
+		"name":"OtherOperations",
+		"display_zh_CN":"其他操作",
+		"display_en_US":"OtherOperations",
+		"module": "examine",
+		"resource":"",
+		"children":[{
+			"rid":150201,
+			"name":"gotoTriageList",
+			"display_zh_CN":"查看分诊请求",
+			"display_en_US":"gotoTriageList",
+			"module": "examine",
+			"resource":"/examine/gotoTriageListDlg/**"
+		},{
+			"rid":150202,
+			"name":"gotoTriageDlg",
+			"display_zh_CN":"申请分诊",
+			"display_en_US":"gotoTriageDlg ",
+			"module": "examine",
+			"resource":"/examine/gotoTriageDlg/**"
+		},{
+			"rid":150203,
+			"name":"cancelApplyTriage",
+			"display_zh_CN":"取消申请分诊",
+			"display_en_US":"cancelApplyTriage ",
+			"module": "examine",
+			"resource":"/examine/cancelApplyTriage/**"
+		},{
+			"rid":150204,
+			"name":"gotoReceiveDlg",
+			"display_zh_CN":"获取设备病人",
+			"display_en_US":"gotoReceiveDlg ",
+			"module": "examine",
+			"resource":"/examine/gotoReceiveDlg/**"
+		},{
+			"rid":150205,
+			"name":"modifyExamine",
+			"display_zh_CN":"修改检查",
+			"display_en_US":"modifyExamine ",
+			"module": "examine",
+			"resource":"/examine/openModifyDlg/**"
+		},{
+            "rid":150206,
+            "name":"cancelChecked",
+            "display_zh_CN":"重新检查",
+            "display_en_US":"cancelChecked ",
+            "module": "examine",
+            "resource":"/examine/cancelStudyChecked/**"
+        }]
+	}]
+},{
+	"rid":16,
+	"name":"Statistics",
+	"display_zh_CN":"统计",
+	"display_en_US":"Statistics",
+	"module": "statistics",
+	"resource":"",
+	"children":[{
+		"rid":1601,
+		"name":"showStatisticalReport",
+		"display_zh_CN":"生成报表",
+		"display_en_US":"showStatisticalReport ",
+		"module": "statistics",
+		"resource":"/statistics/showStatisticalReport_Pdf/**"
+	},{
+		"rid":1602,
+		"name":"exportStatisticalReport",
+		"display_zh_CN":"导出报表",
+		"display_en_US":"exportStatisticalReport ",
+		"module": "statistics",
+		"resource":"/statistics/exportStatisticalReport/**"
+	},{
+		"rid":1603,
+		"name":"revenueDashboard",
+		"display_zh_CN":"Dashboard收入统计",
+		"display_en_US":"revenueDashboard ",
+		"module": "statistics",
+		"resource":"/statistics/eachEquipmentRevernue/**;/statistics/eachEquipmentRevernue30Days/**"
+	}]
+},{
+	"rid":17,
+	"name":"WebViewer",
+	"display_zh_CN":"报告查询",
+	"display_en_US":"WebViewer",
+	"module": "webview",
+	"resource":"",
+	"children":[{
+			"rid":1701,
+			"name":"open_webview_report",
+			"display_zh_CN":"打开报告",
+			"display_en_US":"open_report",
+			"module": "webview",
+			"resource":"/webview/openReport/**"
+		},{
+			"rid":1702,
+			"name":"favorites_webview_report",
+			"display_zh_CN":"收藏报告",
+			"display_en_US":"favorites_report",
+			"module": "webview",
+			"resource":"/webview/goFavorites/**"
+		},{
+			"rid":1703,
+			"name":"print_report",
+			"display_zh_CN":"打印报告",
+			"display_en_US":"print_report",
+			"module": "webview",
+			"resource":"/print/print/**"
+		},{
+			"rid":1704,
+			"name":"Filter",
+			"display_zh_CN":"过滤器",
+			"display_en_US":"Filter",
+			"module": "webview",
+			"resource":"",
+			"children":[{
+				"rid":170401,
+				"name":"save_webview_filter",
+				"display_zh_CN":"过滤器保存",
+				"display_en_US":"save_filter",
+				"module": "webview",
+				"resource":"/webview/openSaveFilterDialog/**;/webview/saveFilter/**;"
+			},{
+				"rid":170402,
+				"name":"manage_webview_filter",
+				"display_zh_CN":"过滤器管理",
+				"display_en_US":"manage_filter",
+				"module": "webview",
+				"resource":"/webview/filterManage/**;/webview/deleteFilter/**;"
+			}]
+		},{
+			"rid":1705,
+			"name":"getApply_webview",
+			"display_zh_CN":"查看申请单",
+			"display_en_US":"getApply",
+			"module": "webview",
+			"resource":"/webview/getImage/**"
+		},{
+			"rid":1706,
+			"name":"getStudyprocess_webview",
+			"display_zh_CN":"查看检查流程",
+			"display_en_US":"getStudyprocess ",
+			"module": "webview",
+			"resource":"/webview/gotoStudyProcess/**;/webview/getStudyProcess/**"
+		}]
+},{
+	"rid":18,
+	"name":"Chat",
+	"display_zh_CN":"聊天",
+	"display_en_US":"Chat",
+	"module": "chat",
+	"resource":"",
+	"children":[{
+			"rid":1801,
+			"name":"init_chat",
+			"display_zh_CN":"聊天初始化",
+			"display_en_US":"Init_chat",
+			"module": "chat",
+			"resource":"/chat/queryBaseInformation/**"
+		},{
+			"rid":1802,
+			"name":"getGroupMembers_chat",
+			"display_zh_CN":"获取聊天群成员",
+			"display_en_US":"GetGroupMembers",
+			"module": "chat",
+			"resource":"/chat/queryFriendsByGroupId/**"
+		},{
+			"rid":1803,
+			"name":"sendImage_chat",
+			"display_zh_CN":"发送图片",
+			"display_en_US":"Send_Image",
+			"module": "chat",
+			"resource":"/chat/uploadImg/**"
+		},{
+			"rid":1804,
+			"name":"getChatRecord_chat",
+			"display_zh_CN":"获取聊天记录",
+			"display_en_US":"Chat_Record",
+			"module": "chat",
+			"resource":"/chat/toChatRecord/**"
+		},{
+			"rid":1805,
+			"name":"editSign_chat",
+			"display_zh_CN":"修改签名",
+			"display_en_US":"Edit_Sign",
+			"module": "chat",
+			"resource":"/chat/updateSign/**;"
+		}]
+},{
+    "rid":19,
+    "name":"distribution",
+    "display_zh_CN":"分发",
+    "display_en_US":"Distribution",
+    "module": "distribution",
+    "resource":"",
+    "children":[{
+            "rid":1901,
+            "name":"distribution_report",
+            "display_zh_CN":"批量打印",
+            "display_en_US":"distributionreport",
+            "module": "distribution",
+            "resource":"/distribution/**"
+        }]
+}]

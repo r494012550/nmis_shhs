@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="225716e8-d3f7-4298-bb0c-eaec68ca55fc">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="KS_Nmis_TJ.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="datefrom" class="java.lang.String"/>
+	<parameter name="dateto" class="java.lang.String"/>
+	<parameter name="where" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT (CASE pos_or_neg
+  WHEN 'p' THEN '阳性'
+  WHEN 'n' THEN '阴性'
+  END )AS '阴阳性',
+  COUNT(report.id) AS 数量,
+ (select dic_modality.modality_name from dic_modality where dic_modality.id=studyorder.modalityid) as '检查设备'
+ FROM report
+ LEFT JOIN studyorder ON studyorder.id = report.studyorderfk
+ WHERE report.reportstatus>='31' AND report.pos_or_neg IS NOT NULL
+ AND $P!{where}
+ GROUP BY report.pos_or_neg, studyorder.modalityid]]>
+	</queryString>
+	<field name="阴阳性" class="java.lang.String"/>
+	<field name="数量" class="java.lang.Integer"/>
+	<field name="检查设备" class="java.lang.String"/>
+	<variable name="num" class="java.lang.Integer" incrementType="Report">
+		<variableExpression><![CDATA[new java.lang.Integer($V{num}.intValue() + $F{数量})]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="155" y="0" width="234" height="33" uuid="22e42ebe-5c10-4d6e-b8c3-d7bf7bc1e3b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查设备阴阳性统计]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="33" width="20" height="20" uuid="5a926a9d-6426-401a-9a15-acdf0d36e97a"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[至]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="485" y="33" width="62" height="20" uuid="d3c13f82-0764-4f4f-96f3-2f75c7a71844"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="347" y="33" width="60" height="20" uuid="56450040-a9cd-4d95-81b9-c3fe505febec"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[统计日期:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="405" y="33" width="62" height="20" uuid="5841eecd-a978-4a8b-9bf0-cfef3a130c48"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datefrom}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="13" y="1" width="55" height="20" uuid="cb2af9b5-75ad-418a-b1d1-073aa704cfc1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="68" y="1" width="254" height="20" uuid="cbc1ccd9-83d4-4cf7-945d-2a40b3e2f520"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="322" y="1" width="81" height="20" uuid="6501478c-1305-4c35-ba70-067306be08dc"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="13" y="1" width="55" height="20" uuid="ca7c0c84-6b69-4a21-8a7d-054f31aa482f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[序号]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="403" y="1" width="152" height="20" uuid="dc25e5f1-2fc6-4244-8d6b-87dcdffe1cbb"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="69" y="1" width="253" height="19" uuid="5753d8b9-d944-4171-8525-5234d6a02359"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查设备]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="322" y="2" width="81" height="18" uuid="515f0671-f919-4876-969e-23dda812362f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[阴阳性]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="2" width="152" height="18" uuid="25ae8915-719a-4ecc-bbfe-3b153225afe3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[数量]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<rectangle>
+				<reportElement x="13" y="0" width="55" height="25" uuid="b6f95620-4d31-4fa4-9710-98f520d52792"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="68" y="0" width="254" height="25" uuid="f9031746-bb73-4554-a693-bfd86c943516"/>
+			</rectangle>
+			<textField>
+				<reportElement x="13" y="0" width="56" height="25" uuid="a91aeb70-77d1-440a-8b49-d7963c0d7930"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="322" y="0" width="108" height="25" uuid="5ac91cc9-d260-4692-bbca-c1c9e3613f77"/>
+			</rectangle>
+			<textField>
+				<reportElement x="322" y="3" width="81" height="22" uuid="59e4be94-c03c-4f48-b5ee-a0679c1332e0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{阴阳性}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="403" y="0" width="152" height="25" uuid="508c3209-5bc3-47c8-b7cf-7a1f7a63cf60"/>
+			</rectangle>
+			<textField>
+				<reportElement x="403" y="1" width="152" height="22" uuid="2ecd4483-a06e-4673-a38e-972d3416d4f2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{数量}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="69" y="3" width="253" height="22" uuid="368c81cb-e009-4fd1-a69b-85a48a8b7214"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{检查设备}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="25">
+			<staticText>
+				<reportElement x="468" y="0" width="31" height="25" uuid="0aeb94c4-480b-4380-aff0-34260ceebbea"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[合计:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="476" y="0" width="65" height="25" uuid="eac44a96-e96e-4388-a870-0cfdeb8a2e23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{num}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="255" y="6" width="82" height="20" uuid="b306ae87-2424-440c-a38d-473c1e23cc4c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" / 共 " + $V{PAGE_NUMBER}+" 页"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="6" width="80" height="20" uuid="caf4fac1-5dda-45f1-a2d4-0526f79f30d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["第 "+$V{PAGE_NUMBER}+" 页"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

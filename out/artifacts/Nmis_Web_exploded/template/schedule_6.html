@@ -1,0 +1,212 @@
+<style type="text/css">
+        .right{
+            float:left;
+            
+        }
+        
+        .right td.drop{
+            background:#fafafa;
+            width:73px;
+            height:24px
+        }
+        .right td.undrop{
+            background:#808080;
+            width:73px;
+            height:24px
+        }
+        .right td.over{
+            background:#FBEC88;
+        }
+        
+        .item{
+            text-align:center;
+            border:1px solid #499B33;
+            background:#fafafa;
+            color:#444;
+            width:70px;
+            height:20px
+        }
+        .time{
+        	width:50px;
+        	text-align:center;
+        }
+        .assigned{
+            border:1px solid #BC2A4D;
+        }
+        .trash{
+            background-color:red;
+        }
+        
+    </style>
+<script>
+        $(function(){
+            $('.right .item').draggable({
+                revert:true,
+                proxy:'clone'
+            });
+            $('.right td.drop').droppable({
+                accept: '.item',
+                onDragEnter:function(){
+                    $(this).addClass('over');
+                },
+                onDragLeave:function(){
+                    $(this).removeClass('over');
+                },
+                onDrop:function(e,source){
+                	$(this).removeClass('over');
+                	var child=$(this).find("div");
+                	
+                    if(child.length==1){
+                    	$(source).parent().append(child);
+                    	$(this).empty().append(source);
+                    }
+                    else{
+                    	$(this).append(source);
+                    	console.log($(this).attr("time"));
+                    	console.log($(source).attr("orderid"));
+                    }
+                }
+            });
+            $('.left').droppable({
+                accept:'.assigned',
+                onDragEnter:function(e,source){
+                    $(source).addClass('trash');
+                },
+                onDragLeave:function(e,source){
+                    $(source).removeClass('trash');
+                },
+                onDrop:function(e,source){
+                    $(source).remove();
+                }
+            });
+        });
+    </script>
+
+<div class="right">
+           <table style="background:#E0ECFF;width:100%;">
+               <!-- <tr>
+                   <td class="blank"></td>
+                   <td class="title">00</td>
+                   <td class="title">06</td>
+                   <td class="title">12</td>
+                   <td class="title">18</td>
+                   <td class="title">24</td>
+                   <td class="title">30</td>
+                   <td class="title">36</td>
+                   <td class="title">42</td>
+                   <td class="title">48</td>
+                   <td class="title">54</td>
+               </tr> -->
+               #for(i=0;i<times.size();i++)
+               
+               <tr>
+                   <!-- <td class="time">#(i):00</td> -->
+                   <td class="times">#(com.healta.util.SequenceNo_Generator::timeFormat(times.get(i))+"--"+com.healta.util.SequenceNo_Generator::timeFormat(times.get(i)+dicModality.appointment_time))</td>
+                   #for(j=0;j<dicModality.appointment_number;j++)
+	                   <td class="#(true?'undrop':'drop')" time="#(i):00">
+	                    #if(map.get(times.get(i)+"").get(0)?? && map.get(times.get(i)+"").size()>j ??)
+	                        #if(map.get(times.get(i)+"").get(j).modifytime??)
+	                           <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(j).orderid??)">#(map.get(times.get(i)+"").get(j).patientname??)</div>
+	                        #else
+	                           <div class="item" orderid="#(map.get(i+'').get(j).orderid??)">#(map.get(times.get(i)+"").get(j).patientname??)</div>
+	                        #end
+	                    #end
+	                    </td>
+	               #end
+                   <!-- <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):00">
+                    #if(map.get(i+"").get(0)??)
+                        #if(map.get(i+"").get(0).modifytime??)
+                           <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(0).orderid)">#(map.get(i+"").get(0).patientname)</div>
+                        #else
+                           <div class="item" orderid="#(map.get(i+'').get(0).orderid)">#(map.get(i+"").get(0).patientname)</div>
+                        #end
+					#end
+				    </td>
+                   <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):05">
+                   	#if(map.get(i+"").get(0)?? && map.get(i+"").size()>1)
+                   	    #if(map.get(i+"").get(1).modifytime??)
+                           <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(1).orderid)">#(map.get(i+"").get(1).patientname)</div>
+                        #else
+                           <div class="item" orderid="#(map.get(i+'').get(1).orderid)">#(map.get(i+"").get(1).patientname)</div>
+                        #end
+					#end
+                   </td>
+                   <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):10">
+                   	#if(map.get(i+"").get(0)?? && map.get(i+"").size()>2)
+	                   	#if(map.get(i+"").get(2).modifytime??)
+	                       <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(2).orderid)">#(map.get(i+"").get(2).patientname)</div>
+	                    #else
+	                       <div class="item" orderid="#(map.get(i+'').get(2).orderid)">#(map.get(i+"").get(2).patientname)</div>
+	                    #end
+					#end
+                   </td>
+                   <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):15">
+                   	#if(map.get(i+"").get(0)?? && map.get(i+"").size()>3)
+                   	    #if(map.get(i+"").get(3).modifytime??)
+                           <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(3).orderid)">#(map.get(i+"").get(3).patientname)</div>
+                        #else
+                           <div class="item" orderid="#(map.get(i+'').get(3).orderid)">#(map.get(i+"").get(3).patientname)</div>
+                        #end
+					#end
+                   </td>
+                   <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):20">
+                   	#if(map.get(i+"").get(0)?? && map.get(i+"").size()>4)
+                   	    #if(map.get(i+"").get(4).modifytime??)
+                           <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(4).orderid)">#(map.get(i+"").get(4).patientname)</div>
+                        #else
+                           <div class="item" orderid="#(map.get(i+'').get(4).orderid)">#(map.get(i+"").get(4).patientname)</div>
+                        #end
+					#end
+                   </td>
+                   <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):25">
+                   	#if(map.get(i+"").get(0)?? && map.get(i+"").size()>5)
+                   	    #if(map.get(i+"").get(5).modifytime??)
+                           <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(5).orderid)">#(map.get(i+"").get(5).patientname)</div>
+                        #else
+                           <div class="item" orderid="#(map.get(i+'').get(5).orderid)">#(map.get(i+"").get(5).patientname)</div>
+                        #end
+					#end
+                   </td>
+                   <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):30">
+                   	#if(map.get(i+"").get(0)?? && map.get(i+"").size()>6)
+                   	    #if(map.get(i+"").get(6).modifytime??)
+                           <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(6).orderid)">#(map.get(i+"").get(6).patientname)</div>
+                        #else
+                           <div class="item" orderid="#(map.get(i+'').get(6).orderid)">#(map.get(i+"").get(6).patientname)</div>
+                        #end
+					#end
+                   </td>
+                   <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):35">
+                   	#if(map.get(i+"").get(0)?? && map.get(i+"").size()>7)
+                   	    #if(map.get(i+"").get(7).modifytime??)
+                           <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(7).orderid)">#(map.get(i+"").get(7).patientname)</div>
+                        #else
+                           <div class="item" orderid="#(map.get(i+'').get(7).orderid)">#(map.get(i+"").get(7).patientname)</div>
+                        #end
+					#end
+                   </td>
+                   <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):40">
+                   	#if(map.get(i+"").get(0)?? && map.get(i+"").size()>8)
+                   	    #if(map.get(i+"").get(8).modifytime??)
+                           <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(8).orderid)">#(map.get(i+"").get(8).patientname)</div>
+                        #else
+                           <div class="item" orderid="#(map.get(i+'').get(8).orderid)">#(map.get(i+"").get(8).patientname)</div>
+                        #end
+					#end
+                   </td>
+                   <td class="#(i<8||i>16?'undrop':'drop')" time="#(i):45">
+                   	#if(map.get(i+"").get(0)?? && map.get(i+"").size()>9)
+                   	    #if(map.get(i+"").get(9).modifytime??)
+                           <div class="item" style="background-color: red;" orderid="#(map.get(i+'').get(9).orderid)">#(map.get(i+"").get(9).patientname)</div>
+                        #else
+                           <div class="item" orderid="#(map.get(i+'').get(9).orderid)">#(map.get(i+"").get(9).patientname)</div>
+                        #end
+					#end
+                   </td> -->
+               </tr>
+               
+               #end
+               
+           </table>
+</div>
+           

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div style="padding:10px;">
+
+	<ul id="labels_tree" class="easyui-tree" data-options="url:'#(ctx)/report/getLabels',method:'get',
+ 			onContextMenu: function(e,node){
+              e.preventDefault();
+              $(this).tree('select',node.target);
+              console.log(node);
+              enableMenu(node);
+              $('#mm_label').menu('show',{
+                  left: e.pageX,
+                  top: e.pageY
+              });
+          },
+          onAfterEdit:function(node){
+          	submitMidifyFolder(node);
+          },
+          formatter:function(node){
+              var s = node.text;
+              if (node.label){
+                  s = '<span style=\'color:blue\'>' + s + '</span>';
+              }
+              return s;
+          }">
+   	</ul>
+	<div id="mm_label" class="easyui-menu" style="width:120px;">
+        <!--div onclick="addnode('<%=request.getParameter("studyid")%>');">添加节点</div-->
+        <div data-options="name:'newfolder'" onclick="addLabelFolder();">新建文件夹</div>
+        <div data-options="name:'modifyfolder'" onclick="modifyLabelFolder();">修改文件夹</div>
+        <div data-options="name:'delfolder'" onclick="deleteLabelFolder();">删除文件夹</div>
+        <div class="menu-sep"></div>
+        <div data-options="name:'newlabel'" onclick="addLabel();">新建标签</div>
+        <div data-options="name:'modifylabel'" onclick="modifyLabel();">修改标签</div>
+        <div data-options="name:'dellabel'" onclick="deleteLabel();">删除标签</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+	function enableMenu(node){
+		if(node.foldername){
+			var item = $('#mm_label').menu('findItem', {name:'newfolder'});
+			$('#mm_label').menu('enableItem', item.target);
+			item = $('#mm_label').menu('findItem', {name:'modifyfolder'});
+			$('#mm_label').menu('enableItem', item.target);
+			item = $('#mm_label').menu('findItem', {name:'delfolder'});
+			$('#mm_label').menu('enableItem', item.target);
+			item = $('#mm_label').menu('findItem', {name:'newlabel'});
+			$('#mm_label').menu('enableItem', item.target);
+			item = $('#mm_label').menu('findItem', {name:'modifylabel'});
+			$('#mm_label').menu('disableItem', item.target);
+			item = $('#mm_label').menu('findItem', {name:'dellabel'});
+			$('#mm_label').menu('disableItem', item.target);
+
+		}
+		else{
+			var item = $('#mm_label').menu('findItem', {name:'newfolder'});
+			$('#mm_label').menu('disableItem', item.target);
+			item = $('#mm_label').menu('findItem', {name:'modifyfolder'});
+			$('#mm_label').menu('disableItem', item.target);
+			item = $('#mm_label').menu('findItem', {name:'delfolder'});
+			$('#mm_label').menu('disableItem', item.target);
+			item = $('#mm_label').menu('findItem', {name:'newlabel'});
+			$('#mm_label').menu('disableItem', item.target);
+			item = $('#mm_label').menu('findItem', {name:'modifylabel'});
+			$('#mm_label').menu('enableItem', item.target);
+			item = $('#mm_label').menu('findItem', {name:'dellabel'});
+			$('#mm_label').menu('enableItem', item.target);
+		}
+	}
+	
+	function addRootNode_label(node){
+		$.messager.prompt({
+			title: '编辑文件夹',
+			msg: '请输入文件夹名称',
+			border:'thin',
+			fn: function(r){
+				if (r){
+					saveLabelFolder(node,r);
+				}
+			}
+		});
+		
+	}
+
+	function saveLabelFolder(node,foldername){
+		$.post(window.localStorage.ctx+'/report/saveLabelFolder',
+			    {
+					//'id': node?node.id:null,
+			    	'foldername' : foldername,
+			    	'parent' : node?node.id:0
+			     },
+			     function (res) {
+		        	var json = validationDataAll(res);
+		        	
+		        	if(json.code==0){
+		        		$('#labels_tree').tree('append', {
+		        			parent: node?node.target:null,
+							data: {
+								id: json.data.id,
+								//state: 'closed',
+								foldername:foldername,
+								text: foldername
+							}
+						});
+		        		updatePrivateLabel_ComboTree();
+		        	}
+		        	else{
+		        		$.messager.show({
+							title : $.i18n.prop('error'),
+							msg : $.i18n.prop('savefailed'),
+							timeout : 3000,
+							border : 'thin',
+							showType : 'slide'
+						});
+		        	}
+		        }
+			);
+	}
+
+	function addLabelFolder(){
+		var selected = $('#labels_tree').tree('getSelected');
+		addRootNode_label(selected);
+	}
+
+	function modifyLabelFolder(){
+		var selected = $('#labels_tree').tree('getSelected');
+		$('#labels_tree').tree('beginEdit',selected.target);
+	}
+
+	function modifyLabel(){
+		var selected = $('#labels_tree').tree('getSelected');
+		$('#labels_tree').tree('beginEdit',selected.target);
+	}
+	
+	function submitMidifyFolder(node){
+		if(node.foldername){
+			$.post(window.localStorage.ctx+'/report/saveLabelFolder',
+				    {
+						'id': node.id,
+				    	'foldername' : node.text
+				     },
+				     function (res) {
+			        	var json = validationDataAll(res);
+			        	
+			        	if(json.code==0){
+			        		updatePrivateLabel_ComboTree();
+			        	}
+			        	else{
+			        		$.messager.show({
+								title : $.i18n.prop('error'),
+								msg : $.i18n.prop('savefailed'),
+								timeout : 3000,
+								border : 'thin',
+								showType : 'slide'
+							});
+			        	}
+			        }
+			);
+		}
+		else{
+			$.post(window.localStorage.ctx+'/report/saveLabel',
+				    {
+						'id': node.labelid,
+				    	'label' : node.text
+				     },
+				     function (res) {
+			        	var json = validationDataAll(res);
+			        	
+			        	if(json.code==0){
+			        		updatePrivateLabel_ComboTree();
+			        	}
+			        	else{
+			        		$.messager.show({
+								title : $.i18n.prop('error'),
+								msg : $.i18n.prop('savefailed'),
+								timeout : 3000,
+								border : 'thin',
+								showType : 'slide'
+							});
+			        	}
+			        }
+			);
+		}
+	}
+
+	function deleteLabelFolder(){
+		var selected = $('#labels_tree').tree('getSelected');
+
+		$.messager.confirm({
+			title: $.i18n.prop('confirm'),
+			msg: '确认删除文件夹！',
+			border:'thin',
+			fn: function(r){
+				if (r){
+					$.post(window.localStorage.ctx+'/report/delLabelFolder',
+						    {
+								'id': selected.id
+						     },
+						     function (res) {
+					        	var json = validationDataAll(res);
+					        	if(json.code==0){
+					        		$('#labels_tree').tree('remove',selected.target);
+					        		updatePrivateLabel_ComboTree();
+					        	}
+					        	else{
+					        		$.messager.show({
+										title : $.i18n.prop('error'),
+										msg : $.i18n.prop('savefailed'),
+										timeout : 3000,
+										border : 'thin',
+										showType : 'slide'
+									});
+					        	}
+					        }
+					);
+				}
+			}
+		});
+	}
+
+	function deleteLabel(){
+		var selected = $('#labels_tree').tree('getSelected');
+		$.messager.confirm({
+			title: $.i18n.prop('confirm'),
+			msg: '确认删除标签吗？',
+			border:'thin',
+			fn: function(r){
+				if (r){
+					$.post(window.localStorage.ctx+'/report/delLabel',
+						    {
+								'id': selected.labelid
+						     },
+						     function (res) {
+					        	var json = validationDataAll(res);
+					        	if(json.code==0){
+					        		$('#labels_tree').tree('remove',selected.target);
+					        		updatePrivateLabel_ComboTree();
+					        	}
+					        	else{
+					        		$.messager.show({
+										title : $.i18n.prop('error'),
+										msg : $.i18n.prop('savefailed'),
+										timeout : 3000,
+										border : 'thin',
+										showType : 'slide'
+									});
+					        	}
+					        }
+					);
+				}
+			}
+		});
+	}
+
+	function addLabel(){
+		var selected = $('#labels_tree').tree('getSelected');
+		$.messager.prompt({
+			title: '编辑标签',
+			msg: '请输入标签名称',
+			border:'thin',
+			fn: function(r){
+				if (r){
+					$.post(window.localStorage.ctx+'/report/saveLabel',
+						    {
+								//'id': node?node.id:null,
+						    	'folderfk' : selected.id,
+						    	'label' : r
+						     },
+						     function (res) {
+					        	var json = validationDataAll(res);
+					        	
+					        	if(json.code==0){
+					        		$('#labels_tree').tree('append', {
+					        			parent: selected.target,
+										data: {
+											id: json.data.id,
+											labelid: json.data.id,
+											//state: 'closed',
+											text: r
+										}
+									});
+					        		updatePrivateLabel_ComboTree();
+					        	}
+					        	else{
+					        		$.messager.show({
+										title : $.i18n.prop('error'),
+										msg : $.i18n.prop('savefailed'),
+										timeout : 3000,
+										border : 'thin',
+										showType : 'slide'
+									});
+					        	}
+					        }
+						);
+				}
+			}
+		});
+	}
+
+	function updatePrivateLabel_ComboTree(){
+		$("input[privatelabelname='privatelabel_combotree']").each(function(index,element){
+		    $(element).combotree('reload');
+		});
+	}
+	
+</script>
+</body>
+</html>

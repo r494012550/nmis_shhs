@@ -1,0 +1,752 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>下拉菜单</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" >
+    <meta name="generator" content="www.rebound.com" />
+     <!--<link rel="stylesheet" type="text/css" href="themes/metro-blue/easyui.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    [if lte IE 6]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-ie6.css">
+    <![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/ie.css">
+    <![endif]
+    <link rel="stylesheet" href="leipi.style.css">
+    <script type="text/javascript" src="../dialogs/internal.js"></script>-->
+    <script type="text/javascript">
+function createElement(type, name)
+{     
+    var element = null;     
+    try {        
+    	element = document.createElement(type);   
+        element.setAttribute("name",name);    
+    } catch (e) {}   
+    if(element==null) {     
+        element = document.createElement(type);     
+        element.name = name;     
+    } 
+    return element;     
+}
+function fnSelect( combo ) {
+    var iIndex = combo.selectedIndex ;
+    oListText.selectedIndex    = iIndex ;
+    var olistText    = document.getElementById( "orgtext" ) ;
+    olistText.value    = oListText.value ;
+}
+
+function fnAdd() {
+    var olistText    = document.getElementById( "orgtext" ) ;
+    fnAddComboOption( oListText, olistText.value, olistText.value ) ;
+    oListText.selectedIndex = oListText.options.length - 1 ;
+    olistText.value    = '' ;
+    olistText.focus() ;
+}
+
+function fnModify() {
+    var iIndex = oListText.selectedIndex ;
+    if ( iIndex < 0 ) return ;
+    var olistText    = document.getElementById( "orgtext" ) ;
+    oListText.options[ iIndex ].innerHTML    = fnHTMLEncode( olistText.value ) ;
+    oListText.options[ iIndex ].value        = olistText.value ;
+    olistText.value    = '' ;
+    olistText.focus() ;
+}
+
+function fnMove( steps ) {
+    fnChangeOptionPosition( oListText, steps ) ;
+}
+
+function fnDelete() {
+    fnRemoveSelectedOptions( oListText ) ;
+}
+
+function fnSetSelectedValue() {
+    var iIndex = oListText.selectedIndex ;
+    if ( iIndex < 0 ) return ;
+    var olistText = document.getElementById( "orgvalue" ) ;
+    olistText.innerHTML = oListText.options[ iIndex ].value ;
+}
+
+// Moves the selected option by a number of steps (also negative)
+function fnChangeOptionPosition( combo, steps ) {
+    var iActualIndex = combo.selectedIndex ;
+    if ( iActualIndex < 0 ){
+        return ;
+    }
+    var iFinalIndex = iActualIndex + steps ;
+    if ( iFinalIndex < 0 ){
+        iFinalIndex = 0 ;
+    }
+    if ( iFinalIndex > ( combo.options.length - 1 ) ) {
+        iFinalIndex = combo.options.length - 1 ;
+    }
+    if ( iActualIndex == iFinalIndex ) {
+        return ;
+    }
+    var oOption = combo.options[ iActualIndex ] ;
+    if(oOption.value=="") {
+        var sText    = fnHTMLDecode( oOption.value ) ;
+    } else {
+        var sText    = fnHTMLDecode( oOption.innerHTML ) ;
+    }
+    combo.remove( iActualIndex ) ;
+    oOption = fnAddComboOption( combo, sText, sText, null, iFinalIndex ) ;
+    oOption.selected = true ;
+}
+
+// Remove all selected options from a SELECT object
+function fnRemoveSelectedOptions( combo ) {
+    // Save the selected index
+    var iSelectedIndex = combo.selectedIndex ;
+    var oOptions = combo.options ;
+    // Remove all selected options
+    for ( var i = oOptions.length - 1 ; i >= 0 ; i-- ) {
+        if (oOptions[i].selected) combo.remove(i) ;
+    }
+
+    // Reset the selection based on the original selected index
+    if ( combo.options.length > 0 ) {
+        if ( iSelectedIndex >= combo.options.length ) iSelectedIndex = combo.options.length - 1 ;
+        combo.selectedIndex = iSelectedIndex ;
+    }
+}
+
+
+
+
+function fnHTMLDecode( text ) {
+    if ( !text ) {
+        return '' ;
+    }
+    text = text.replace( /&gt;/g, '>' ) ;
+    text = text.replace( /&lt;/g, '<' ) ;
+    text = text.replace( /&amp;/g, '&' ) ;
+    return text ;
+}
+
+function fnSetAttribute( element, attName, attValue ) {
+    if ( attValue == null || attValue.length == 0 ){
+        element.removeAttribute( attName, 0 ) ;        
+    } else {
+        element.setAttribute( attName, attValue, 0 ) ;    
+    }
+}
+
+
+    </script>
+</head>
+<body>
+<div style="padding:10px 10px 5px 10px;margin-left:auto;margin-right:auto;width:450px;height:400px;">
+		<form id="select_form" method="post">	
+		 	<div style="margin-bottom:10px">
+		 		<input id="select_name" class='easyui-textbox tb' label="名称：" labelPosition="before" labelWidth="50" labelAlign="right" style="width:300px;height: 30px"  
+		 			data-options="prompt:'请输入组件名称...',required:true,missingMessage:'必填'" name="name" value=""/>
+		 	</div>
+		 	<div style="margin-bottom:10px">
+		 		<input id="select_width" class='easyui-textbox tb' label="长度：" labelPosition="before" labelWidth="50" labelAlign="right" style="width:300px;height: 30px"  
+		 			data-options="prompt:'请输入组件长度...',value:'100'" name="gwidth" value=""/> px
+		 	</div>
+		 	<div style="margin-bottom:10px">
+				<input id="select_height" class="easyui-numberbox tb" label="高度：" labelPosition="before" labelWidth="50" labelAlign="right" value="20" style="width:300px;height:30px;"  
+					data-options="prompt:'请输入组件高度...',value:'23'"/> px
+			</div>
+		 	<div style="margin-bottom:10px">
+            	<input id="select_code" class='easyui-textbox tb' label="编码：" labelPosition="before" labelWidth="50" labelAlign="right" name="code" style="width:300px;height:30px;"  
+            		data-options="prompt:'请选择编码...',required:true,missingMessage:'必填'" readonly='readonly' value=""/>
+            	<a class="easyui-linkbutton"  style="width:50px;height:28px;margin-left:3px;" onclick="openStandardCodWindow_('select_code')">编码</a>
+            </div>
+            <div style="margin-bottom:5px">
+            		&nbsp;<input class="easyui-checkbox" id="select_required" name="required" label=" 必填：" labelWidth="50">&emsp;&emsp;&emsp;
+            	<input class="easyui-checkbox" id="select_multiple" name="multiple" label="允许多选：" labelWidth="80">
+            </div>
+            <!-- <div style="margin-bottom:3px;margin-top:10px;">
+            	<input class="easyui-switchbutton tb" id="select_required" label="必填：" style="width:110px;" labelAlign="right" gchecked="" name="required"
+	        		data-options="onText:'开',offText:'关',handleText:'必填项',handleWidth:70" />&emsp;&emsp;&emsp;
+		 		<input class="easyui-switchbutton" style="width:110px;" id="select_multiple"
+		 			data-options="onText:'开',offText:'关',handleText:'允许多选',handleWidth:70"/>
+		 		
+		 	</div> -->
+            <input type="hidden" name="type" value="1"/>
+            <input type="hidden" name="id" value="" id="selectComponentid"/>
+            <input type="hidden" name="uid" value="" id="selectComponentuid"/>
+	        <input type="hidden" id="select_html" name="html"/>
+	        <input type="hidden" id="select_option" name="select_option"/>
+        </form>
+            <hr style="width:450px;height:1px;border:none;border-top:1px dashed #0066CC;" />
+		 	<!-- <div style="margin-bottom:3px">
+		 		<a id="addDiv" class="easyui-linkbutton" style="width:80px;height:25px;margin-left:3px;" onclick="addDiv_('','')">添加选项</a>
+		 		
+		 	</div>
+		 	
+		 	<div style="padding:5px;">
+		 		选项名称&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;临床编码&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;操作
+		 	</div>
+		 	
+		 	<div class="easyui-panel" style="width:450px;height:100px;margin-bottom:10px;padding:5px;">
+		 		<div id="parentdiv"> </div>
+		 	</div> -->
+		 	
+		 		<table id="dg_select" class="easyui-datagrid" style="width:450px;height:280px;"
+		            data-options="
+		                singleSelect: true,
+		                toolbar: '#tb_select',
+		                checkOnSelect:false,
+		                onClickCell: onClickCell_handle,
+		                onEndEdit: onEndEdit_handle,
+		                onLoadSuccess:onLoadSuccess_handle
+		            ">
+		        <thead>
+		            <tr>
+		            	<th data-options="field:'ck',checkbox:true">默认选项</th>
+		                <th data-options="field:'value',width:160,editor:'textbox',options:{required:true,fit:true}">选项名称</th>
+		                <th data-options="field:'code',width:100">临床编码</th>
+		                <th data-options="field:'status',width:160,align:'center',formatter:columnformatter">操作</th>
+		            </tr>
+		        </thead>
+		    </table>
+		    <div id="tb_select" style="text-align:right;">
+		        <a class="easyui-linkbutton" onclick="appendOption()">添加选项</a>
+		        <a class="easyui-linkbutton c2" onclick="clearDefault()">清除默认选项</a>
+		    </div>
+		 	
+			
+	</div>
+<!-- <div class="content">
+    <table class="table table-bordered table-striped table-hover">
+     <tr style="display:none">
+        <th><span>控件名称</span><span class="label label-important">*</span></th>
+        <th><span>控件样式</span> </th>
+    </tr>
+    <tr style="display:none">
+        <td><input id="orgname" placeholder="必填项" type="text"/></td>
+        <td> 宽：<input id="orgwidth1" type="text" value="100" class="input-small span1"/> px&nbsp;&nbsp;&nbsp;&nbsp;高：<input id="orgsize1" type="text" class="input-small span1" value="1"/> 行</td>
+    </tr>
+    <tr style="display: none;">
+        <th>
+        <span>关联子菜单名称</span> <a id="showTips" data-content="若关联子菜单，需要子下拉菜单设置的时候在每个选项后加上特殊标记以记录与父菜单关系，形如“子菜单项目|父菜单项目”，则父菜单发生变化，子菜单会随之自动刷新筛选" rel="popover" data-original-title="说明"><i class="icon-info-sign"></i></a> </th>
+        <td><input id="orgChild" type="text" size="20" > </td>
+    </tr>
+    <tr style="display:none">
+        <th><span class="pull-right">初始选定</span></th>
+        <td> <span id="orgvalue" class="uneditable-input" style="height:20px;"></span> </td>
+    </tr>
+    <tr style="display:none">
+        <th colspan="2">
+            <span>列表值</span> <span class="label label-important">*</span>
+        </th>
+    </tr>
+    <tr style="display:none">
+        <td colspan="2">
+            <select id="orglist"  multiple="multiple" class="span14"></select>
+        </td>
+    </tr>
+    <tr style="display:none">
+        <td>
+            <div class="btn-group pull-right">
+                <a title="新增" onclick="fnAdd();" class="btn btn-primary"><i class="icon-white icon-plus"></i></a>
+                <a title="修改" onclick="fnModify();" class="btn btn-default"><i class="icon-edit"></i></a>
+            </div>
+            <input type="text" placeholder="输入列表值..." class="span2" id="orgtext">
+        </td>
+        <td>
+            <div class="btn-group" >
+                <button title="上移" onclick="fnMove(-1);" class="btn btn-default"><i class="icon-arrow-up"></i></button>
+                <button title="下移" onclick="fnMove(1);" class="btn btn-default"><i class="icon-arrow-down"></i></button>
+                <button title="设为初始化时选定值" onclick="fnSetSelectedValue();" class="btn btn-default"><i class="icon-ok-circle"></i></button>
+                <button title="删除" onclick="fnDelete();" class="btn btn-default"><i class="icon-ban-circle"></i></button>
+            </div>
+        </td>
+    </tr>
+     <tr>
+        <th style="width: 30%;text-align: right;"><span>控件样式</span> </th>
+    	 <td> 宽：<input id="orgwidth" type="text" value="100" class="input-small span1"/> px&nbsp;&nbsp;&nbsp;&nbsp;高：<input id="orgsize" type="text" class="input-small span1" value="1"/> 行</td>
+    </tr>
+     <tr>
+        <th style="width: 30%;text-align: right;"><span>字体大小</span> </th>
+    	<td style="width:70%;">
+            <input id="orgfontsize" type="text" style="margin-left: 23px;"  value="" class="input-small span1" placeholder="auto"/> px
+        </td>
+    </tr>
+    </table>
+</div> -->
+<script type="text/javascript">
+var oNode = null,oListText='',thePlugins = 'select';
+$(document).ready(function(){
+    oListText = $('#orglist');
+    
+    if( UE.plugins[thePlugins].editdom ){
+        oNode = UE.plugins[thePlugins].editdom;
+        var gTitle=oNode.getAttribute('title');
+        if(gTitle){
+            gTitle=gTitle.replace(/&quot;/g,"\"");
+        }
+        else{
+        	gTitle="";
+        }
+        gWidth=oNode.getAttribute('orgwidth'),
+        gHeight=oNode.getAttribute('orgheight'),
+        //gSize=oNode.getAttribute('size');
+        code=oNode.getAttribute('code'),
+        ret=oNode.getAttribute('required'),
+        multiple=oNode.getAttribute('orgmultiple'),
+        id=oNode.getAttribute('id'),
+        uid=oNode.getAttribute('uid');
+        //$('#orgvalue').innerHTML = oNode.value;
+        $('#select_name').val(gTitle);
+        //$('#orgsize').value = gSize;
+        $('#select_width').val(gWidth);
+        $('#select_height').val(gHeight);
+        $('#select_code').val(code);
+
+        if(ret=="required"){
+        	$('#select_required').attr("data-options","checked:true");
+        }
+
+        if(multiple){
+        	$('#select_multiple').attr("data-options","checked:true");
+        }
+		
+        $('#selectComponentid').val(id);
+        $('#selectComponentuid').val(uid);
+
+        $('#dg_select').datagrid({url:'srtemplate/findComponentSelectOption?uid='+uid});
+        
+        //$('#dg_select').datagrid("reload");
+        
+       // for ( var i = 0 ; i < oNode.options.length ; i++ ) {
+       //     var sText    = oNode.options[i].value ;
+       //     _fnAddComboOption( oListText, sText, sText ,null,null,oNode.options[i].code) ;
+       // }
+    }
+    /*$('#showTips').popover();*/
+});
+var editIndex = undefined;
+function endEditing(){
+    if (editIndex == undefined){return true}
+    if ($('#dg_select').datagrid('validateRow', editIndex)){
+        $('#dg_select').datagrid('endEdit', editIndex);
+        editIndex = undefined;
+        return true;
+    } else {
+        return false;
+    }
+}
+function onClickCell_handle(index, field){
+	console.log("editIndex="+editIndex+";index="+index);
+    if (editIndex != index){
+        if (endEditing()){
+            $('#dg_select').datagrid('selectRow', index)
+                    .datagrid('beginEdit', index);
+            var ed = $('#dg_select').datagrid('getEditor', {index:index,field:field});
+            if (ed){
+                ($(ed.target).data('textbox') ? $(ed.target).textbox('textbox') : $(ed.target)).focus();
+            }
+            editIndex = index;
+        } else {
+            setTimeout(function(){
+                $('#dg_select').datagrid('selectRow', editIndex);
+            },0);
+        }
+    }
+}
+function onEndEdit_handle(index, row){
+    /*var ed = $(this).datagrid('getEditor', {
+        index: index,
+        field: 'productid'
+    });*/
+    //row.productname = $(ed.target).combobox('getText');
+}
+
+
+function onLoadSuccess_handle(data){
+	var dgrows=$('#dg_select').datagrid('getData').rows;
+	for(var n=0;n<dgrows.length;n++){
+		if(dgrows[n].defaultoption=="checked"){
+			$('#dg_select').datagrid('checkRow',n);
+		}
+	}
+}
+
+
+function columnformatter(value, row, index){
+	return '<a href="#" onclick=\'handelClick()\'>编码</a>&nbsp;&nbsp;<a href="#" onclick=\'removeit()\'>删除</a>&nbsp;&nbsp;'+
+		'<a href="#" onclick=\'up_option()\'>上移</a>&nbsp;&nbsp;<a href="#" onclick=\'down_option()\'>下移</a>';
+}
+/*
+function onEndEdit(index, row){
+    var ed = $(this).datagrid('getEditor', {
+        index: index,
+        field: 'productid'
+    });
+    //row.productname = $(ed.target).combobox('getText');
+}
+*/
+function appendOption(){
+    if (endEditing()){
+        $('#dg_select').datagrid('appendRow',{name:'',code:''});
+        editIndex = $('#dg_select').datagrid('getRows').length-1;
+        $('#dg_select').datagrid('selectRow', editIndex)
+                .datagrid('beginEdit', editIndex);
+    }
+}
+
+function clearDefault(){
+	$('#dg_select').datagrid("clearChecked");
+}
+function removeit(index){
+	setTimeout(function(){
+		console.log(editIndex)
+	    $('#dg_select').datagrid('cancelEdit', editIndex);
+	    $('#dg_select').datagrid('deleteRow', editIndex);
+	    editIndex = undefined;
+	},1);
+}
+
+function handelClick(){
+	setTimeout(function(){
+		console.log(editIndex)
+		$("#dg_select").datagrid("endEdit", editIndex);
+		openStandardCodWindow_(editIndex);
+	},1);
+}
+
+function up_option(){
+	setTimeout(function(){
+		console.log(editIndex)
+		if(editIndex>0){
+			$("#dg_select").datagrid("endEdit", editIndex);
+	
+			
+			var data=$('#dg_select').datagrid('getData');
+			var rows=data.rows;
+			var code=rows[editIndex].code;
+			var value=rows[editIndex].value;
+			var code1=rows[editIndex-1].code;
+			var value1=rows[editIndex-1].value;
+			rows[editIndex].code=code1;
+			rows[editIndex].value=value1;
+			rows[editIndex-1].code=code;
+			rows[editIndex-1].value=value;
+			
+			$('#dg_select').datagrid('refreshRow',editIndex);
+			$('#dg_select').datagrid('refreshRow',editIndex-1);
+		}
+
+	},1);
+}
+function down_option(){
+
+	setTimeout(function(){
+		console.log(editIndex)
+		$("#dg_select").datagrid("endEdit", editIndex);
+		var data=$('#dg_select').datagrid('getData');
+		var rows=data.rows;
+		if((editIndex+1)<rows.length){
+			var code=rows[editIndex].code;
+			var value=rows[editIndex].value;
+			var code1=rows[editIndex+1].code;
+			var value1=rows[editIndex+1].value;
+			rows[editIndex].code=code1;
+			rows[editIndex].value=value1;
+			rows[editIndex+1].code=code;
+			rows[editIndex+1].value=value;
+			
+			$('#dg_select').datagrid('refreshRow',editIndex);
+			$('#dg_select').datagrid('refreshRow',editIndex+1);
+			
+		}
+               
+    },1);
+
+}
+
+//Add a new option to a SELECT object (combo or list)
+function _fnAddComboOption( combo, optionText, optionValue, documentObject, index ,code,defaultoption) {
+    var oOption ;
+    if ( documentObject ) {
+        oOption = documentObject.createElement("option") ;
+    } else {
+        oOption = document.createElement("option") ;
+    }
+    if ( index != null ) {
+        combo.options.add( oOption, index ) ;
+    } else {
+        combo.options.add( oOption ) ;
+    }
+    oOption.innerHTML = optionText.length > 0 ? fnHTMLEncode( optionText ) : '&nbsp;' ;
+    oOption.value     = optionValue ;
+
+    if(defaultoption){
+    	oOption.setAttribute('selected','selected');
+    }
+
+    if(code){
+    	oOption.setAttribute('code',code);
+    }
+    return oOption ;
+}
+
+function fnHTMLEncode( text ) {
+    if ( !text ) {
+        return '' ;
+    }
+    text = text.replace( /&/g, '&amp;' ) ;
+    text = text.replace( /</g, '&lt;' ) ;
+    text = text.replace( />/g, '&gt;' ) ;
+    return text ;
+}
+
+oncancel = function () {
+    if( UE.plugins[thePlugins].editdom ) {
+        delete UE.plugins[thePlugins].editdom;
+    }
+    if( UE.plugins[thePlugins].editway) {
+    	delete UE.plugins[thePlugins].editway;
+    }
+};
+onok = function (editor){
+
+    if(!$('#select_name').val()||!$('#select_code').val()){
+        return false;
+    }
+
+    var gWidth=$('#select_width').val(),
+    gHeight=$('#select_height').val(),
+    gTitle=$('#select_name').val(),
+    code=$('#select_code').val(),
+    req=$('#select_required').checkbox('options').checked,
+    multiple=$('#select_multiple').checkbox('options').checked,
+    id=$('#selectComponentid').val(),
+    uid=$('#selectComponentuid').val();
+    //console.log(req+"--"+multiple);
+	//console.log($('#dg_select').datagrid('getData').rows);
+	if($('#dg_select').datagrid('getData').rows==0){
+		$.messager.show({
+				title : '提示',msg : "请添加选项！",timeout : 3000,border:'thin',showType : 'slide'
+		 });
+		return;
+	}
+
+    $.getJSON( window.localStorage.ctx+"/srtemplate/checkComponentName?name="+gTitle+"&id="+id, function(json){
+
+   	   if(json.code == 0){
+   			 
+   			 if(json.data){
+   				 $.messager.show({
+   						title : '提示',msg : "组件名已存在！",timeout : 3000,border:'thin',showType : 'slide'
+   				 });
+   				 $('#select_name').textbox("setValue",'');
+   			 }
+   			 else{
+
+   				
+   				 $('#select_form').form('submit', {
+   					    url:window.localStorage.ctx+"/srtemplate/saveComponent_Select",
+   					    onSubmit: function(){
+   					    	if( !oNode ) {
+   					        	oNode=pluginHandle.createElement("select","selectComponent");
+   					        	
+   					        	oNode.setAttribute('id','@id@');
+   					            oNode.setAttribute('uid','@uid@');
+   					            //oNode.setAttribute("name","textinputComponent");
+   					        }
+   					    	oNode.setAttribute('class','easyui-combobox');
+   					        oNode.setAttribute('title', gTitle);
+   					        oNode.setAttribute('code',code);
+   					     	oNode.setAttribute('gvalue',"");
+   					  		oNode.setAttribute('gvaluecode',"");
+   					        //oNode.innerHTML = gValue;
+   					        
+   					        if(req){
+   					        	oNode.setAttribute('required','required');
+   					        }
+   					        else{
+   					        	oNode.removeAttribute('required');
+   					        }
+
+   					     	oNode.removeAttribute('onchange');
+
+   					     	if(multiple){
+					        	oNode.setAttribute('orgmultiple',multiple);
+					        	oNode.setAttribute('data-options',"value:[],editable:false,multiple:"+multiple+",onChange:function(){select_onchange_multiple_handle($(this))},"+
+							        	"onLoadSuccess:function(){select_onload_multiple_handle($(this))}");
+
+					        	//oNode.setAttribute('onchange','select_onchange_multiple_handle(this)');
+					        }
+					        else{
+					        	oNode.setAttribute('orgmultiple','');
+					        	//oNode.removeAttribute('data-options');
+					        	oNode.setAttribute('data-options',"value:'',editable:false,multiple:"+multiple+",onChange:function(){select_onchange_handle($(this))},"+
+							        	"onLoadSuccess:function(){select_onload_handle($(this))}");
+					        	//oNode.data-options.multiple=!multiple;
+					        	//oNode.setAttribute('onchange','select_onchange_handle(this)');
+					        }
+   					        
+   					        if( gWidth != '' ) {
+   					            oNode.style.width = gWidth+ 'px';
+   					            oNode.setAttribute('orgwidth',gWidth );
+   					        }else{
+   					        	oNode.style.width = gWidth+ '100px';
+   					            oNode.setAttribute('orgwidth', '100');
+   					        }
+   					        if( gHeight != '' ) {
+   					            oNode.style.height = gHeight+ 'px';
+   					            oNode.setAttribute('orgheight',gHeight );
+   					        }else{
+   					            oNode.setAttribute('orgheight', '23');
+   					        }
+   					     	oNode.options.length=0;
+
+							var optionjson=[];
+
+							var checkrows=$('#dg_select').datagrid('getChecked');
+							console.log(checkrows);
+							var checkindex=-1;
+							if(checkrows.length>0){
+								checkindex=$('#dg_select').datagrid('getRowIndex',checkrows[0]);
+							}
+
+							var dgrows=$('#dg_select').datagrid('getData').rows;
+							for(var n=0;n<dgrows.length;n++){
+								var sText    = dgrows[n].value||"";
+								var defaultoption=(n==checkindex);
+		                        var oOption = _fnAddComboOption( oNode, sText, sText ,null,null,dgrows[n].code,defaultoption) ;
+
+		                        var json={};
+		                        json.code=dgrows[n].code||"";
+		                        json.value=dgrows[n].value||"";
+		                        json.defaultoption=defaultoption?"checked":"";
+		                        optionjson.push(json);
+							}
+							
+   					     	$("#select_option").val(JSON.stringify(optionjson));
+   					        $('#select_html').val(oNode.outerHTML);
+   					        
+   					    },
+   					    success:function(data){
+   					    	var json = validationDataAll(data);
+   					        if(json.code==0){
+   					        	
+   					        	//console.log(id)
+   					        	if(!UE.plugins[thePlugins].editway){
+	   					        	if(uid!=""){
+	   					        		delete UE.plugins[thePlugins].editdom;
+	   					        	}
+	   					        	else{
+	   					        		oNode.setAttribute('id',json.data.id);
+	   						        	oNode.setAttribute('uid',json.data.uid);
+	
+	   						        	editor.execCommand('insertHtml',oNode.outerHTML);
+	   					        	}
+   					        	}
+ 					        	else{
+ 					        		updateComponentInSRTemplate(json.data,editor);
+ 					        		delete UE.plugins[thePlugins].editdom;
+ 	 	 					    }
+ 					        	delete UE.plugins[thePlugins].editway;
+   					        	//$("#templets").datagrid('reload');
+   					        	$('#admin_common_dialog').dialog('close');
+   					        }
+   					    }
+   					});
+   				 
+   			 }
+   	   }
+   	   else{
+   			$.messager.show({
+   				title : '提示',msg : "发生错误！",timeout : 3000,border:'thin',showType : 'slide'
+   		 	});
+   		}
+
+   	   
+      });
+
+     
+
+  /*  if( !oNode ) {
+        try {
+            //oNode = document.createElement("select"); 
+            oNode = createElement('select','leipiNewField');
+            oNode.setAttribute('title',$G('orgname').value);
+            oNode.setAttribute('code',window.localStorage.getItem("code"));
+            oNode.setAttribute('leipiPlugins',thePlugins );
+            oNode.setAttribute('size',gSize);
+            oNode.setAttribute('unit',window.localStorage.getItem('unit'));
+            oNode.setAttribute('onchange',"this.setAttribute('value',this.value)");
+            if ( $G('orgwidth').value!= '' ) {
+                oNode.style.width =  $G('orgwidth').value+ 'px';
+                //oNode.setAttribute('style','width:'+ $G('orgwidth').value + 'px;');
+            }
+
+            oNode.style.height ='22px';
+            if( gWidth != '' ) {
+                oNode.style.width = gWidth + 'px';
+                oNode.setAttribute('orgwidth',gWidth );
+            }
+
+            $(oNode).change(function(){
+            	  $(this).css("background-color","#FFFFCC");
+            });
+            
+            // Add all available options.
+            	var data = window.localStorage.getItem('data');
+                if(data != null && data != ''){
+                	var jsonObj=JSON.parse(data);
+                	for ( var i = 0 ; i < jsonObj.length ; i++ ) {
+                    var sText    = jsonObj[i].value;
+                    if ( sText.length == 0 ) {
+                        sText = sText ;
+                    }
+                    var oOption = fnAddComboOption( oNode, sText, sText ) ;
+                    if ( sText == $G('orgvalue').innerHTML ) {
+                        fnSetAttribute( oOption, 'selected', 'selected' ) ;
+                        oOption.selected = true ;
+                    }
+               	 }
+                }
+            //firefox要利用span
+                if(window.localStorage.getItem("s_flag") == 0){
+                	 editor.execCommand('insertHtml','');
+               }else{
+            	   editor.execCommand('insertHtml','<span leipiplugins="select">'+oNode.outerHTML+'</span>');
+               }
+           
+            return true ;
+        } catch ( e ) {
+            try {
+                editor.execCommand('error');
+            } catch ( e ) {
+                alert('控件异常，请到 [雷劈网] 反馈或寻求帮助！');
+            }
+            return false;
+        }
+    } else {
+        oNode.setAttribute('title', $G('orgname').value); 
+        oNode.setAttribute('size',gSize);
+        if( gWidth != '' ) {
+			oNode.style.width = gWidth + 'px';
+			oNode.setAttribute('orgwidth',gWidth );
+		}
+        // Remove all options.
+        while ( oNode.options.length > 0 ){
+            oNode.remove(0) ;
+        }
+        for ( var i = 0 ; i < $G('orglist').options.length ; i++ ) {
+            var sText    = $G('orglist').options[i].value ;
+            if ( sText.length == 0 ) {
+                sText = sText ;
+            }
+            var oOption = fnAddComboOption( oNode, sText, sText ) ;
+            if ( sText == $G('orgvalue').innerHTML ) {
+                fnSetAttribute( oOption, 'selected', 'selected' ) ;
+                oOption.selected = true ;
+            }
+        }
+        delete UE.plugins[thePlugins].editdom; 
+    }*/
+};
+</script>
+</body>
+</html>

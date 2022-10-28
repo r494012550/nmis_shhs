@@ -1,0 +1,127 @@
+@CHARSET "GB18030";
+
+	.sr_container{
+		color: #000000 !important;
+	}
+	.mydiv{
+		background-color:#FFFFFF;
+	}
+	.mydiv hr{
+		border:none;
+		border-top:1px dashed;/*#0066CC*/
+	}
+	
+	.mydiv input{
+		border-width: thin;
+		border-color: rgb(195, 217, 224);
+		border-style: solid solid solid solid;
+	}
+	
+	.mydiv input[type='checkbox']{
+		vertical-align: middle;
+		margin-top: 1px;
+	}
+	
+	.mydiv input[type='radio']{
+		vertical-align: middle;
+		margin-top: 0px;
+		margin-bottom: 2px;
+	}
+	
+	.mydiv article{
+		border: 0;
+	}
+	/*.mydiv textarea{
+		border-width: thin;
+		border-color: rgb(195, 217, 224);
+		border-style: solid solid solid solid;
+	}
+	
+	.mydiv select{
+		border-width: thin;
+		border-color: rgb(195, 217, 224);
+		border-style: solid solid solid solid;
+		background-color: rgb(255, 243, 243);
+	}*/
+			/*body{font-family: ËÎÌו, SimSun;}
+			.pagebreak{display:block;clear:both !important;cursor:default !important;width: 100% !important;margin:0;}
+		    .pageNext{page-break-after: always;}*/
+	.mydiv table {
+		margin-bottom:0px;
+		border-collapse:collapse;
+		display:table;
+	}
+	.mydiv td,th {
+		padding: 1px 1px;
+		border: 1px solid #DDD;
+	}
+	.mydiv th {
+		border-top:1px solid #BBB;
+		background-color:#F7F7F7;
+	}
+	
+	.mydiv table tr.firstRow th {
+		border-top-width:2px
+	}
+	
+	.mydiv td p{
+		margin:0px;
+		padding:0px;
+	}
+	
+	.mydiv p{
+		margin:2px !important;
+	} 
+	.mydiv ol{
+		margin:2px !important;
+	}
+	.hlong *{display:inline-block;vertical-align:middle}  
+	
+	.mydiv [required=required]{
+		border-width: thin;
+		border-color: rgb(255, 168, 168);
+		border-style: solid solid solid solid;
+	}
+	.mydiv [optional=optional]{
+		border-width: thin;
+		border-color: rgb(195, 217, 224);
+		border-style: solid solid solid solid;
+	}
+	.mydiv textarea{
+		resize: none;
+	}
+	.sectioncontainer{
+		background-color:#f2f2f2;
+		padding:0px;
+		margin:1px;
+	}
+	
+	.mydiv-inline{
+		display:inline-block;
+	}
+	.mydiv .summary_textarea_span {
+		display: inline-block;
+		position: relative;
+	}
+	.mydiv .summary_textarea_toolbar {
+		border-color: rgb(195, 217, 224);
+		border-width: 1px 1px 1px 0px;
+		border-style: solid;
+		background-color:#f5f5f5;
+		position: absolute;
+		display: inline-block;
+		/* right: 0px;  */
+		top: 0px;
+	}
+	.valuechange{
+		border-color: #4edb33 !important;
+	}
+	
+	label.valuechange{
+		background-color: #4edb33 !important;
+	}
+	
+	.outof_normal_range_alert{
+		background-color: #f76969 !important;
+	}
+	

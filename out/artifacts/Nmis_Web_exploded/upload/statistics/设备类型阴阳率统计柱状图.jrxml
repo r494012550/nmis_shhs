@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="科室阴阳性柱状图" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="69b021be-e6aa-40de-af19-f2e634ad78dd">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="KS_Nmis_TJ.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="where" class="java.lang.String"/>
+	<parameter name="datefrom" class="java.lang.String"/>
+	<parameter name="dateto" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT studyorder.modality_type
+   ,CONVERT(decimal(18,2),SUM( CASE WHEN report.pos_or_neg = 'p' THEN 1.00 ELSE 0.00 END )*100/COUNT(*)) AS '阳性率',
+   CONVERT(decimal(18,2),SUM( CASE WHEN report.pos_or_neg = 'n' THEN 1.00 ELSE 0.00 END )*100/COUNT(*)) AS '阴性率'
+  FROM studyorder
+  INNER JOIN report ON report.studyorderfk = studyorder.id
+  WHERE reportstatus = '31'  and $P!{where} 
+  GROUP BY modality_type]]>
+	</queryString>
+	<field name="modality_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="modality_type"/>
+	</field>
+	<field name="阳性率" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="阳性率"/>
+	</field>
+	<field name="阴性率" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="阴性率"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="40" uuid="f93e1a10-22fd-420f-80a6-d4650ea5424d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[阴阳率统计柱状图]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="287" y="0" width="75" height="30" uuid="e1d1ba34-e1d8-4039-91c4-0a7a719f677f">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[统计日期：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="439" y="0" width="28" height="30" uuid="e1cee99c-cbeb-470d-8aa0-e8d7141d070e">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[至]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="348" y="0" width="100" height="30" uuid="559ac93a-4678-4f29-9850-1f949be05cb6">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datefrom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="0" width="100" height="30" uuid="1fb64d6a-5d70-4822-a26b-bd9da3f2f152">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<summary>
+		<band height="622" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="3" y="0" width="550" height="280" uuid="a5ea6fe7-fb6f-4724-b840-e63f2bce9ae5">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<chartTitle>
+						<font fontName="宋体" size="16"/>
+						<titleExpression><![CDATA["检查类型阳性率统计(%)"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font fontName="宋体" size="10"/>
+					</chartSubtitle>
+					<chartLegend position="Bottom">
+						<font fontName="宋体" size="10"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{modality_type}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{modality_type}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{阳性率}]]></valueExpression>
+						<labelExpression><![CDATA[$F{阳性率}+"%"]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true" isShowTickLabels="true">
+					<plot foregroundAlpha="1.0">
+						<seriesColor seriesOrder="0" color="#C40405"/>
+					</plot>
+					<itemLabel color="#0040FF">
+						<font fontName="宋体" size="12" isBold="true"/>
+					</itemLabel>
+					<categoryAxisLabelExpression><![CDATA["检查设备类型"]]></categoryAxisLabelExpression>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" verticalTickLabels="false" axisLineColor="#000000">
+							<labelFont>
+								<font fontName="宋体" size="12"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="宋体" size="10" isBold="true"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA["阳性率"]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000">
+							<labelFont>
+								<font fontName="宋体" size="12" isBold="true"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="宋体" isBold="true"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="342" width="550" height="280" uuid="ce70bdb8-8a29-4581-8d09-6494cfdfb3f8">
+						<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					</reportElement>
+					<chartTitle>
+						<font fontName="宋体" size="16"/>
+						<titleExpression><![CDATA["检查类型阴性率统计(%)"]]></titleExpression>
+					</chartTitle>
+					<chartSubtitle>
+						<font fontName="宋体" size="10"/>
+					</chartSubtitle>
+					<chartLegend position="Bottom">
+						<font fontName="宋体" size="10"/>
+					</chartLegend>
+				</chart>
+				<categoryDataset>
+					<dataset resetType="Report"/>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{modality_type}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{modality_type}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{阴性率}]]></valueExpression>
+						<labelExpression><![CDATA[$F{阴性率}+"%"]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true" isShowTickLabels="true" isShowTickMarks="true">
+					<plot backgroundAlpha="1.0">
+						<seriesColor seriesOrder="0" color="#87C426"/>
+					</plot>
+					<itemLabel color="#F700FF">
+						<font fontName="宋体" size="12" isBold="true"/>
+					</itemLabel>
+					<categoryAxisLabelExpression><![CDATA["检查设备类型"]]></categoryAxisLabelExpression>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000">
+							<labelFont>
+								<font fontName="宋体" size="12"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="宋体" isBold="true"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisLabelExpression><![CDATA["阴性率"]]></valueAxisLabelExpression>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" verticalTickLabels="false" axisLineColor="#000000">
+							<labelFont>
+								<font fontName="宋体" size="12" isBold="true"/>
+							</labelFont>
+							<tickLabelFont>
+								<font fontName="宋体" isBold="true"/>
+							</tickLabelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

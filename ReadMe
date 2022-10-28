@@ -1,0 +1,38 @@
+
+Controller：负责参数获取、处理、传递，页面跳转，调用Service类处理具体的业务，并向前端页面返回数据。
+
+Service：负责处理具体的业务逻辑，与数据层交互。
+
+common.js里有两个方法_message(),_alert()用以替代easyui的$.messager.show 和$.messager.alert方法
+
+强调：
+Controller类里不要写业务逻辑的代码。
+
+最好不要使用SimpleDateFormat，线程不安全。可以使用java8中的DateTimeFormatter或者org.apache.commons.lang.time.DateUtils
+
+熟练使用java8中新增的几个时间类：LocalDate，LocalDateTime，LocalTime等等
+
+所有表中添加createtime字段，默认值getdate()
+
+
+websocket使用场景：
+1 后端需要往前端主动推送信息;
+2 前端与前端通信（典型应用：聊天功能）
+除上述场景外不建议使用websocket
+
+Db.findFirst(),查询语句加上‘top 1’
+
+easyui建议使用官方英文文档。中文网站的文档更新不够及时，缺失很多信息。
+
+熟练使用jfinal提供的缓存功能：
+List<DicDepartment> institution = CacheKit.get(CacheName.DICCACHE, "dic_institution", new IDataLoader(){ 
+	public Object load() { 
+		return DicDepartment.dao.find("select * from dic_institution where deleted=0"); 
+	}
+});
+Hl7RouterRule.dao.findByCache(cacheName, key, sql)
+Db.findByCache(cacheName, key, sql)
+
+项目中如果需要使用压缩文件供用户下载，请使用zip格式，原因是WIN10或windows 2012以上等系统可以直接解压缩。
+
+代码中不要出现System.out.println，需要记录日志请使用org.apache.log4j.Logger

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div style="padding:10px;">
+#if(reject_report)
+	<table style="width:420px;">
+         <tr>
+             <td style="background:#E0ECFF;width:100%;"><b>添加驳回意见</b></td>
+         </tr>
+         <tr>
+             <td class="blank"><input id="rejectopinioncontent" name="notes" class="easyui-textbox" style="width:100%;height:120px"
+             data-options="multiline:true,validType:'length[1,200]'" prompt="可以在此输入驳回意见"></td>
+         </tr>
+         
+         <tr>
+             <td style="text-align:right;"><a class="easyui-linkbutton" style="width:80px;height:28px" 
+				onclick="saveRejectOpinion('#(reportid)')">保存</a></td>
+         </tr>  
+     <table>
+ #end
+
+
+
+#for(i=0;i<list.size();i++)
+	<table>
+         <tr>
+             <td style="background:#E0ECFF;width:150px;"><b>#(list.get(i).get("creator_name"))</b></td>
+             <td style="background:#E0ECFF;width:290px;"><b>#(list.get(i).get("createtime"))</b></td>
+             
+         </tr>
+         <tr>
+             <td colspan="2" style="color:#FF6A00;">#(list.get(i).get("rejectopinioncontent"))</td>
+         </tr>
+         <tr style="height:5px">
+             
+         </tr>
+     <table>
+#end
+
+</div>
+</body>
+</html>

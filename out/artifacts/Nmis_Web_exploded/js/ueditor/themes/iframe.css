@@ -1,0 +1,79 @@
+/*可以在这里添加你自己的css*/
+hr{
+	border:none;
+	border-top:1px dashed #DDDDDD;/*#0066CC*/
+}
+
+input{
+	border-width: thin;
+	border-color: rgb(195, 217, 224);
+	border-style: solid solid solid solid;
+	/*background-color: rgb(255, 243, 243);*/
+}
+
+textarea{
+	border-width: thin;
+	border-color: rgb(195, 217, 224);
+	border-style: solid solid solid solid;
+	/*background-color: rgb(255, 243, 243);*/
+}
+
+select{
+	border-width: thin;
+	border-color: rgb(195, 217, 224);
+	border-style: solid solid solid solid;
+	/*background-color: rgb(255, 243, 243);*/
+}
+
+[required]{
+	border-width: thin;
+	border-color: rgb(255, 168, 168);
+	border-style: solid solid solid solid;
+	/*background-color: rgb(255, 243, 243);*/
+}
+
+.requiredClass{
+	border-width: thin;
+	border-color: rgb(255, 168, 168);
+	border-style: solid solid solid solid;
+	background-color: rgb(255, 243, 243);
+}
+
+.notRequiredClass{
+	border-width: thin;
+	border-color: rgb(195, 217, 224);
+	border-style: solid solid solid solid;
+	/*background-color: rgb(255, 243, 243);*/
+}
+
+.hlong *{display:inline-block;vertical-align:middle}
+
+p{
+	margin:3px !important;
+}
+ol{
+	margin:3px !important;
+}
+
+.mydiv-inline{
+	display:inline-block;
+}
+
+.checkbox_Component{
+	/* position: absolute;left: 0；z-index:5; */
+	background-image: url("default/images/checkbox.png"); /*引入图片图片*/
+	background-repeat: no-repeat; /*设置图片不重复*/
+	background-position: center left; /*图片显示的位置*/
+	width: 20px; /*设置图片显示的宽*/
+	height: 20px; /*图片显示的高*/
+	padding-left:30px;
+}
+.radiobutton_Component{
+	/* position: absolute;left: 0；z-index:5; */
+	background-image: url("default/images/radiobutton.png"); /*引入图片图片*/
+	background-repeat: no-repeat; /*设置图片不重复*/
+	background-position: center left; /*图片显示的位置*/
+	width: 20px; /*设置图片显示的宽*/
+	height: 20px; /*图片显示的高*/
+	padding-left:30px;
+}

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="登记明细统计" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e9645bf4-e622-43a7-9981-9d625e7dd1a3">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="KS_Nmis_TJ.xml"/>
+	<parameter name="where" class="java.lang.String"/>
+	<parameter name="datefrom" class="java.lang.String"/>
+	<parameter name="dateto" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+ report.reporttime as '报告时间',
+ report.audittime as '审核时间',
+ report.reportphysician_name as '报告医生',
+ report.auditphysician_name as '审核医生',
+ patient.patientname as '病人姓名',
+ admission.inno as '住院号',
+ admission.outno as '门诊号',
+ studyorder.studyid as '检查号',
+ studyorder.studyitems as '检查项目',
+ studyorder.modality_type as '检查类型',
+ studyorder.appdeptname as '申请科室',
+ studyorder.appdoctorname as '申请医生',
+ studyorder.regdatetime as '登记时间',
+ (select dic_modality.modality_name from dic_modality where dic_modality.id=studyorder.modalityid) as '检查设备',
+ CONVERT(varchar(12), studyorder.regdatetime, 23) as '报告时间分组'
+ FROM  studyorder
+ INNER JOIN patient ON patient.id = studyorder.patientidfk
+ INNER JOIN admission ON admission.id = studyorder.admissionidfk
+ LEFT JOIN report ON report.studyorderfk = studyorder.id
+ WHERE  (studyorder.modality_type = 'CT' OR studyorder.modality_type = 'MR') AND $P!{where}
+ ORDER BY studyorder.regdatetime,'检查类型']]>
+	</queryString>
+	<field name="报告时间" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="报告时间"/>
+	</field>
+	<field name="审核时间" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="审核时间"/>
+	</field>
+	<field name="报告医生" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="报告医生"/>
+	</field>
+	<field name="审核医生" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="审核医生"/>
+	</field>
+	<field name="病人姓名" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="病人姓名"/>
+	</field>
+	<field name="住院号" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="住院号"/>
+	</field>
+	<field name="门诊号" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="门诊号"/>
+	</field>
+	<field name="检查号" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="检查号"/>
+	</field>
+	<field name="检查项目" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="检查项目"/>
+	</field>
+	<field name="检查类型" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="检查类型"/>
+	</field>
+	<field name="申请科室" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="申请科室"/>
+	</field>
+	<field name="申请医生" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="申请医生"/>
+	</field>
+	<field name="登记时间" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="登记时间"/>
+	</field>
+	<field name="检查设备" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="检查设备"/>
+	</field>
+	<field name="报告时间分组" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="报告时间分组"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="236" y="1" width="289" height="30" uuid="175d7b64-a882-45f7-8c02-bbd89b597633"/>
+				<textElement textAlignment="Center">
+					<font fontName="宋体" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[登记明细统计]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="587" y="40" width="60" height="20" uuid="5796e8c8-7e8c-4571-95a3-57473c390f11">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[统计范围：]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="647" y="40" width="60" height="20" uuid="7db517fe-3270-4db4-8c9f-b61e24d72f76">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datefrom}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="707" y="40" width="20" height="20" uuid="cf86d9aa-f48a-491b-a9e2-1beac9554796">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<text><![CDATA[至]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="727" y="40" width="60" height="20" uuid="1eafb075-1ffa-4e31-a022-99c50c03600f">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dateto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="49">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle>
+				<reportElement x="250" y="1" width="110" height="48" uuid="7eaebe58-a408-409f-99d5-791b16f290ff">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="1" width="100" height="48" uuid="e909ba44-a18f-450a-ba8c-638abfa9412f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="150" y="1" width="100" height="48" uuid="0e6adc2e-a81d-4467-af32-4b04d27388a7">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[住院号]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="80" y="1" width="70" height="48" uuid="55990f34-d440-4ebf-b417-04d4a940c48d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="30" y="1" width="50" height="48" uuid="fe7f04cb-8c7c-432f-bdcc-cb790ee21ecd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="1" width="50" height="48" uuid="d7f1b153-8ae7-42a7-873e-291d5ff4c22b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[姓名]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="1" width="30" height="48" uuid="e8ff682f-bdcd-4751-8ce1-2e4b2cd1161e">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="410" y="1" width="230" height="48" uuid="5d528c2b-0e21-4ae2-af0d-aa4c286e8cdc">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="640" y="1" width="80" height="48" uuid="ea77909e-3774-43c5-9149-6bbc922f6b8b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="720" y="1" width="60" height="48" uuid="42b2b8a8-182b-4550-9966-f224299b3626"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="1" width="30" height="48" uuid="cdd104d8-3787-4e21-af19-ea6e62dad3fb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[序号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="1" width="70" height="48" uuid="5818d742-7e70-4e1c-b22d-b9ffc12ae81d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="1" width="110" height="48" uuid="ed51a2c6-24fe-4411-a377-024f828ce71c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[门诊号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="1" width="230" height="48" uuid="24d33901-3924-4d67-8655-e5ebf3ebfbd9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查项目]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="640" y="1" width="80" height="48" uuid="913a2137-c086-4cfb-b7fb-6b26bc1086ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[申请科室]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="720" y="1" width="60" height="48" uuid="a948b58f-c020-45d6-b259-e1acb068f794"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[申请医生]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="360" y="1" width="50" height="48" uuid="18c5ffc9-4500-4a21-ac01-3f0f655cd2b1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="360" y="1" width="49" height="48" uuid="c989154c-8748-45a8-afde-ad16e5f1d443"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查设备]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="39" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement x="720" y="0" width="60" height="39" uuid="5c5970ef-9ef8-41c1-8122-7cef92f56c50"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="30" y="0" width="50" height="39" uuid="483e9440-2cec-466f-b629-7619645548a2">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="80" y="0" width="70" height="39" uuid="bb7b6e31-f4e0-4539-913d-f5a958f7893f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="640" y="0" width="80" height="39" uuid="fac3990e-e273-47ed-9475-6a8145e9f9ad"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="410" y="0" width="230" height="39" uuid="dbc80f2f-c3a9-4a99-bbe9-af313ef179c6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="150" y="0" width="100" height="39" uuid="b1bc177a-d767-4101-9d87-56e5c088a4d4">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="30" height="39" uuid="071dd349-0391-4521-8f1d-0744ad446440">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="0" width="30" height="39" uuid="7d2f2549-d1d9-47c1-b9ff-e2398e13d651">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="250" y="0" width="110" height="39" uuid="06de36fd-0915-4cbc-ac95-d0312eafced9">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</rectangle>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="30" y="0" width="50" height="39" uuid="4e78ef5c-0cc9-4e47-8e03-d0b3f3c6e5b2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{病人姓名}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="80" y="0" width="70" height="39" uuid="66125e92-44c6-4e6b-8d25-a2fd9d45b10e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{检查号}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="150" y="0" width="100" height="39" uuid="85436358-82a2-4325-b3a4-3b30697a2bdf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{住院号}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="250" y="0" width="110" height="39" uuid="05451831-6ef3-4519-b1a7-5d4519ee87a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{门诊号}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="410" y="0" width="230" height="39" uuid="8ad9ac48-e170-4b46-aa70-9e3d223cfe00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{检查项目}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="640" y="0" width="80" height="39" uuid="06026e78-f0ff-4cde-8870-5f8460038d6b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{申请科室}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="720" y="0" width="60" height="39" uuid="e32c0a90-d5b3-4f23-a89f-f24fae3e7803"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{申请医生}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="360" y="0" width="50" height="39" uuid="09f5fe3e-0225-44cf-b692-8d5c8a13fb03"/>
+			</rectangle>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="360" y="0" width="49" height="39" uuid="c2440aec-70f7-4ab1-870a-cc2be5b1bdf7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{检查设备}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="313" y="1" width="80" height="20" uuid="b1bcb9b5-a68f-4611-af93-25e0e161548c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["第 "+$V{PAGE_NUMBER}+" 页"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="363" y="1" width="82" height="20" uuid="5e964f39-7273-42e0-8f8f-1edb158f44d0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" / 共 " + $V{PAGE_NUMBER}+" 页"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="560" y="0" width="161" height="20" uuid="11c00a49-4ef5-439a-b537-ecf0423c7681">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA["共 计："+$V{REPORT_COUNT}+" 条数据"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

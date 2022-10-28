@@ -1,0 +1,25 @@
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+<div class="easyui-panel" data-options="fit:true,border:false" style="padding:10px;">
+	<table class="mytablelaout">
+		<tr>
+			<td class="firstrow" colspan="2">请选择设备：</td>
+		</tr>
+		#set(n=1)
+		#for(key:map.keySet())
+			<tr>
+			<td class="firstcol">#(key)</td>
+			
+			#for(equ:map.get(key))
+				<td><a class="easyui-linkbutton c#(n%8)" onclick="gotoExamination(#(equ.id))" style="width:150px;height:80px;">#(equ.modality_name)</a></td>
+			#end
+			</tr>
+			#set(n=n+1)
+		#end
+	</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="easyui-layout" data-options="border:false" style="width:100%;height:100%;">
+	<div data-options="region:'west',title:'历史检查图片',split:true,hideCollapsedContent:false,collapsed:true,tools:'#tt_history_exam_image'" style="width:25%;">
+			<div class="easyui-panel" id="image_container_history" style="padding:0px;" data-options="border:false,fit:true,
+				onOpen:function(){
+					printImagePanel_history_onLoad('#(reportid)','#(studyid)','#(patientid)');
+				}">
+				<div class="cl imglist" id="img_ul_history" style="width:250px;height:315px;"></div>	
+			</div>
+			<div id="tt_history_exam_image">
+				<a class="easyui-tooltip" title="添加图片" onclick="addImage('#(reportid)','#(studyid)');">
+                	<i class="icon iconfont icon-plus7" style="font-size:15px;vertical-align:2px;text-align: 2px;"></i>
+                </a>
+			</div>
+	</div>
+	<div data-options="region:'center'">
+		<div class="easyui-panel" id="image_container" style="padding:0px;"
+			data-options="border:false,fit:true,onOpen:function(){
+					printImagePanel_onLoad(#(reportid),'#(studyid)');
+				}">
+		
+			<div class="easyui-layout" data-options="fit:true,border:false">
+		        <div data-options="region:'east',split:false,border:false" style="width:150px;padding:10px;">
+		        	<!-- <div class="cl imglist" id="img_ul_thumb" style="width:150px;height:315px;"></div> -->
+		        	<div style="margin-bottom: 10px;">
+		        		图像总数：<span id="total_images_span">0</span>
+		        	</div>
+		        	<div style="margin-bottom: 30px;">
+		        		选中总数：<span id="selected_images_span" style="color:red;">0</span>
+		        	</div>
+		        	<div style="margin-bottom: 10px;">
+		      			<select class="easyui-combobox" label="列数：" labelPosition="top" name="layout" style="width:125px;" 
+		      				data-options="onSelect:function(record){changeImageLayout(record,#(reportid));}">
+			                <option value="1">1</option>
+			                <option value="2">2</option>
+			                <option value="3" selected>3</option>
+			                <option value="4">4</option>
+			                <option value="5">5</option>
+			                <option value="6">6</option>
+			                <option value="7">7</option>
+			                <option value="8">8</option>
+		            	</select>
+					</div>
+					<div style="margin-bottom: 10px;">
+			            <a href="#" class="easyui-linkbutton" data-options="toggle:true" style="width:125px;" onclick="selectAllImage(#(reportid),this);">全选/取消全选</a>
+					</div>
+					<div style="margin-bottom: 10px;">
+			            <a href="#" class="easyui-linkbutton" data-options="" style="width:125px;" onclick="refreshImages(#(reportid),'#(studyid)');">刷新</a>
+					</div>
+					<div style="margin-bottom: 20px;">
+			            <a href="#" class="easyui-linkbutton c5" data-options="disabled:false" style="width:125px;" onclick="delSelectedImgs(#(reportid));">删除</a>
+					</div>
+					<div style="margin-bottom: 5px;">
+			            <a class="easyui-menubutton" style="width:125px;" onClick="printImages(#(reportid),#(orderid),'#(studyid)','one')";
+							data-options="plain:false,menu:'#printimgmenu_one'">单幅打印</a>
+						<div id="printimgmenu_one" style="width:100px;">
+						    <div><a class="easyui-linkbutton" plain="true" onClick="printImages(#(reportid),#(orderid),'#(studyid)','one')">单幅打印</a></div>
+						    <div><a class="easyui-linkbutton" plain="true" onClick="previewImages(#(reportid),#(orderid),'#(studyid)','one');">打印预览</a></div>
+						</div>
+			        </div>
+			        <div style="margin-bottom: 20px;">
+		      			<select class="easyui-combobox" id="one_temp_name_cb" label="单图模板：" labelPosition="top" name="layout" style="width:125px;" 
+		      				data-options="url:'#(ctx)/system/getPrintTemps?type=8',valueField: 'template_name',textField: 'description',panelHeight:200,editable:false,
+		      				onLoadSuccess:function(){
+			                	var data=$(this).combobox('getData');
+			                	if(data&&data[0]){
+			                		$(this).combobox('select',data[0].template_name);
+			                	}
+			                }"></select>
+					</div>
+			        <div style="margin-bottom: 5px;">
+			            <a class="easyui-menubutton" style="width:125px;" onClick="printImages(#(reportid),#(orderid),'#(studyid)','selected');" title="打印选中的图像"
+							data-options="plain:false,menu:'#printimgmenu_all'">批量打印</a>
+						<div id="printimgmenu_all" style="width:100px;">
+							<div><a class="easyui-linkbutton" plain="true" onClick="previewImages(#(reportid),#(orderid),'#(studyid)','selected');">批量打印预览</a></div>
+						    <div><a class="easyui-linkbutton" plain="true" onClick="printImages(#(reportid),#(orderid),'#(studyid)','all')">全部打印</a></div>
+						    <div><a class="easyui-linkbutton" plain="true" onClick="previewImages(#(reportid),#(orderid),'#(studyid)','all');">全部打印预览</a></div>
+						</div>
+			        </div>
+			        <div style="margin-bottom: 205px;">
+		      			<select class="easyui-combobox" id="all_temp_name_cb" label="图像模板：" labelPosition="top" name="layout" style="width:125px;" 
+		      				data-options="url:'#(ctx)/system/getPrintTemps?type=7',valueField: 'template_name',textField: 'description',panelHeight:200,editable:false,
+		      				onLoadSuccess:function(){
+			                	var data=$(this).combobox('getData');
+			                	if(data&&data[0]){
+			                		$(this).combobox('select',data[0].template_name);
+			                	}
+			                }"></select>
+					</div>
+			        <div style="margin-bottom: 0px;">
+			            <a href="#" class="easyui-linkbutton c1" id="saveImgDescBtn" data-options="disabled:true" style="width:125px;" onclick="saveImgDesc(#(reportid))">保存描述</a>
+			        </div>	
+		        </div>
+		        <div data-options="region:'center',border:false">
+		        	<div class="easyui-layout" data-options="fit:true,border:false">
+			        	<!-- <div data-options="region:'north'" style="height:50px"></div> -->
+			        	<div data-options="region:'center'" style="border-left-width:0px;">
+			        		<div class="cl imglist" id="img_ul" style="width:990px;height:315px;"></div>
+			        	</div>
+			        	<div data-options="region:'south',split:false" style="height:100px;border-left-width:0px;border-bottom-width:0px;">
+			        		
+			        		<div style="margin: 4px;">
+			        			 <input class="easyui-textbox" id="imgDescTxtbox" label="图像描述：" labelPosition="top" multiline="true" data-options="disabled:true"
+			        			 	value="" style="width:100%;height:90px">
+			        		</div>
+			        	
+			        	</div>
+		        	</div>
+		        </div>
+		    </div>
+		    <input id="print_img_reportstatus" name="reportstatus" type="hidden" value="#(report.reportstatus)">
+		    <input id="print_img_projecturl" name="projecturl" type="hidden" value="#(projecturl)">
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

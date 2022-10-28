@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="10" bottomMargin="0" uuid="bfd60632-ca28-4bae-9e67-af5ac4c504e9">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="KS_nmis.xml"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="reportid" class="java.lang.String"/>
+	<parameter name="reportFontSize" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     o.studyid,
+     o.studydatetime,
+     p."patientid",
+     a."outno",
+     a."inno",
+     p."patientname",
+     p."externalpatientno",
+     (SELECT name_zh FROM syscode WHERE syscode.code = p.sex AND syscode.type = '0001') AS sexdisplay,
+     a."age",
+     (SELECT name_zh FROM syscode WHERE syscode.code = a.ageunit AND syscode.type = '0008') AS ageunitdisplay,
+     a."wardno",
+     o."studyitems",
+     a."bedno",
+	 o."appdeptname",
+     r."studymethod",
+     r."checkdesc_txt" as checkdesc_txt,
+     r."checkresult_txt" as checkresult_txt,
+     r."reportphysician_name" ,
+     r."reporttime" ,
+     r."auditphysician_name",
+     r."audittime",
+     r."reportstatus",
+	 r."laserfilm",
+     r."scanningmethod",
+     r."gating",
+     r."reconstruction",
+     r."enhanced",
+     r."studyitem",
+     r."id",
+     (SELECT name_zh FROM syscode WHERE syscode.code = o.modality_type AND syscode.type = '0004') AS modality_type
+FROM
+     "studyorder" o INNER JOIN "patient" p ON o."patientidfk" = p."id"
+     INNER JOIN "admission" a ON o."admissionidfk" = a."id"
+     INNER JOIN "report" r ON o."id" = r."studyorderfk"
+WHERE
+     r.id = $P{reportid}
+ORDER BY
+     r.id DESC]]>
+	</queryString>
+	<field name="studyid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="studyid"/>
+	</field>
+	<field name="studydatetime" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="studydatetime"/>
+	</field>
+	<field name="patientid" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="patientid"/>
+	</field>
+	<field name="outno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="outno"/>
+	</field>
+	<field name="inno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="inno"/>
+	</field>
+	<field name="patientname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="patientname"/>
+	</field>
+	<field name="externalpatientno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="externalpatientno"/>
+	</field>
+	<field name="sexdisplay" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sexdisplay"/>
+	</field>
+	<field name="age" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="age"/>
+	</field>
+	<field name="ageunitdisplay" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="ageunitdisplay"/>
+	</field>
+	<field name="wardno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="wardno"/>
+	</field>
+	<field name="studyitems" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="studyitems"/>
+	</field>
+	<field name="bedno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="bedno"/>
+	</field>
+	<field name="appdeptname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="appdeptname"/>
+	</field>
+	<field name="studymethod" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="studymethod"/>
+	</field>
+	<field name="checkdesc_txt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="checkdesc_txt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="report"/>
+	</field>
+	<field name="checkresult_txt" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="checkresult_txt"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="report"/>
+	</field>
+	<field name="reportphysician_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="reportphysician_name"/>
+	</field>
+	<field name="reporttime" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="reporttime"/>
+	</field>
+	<field name="auditphysician_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="auditphysician_name"/>
+	</field>
+	<field name="audittime" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="audittime"/>
+	</field>
+	<field name="reportstatus" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="reportstatus"/>
+	</field>
+	<field name="laserfilm" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="laserfilm"/>
+	</field>
+	<field name="scanningmethod" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="scanningmethod"/>
+	</field>
+	<field name="gating" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="gating"/>
+	</field>
+	<field name="reconstruction" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="reconstruction"/>
+	</field>
+	<field name="enhanced" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="enhanced"/>
+	</field>
+	<field name="studyitem" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="studyitem"/>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+	</field>
+	<field name="modality_type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="modality_type"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="119" y="0" width="320" height="40" uuid="3f55aaf8-045e-41c8-9584-70fde4012c48"/>
+				<textElement textAlignment="Center">
+					<font fontName="宋体" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[喀什第一人民医院]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="29" width="260" height="30" uuid="f4198e1c-d4f7-4199-a487-223b4e5a9eb4"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[64排-128层CT检查报告单]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="127" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="54" width="40" height="30" uuid="b3e36d3b-7dd2-4938-9d54-2fa7394ecfda"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[姓名:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="40" y="54" width="100" height="30" uuid="d1264ee9-7bd2-4326-9c9b-36307bcbf713"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patientname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="141" y="56" width="51" height="30" uuid="6ccbcf1e-069d-463f-97b9-22c87ae695bb"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[性别:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="180" y="56" width="45" height="30" uuid="938d5496-bfa9-4ba6-bd7e-5c1172af60e8"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sexdisplay}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="240" y="56" width="41" height="30" uuid="cfb9c728-7eff-4d80-a7c3-f9f3914b69b1"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[年龄:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="280" y="56" width="50" height="30" uuid="a2470311-70f1-43d5-8da7-25d85f8f4ec3"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{age}+$F{ageunitdisplay}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="170" y="-2" width="59" height="30" uuid="8a5d39c7-cc6f-4462-973e-83e960e26e78"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[住院号:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="59" y="-1" width="100" height="30" uuid="62d5b0b3-0ef6-4e82-bef1-b29aa2668472"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{studyid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="229" y="-2" width="100" height="30" uuid="85889185-9f61-4cd3-98b8-74824ccbe69f"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="345" y="-2" width="71" height="30" uuid="b5c24026-1bae-4d11-8056-177dc965e30f"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[检查日期:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="17" width="71" height="30" uuid="10832523-1b85-4ca0-8496-a03e9f8186f9"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[报告日期:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="416" y="-2" width="139" height="30" uuid="2c6adcfc-bd53-4a18-a13b-5cf1362b6a40"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DATEFORMAT($F{studydatetime},"yyyy-MM-dd HH:mm:ss")]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="416" y="17" width="139" height="30" uuid="d936c2ac-499e-4e2e-abca-9068f5e6138c"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DATEFORMAT($F{reporttime},"yyyy-MM-dd HH:mm:ss")]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="52" width="555" height="3" uuid="3dab8c70-f911-402d-8518-7ebed00b6dac">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="350" y="56" width="40" height="30" uuid="d2213cbb-6a4c-405d-b7a0-5d1d25b98d95"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[科别:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="390" y="56" width="100" height="30" uuid="278bad6d-eb02-42cd-90e1-6ff34132ab26"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{appdeptname}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="75" width="68" height="30" uuid="0d4d7e44-5f26-4b6f-8d56-448c2b6bf550"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[检查部位:]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="68" y="75" width="362" height="30" uuid="065e23ce-7c34-4f84-bae5-5f6130c1d2bb"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{studyitem}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="430" y="75" width="50" height="30" uuid="cfac013d-3f62-43d3-beb1-ed654dd2a2e9"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[激光干片:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="484" y="75" width="55" height="30" uuid="c54b02d6-582a-465b-98df-f47bf33f5054"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{laserfilm}==null?"": ($F{laserfilm} +" 张")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="95" width="68" height="30" uuid="a36da7f9-8b57-42dc-a304-6702f5a01016"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[扫描方法:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="95" width="40" height="30" uuid="bcf81f35-f727-458e-90eb-28a33280038b"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[门控:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="95" width="38" height="30" uuid="94df87ea-071b-497e-b1b5-bdd18256f4d8"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[重建:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="95" width="70" height="30" uuid="07ffcbfb-8e54-424d-9c23-f5ff6bd165db"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[增强期相:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="68" y="95" width="73" height="30" uuid="3230b3a9-d77a-4159-ac3c-5b495ff96683"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{scanningmethod}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="180" y="95" width="80" height="30" uuid="eecbd7d8-b589-498d-ac57-1baf37c4ae9b"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gating}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="300" y="95" width="112" height="30" uuid="ba30b016-c801-47eb-b5ab-1e599aa4d516"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reconstruction}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="480" y="95" width="75" height="30" uuid="3f8120b1-3167-452e-b036-ba5c4d3c0cd2"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{enhanced}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="1" y="115" width="555" height="3" uuid="efaddf69-1512-459d-ae90-200465538080">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="0" y="-2" width="59" height="30" uuid="5f99a827-26ae-49bc-95f0-09cdf934984e"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CT  号:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="17" width="59" height="30" uuid="25feae2c-c4fe-4fbe-b0f2-f6556d3bc50e">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[病  区:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="59" y="17" width="100" height="30" uuid="4466b277-2e83-4a31-aa15-a002980a5fce">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{wardno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="170" y="17" width="59" height="30" uuid="0ad65fa7-e60c-46a5-9d6b-62beae933660">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[病  床:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="229" y="17" width="100" height="30" uuid="08ff793e-2dfa-4fc8-9631-7a3b6e3632d5">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bedno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="36" width="59" height="30" uuid="69e44067-ddbf-478c-ab1e-0a8e21f01b0d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[患者编号:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="59" y="36" width="100" height="30" uuid="3cdb53cd-01ee-4db7-83ea-691ca5d09779">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{patientid}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="416" y="36" width="139" height="30" uuid="3ea708be-f1af-41aa-bc60-8e4782a58928"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[DATEFORMAT($F{audittime},"yyyy-MM-dd HH:mm:ss")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="345" y="36" width="71" height="30" uuid="c17d2984-b1ff-415d-83c5-a4d57479a865"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[审核日期:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="-11" width="68" height="30" uuid="840c0076-2670-4fa3-aada-d4ee636d2dbe">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查方法:]]></text>
+			</staticText>
+		</band>
+		<band height="50">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="-4" width="555" height="54" uuid="34215a2a-5c94-4cfc-a2b1-9c4bede67f75">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{studymethod}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="35">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="5" width="79" height="30" uuid="70da99cc-47cb-436a-80a7-05dc6790b536">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[检查所见:]]></text>
+			</staticText>
+		</band>
+		<band height="150" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="554" height="150" uuid="8ee91d7a-969d-4971-b969-f8a96d49248d">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<propertyExpression name="net.sf.jasperreports.style.fontSize"><![CDATA[$P{reportFontSize}]]></propertyExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{checkdesc_txt}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="35">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="5" width="50" height="30" uuid="c906fe0e-26e2-4ada-a2f2-0c8a1c1f7797">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="宋体" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[印象:]]></text>
+			</staticText>
+		</band>
+		<band height="150" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField textAdjust="StretchHeight" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="554" height="150" uuid="f518c670-57e6-4a0c-abb1-b3bb3e8f8b13">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<propertyExpression name="net.sf.jasperreports.style.fontSize"><![CDATA[$P{reportFontSize}]]></propertyExpression>
+				</reportElement>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{checkresult_txt}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="72" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="0" y="11" width="80" height="30" uuid="f659a4c1-aad1-4e20-8c31-acca5949e988"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[报告医生:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="82" y="11" width="100" height="30" uuid="2b248850-ee22-4dd3-8300-dae3e9e15d66"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reportphysician_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="270" y="11" width="75" height="30" uuid="2b4d42c5-4982-4415-b619-3cfb68ccd029"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[审核医生:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="11" width="100" height="30" uuid="78e3228d-cd2b-4392-a1a9-252726d2b191"/>
+				<textElement>
+					<font fontName="宋体" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auditphysician_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="33" width="555" height="37" uuid="625dd539-0050-40f7-9175-5fc9a5b2725f"/>
+				<textElement>
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<text><![CDATA[★同级医疗机构检验、检查互认项目
+注：本报告仅供临床医师参考，不作为临床诊断。（签字有效，复印无效）]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1" y="31" width="555" height="1" uuid="e0ac85b1-8814-4260-a2bb-96fb779d49db">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+			<line>
+				<reportElement x="0" y="6" width="555" height="1" uuid="a71e2c9e-02a7-4100-8f90-a9fdee48e366">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.5"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Nmis:Web exploded" />
+    </artifacts-to-build>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="483f534c-9fad-4f15-8ca9-bb2fad4747e4" name="Changes" comment="项目管理-&gt;表单库">
+      <change afterPath="$PROJECT_DIR$/src/com/healta/plugin/activemq/TestActiveMQPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/res/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/i18n_en_US.properties" beforeDir="false" afterPath="$PROJECT_DIR$/res/i18n_en_US.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/i18n_zh_CN.properties" beforeDir="false" afterPath="$PROJECT_DIR$/res/i18n_zh_CN.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/system.properties" beforeDir="false" afterPath="$PROJECT_DIR$/res/system.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/healta/model/_SqlMetaBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/healta/model/_SqlMetaBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/healta/plugin/activemq/ESIndexDocReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/healta/plugin/activemq/ESIndexDocReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/healta/service/ScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/healta/service/ScheduleService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jsp File" />
+      </list>
+    </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2CmYXVxYO0kSH6bBBF5N3ohm88f" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="2" id="Remove" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0&quot;: &quot;0&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1&quot;: &quot;1&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2&quot;: &quot;2&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3&quot;: &quot;3&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4&quot;: &quot;4&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5&quot;: &quot;5&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0&quot;: &quot;235&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1&quot;: &quot;235&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2&quot;: &quot;235&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3&quot;: &quot;235&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4&quot;: &quot;234&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5&quot;: &quot;172&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0&quot;: &quot;0&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1&quot;: &quot;1&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2&quot;: &quot;2&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3&quot;: &quot;3&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4&quot;: &quot;4&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5&quot;: &quot;5&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0&quot;: &quot;234&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1&quot;: &quot;235&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2&quot;: &quot;235&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3&quot;: &quot;235&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4&quot;: &quot;235&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5&quot;: &quot;172&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ren/Desktop/git/spring-boot-demo/pom.xml&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ren\Desktop\svn\nmis_shhs\src\task" />
+      <recent name="C:\Users\ren\Desktop\svn\nmis_shhs\src\com\healta\constant" />
+      <recent name="C:\Users\ren\Desktop\svn\nmis_shhs\src\com\healta\plugin" />
+      <recent name="C:\Users\ren\Desktop\svn\nmis_shhs\src\com\healta\util" />
+      <recent name="C:\Users\ren\Desktop\svn\nmis_shhs\WebRoot\view\statistics" />
+    </key>
+  </component>
+  <component name="RunManager" selected="TomEE Server.TomEE 9.0.22">
+    <configuration name="ResearchService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.healta.service.ResearchService" />
+      <module name="Nmis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.healta.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="_JFinalSyngo_reportGenerator" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.healta.model._JFinalSyngo_reportGenerator" />
+      <module name="Nmis" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.healta.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TomEE 9.0.22" type="TomeeConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="TomEE 9.0.22" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="D:\javaTools\Java\jdk\jre" nameIsGenerated="true">
+      <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+      <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+      <deployment>
+        <artifact name="Nmis:Web exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/nmisshhs" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="89f43446-8bab-4cc0-9465-d595628b8427" />
+        <option name="HTTP_PORT" value="9090" />
+        <option name="JNDI_PORT" value="2099" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="14753" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="Nmis:Web exploded" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application._JFinalSyngo_reportGenerator" />
+      <item itemvalue="Application.ResearchService" />
+      <item itemvalue="TomEE Server.TomEE 9.0.22" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ResearchService" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\ren\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\ren\Desktop\svn\nmis_shhs" />
+          <option name="myCopyRoot" value="C:\Users\ren\Desktop\svn\nmis_shhs" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="C:\Users\ren\Desktop\svn\nmis_shhs" />
+          <option name="myCopyRoot" value="C:\Users\ren\Desktop\svn\nmis_shhs" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="483f534c-9fad-4f15-8ca9-bb2fad4747e4" name="Changes" comment="" />
+      <created>1659409267272</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659409267272</updated>
+      <workItem from="1659409269181" duration="1805000" />
+      <workItem from="1659412251327" duration="1981000" />
+      <workItem from="1659418491728" duration="455000" />
+      <workItem from="1659418985699" duration="18721000" />
+      <workItem from="1659506118945" duration="27683000" />
+      <workItem from="1659596285855" duration="2235000" />
+      <workItem from="1659598620687" duration="3428000" />
+      <workItem from="1659664081525" duration="7095000" />
+      <workItem from="1659685725921" duration="1435000" />
+      <workItem from="1659689993019" duration="1930000" />
+      <workItem from="1659847545459" duration="10779000" />
+      <workItem from="1659923266488" duration="23698000" />
+      <workItem from="1659964253830" duration="1404000" />
+      <workItem from="1660009466724" duration="6467000" />
+      <workItem from="1660024251443" duration="6819000" />
+      <workItem from="1660050997585" duration="9000" />
+      <workItem from="1660096348895" duration="7609000" />
+      <workItem from="1660273061850" duration="6303000" />
+      <workItem from="1660527898751" duration="1601000" />
+      <workItem from="1660613965338" duration="16388000" />
+      <workItem from="1660788228191" duration="729000" />
+      <workItem from="1660788978463" duration="12390000" />
+      <workItem from="1660873518102" duration="8478000" />
+      <workItem from="1661137129718" duration="620000" />
+      <workItem from="1661737987075" duration="4394000" />
+      <workItem from="1661760300699" duration="23000" />
+      <workItem from="1661826010432" duration="12215000" />
+      <workItem from="1661911950685" duration="17742000" />
+      <workItem from="1661996508131" duration="14910000" />
+      <workItem from="1662083030813" duration="3244000" />
+      <workItem from="1662342438129" duration="6314000" />
+      <workItem from="1662428249739" duration="1539000" />
+      <workItem from="1662515051525" duration="4574000" />
+      <workItem from="1662616188695" duration="1268000" />
+      <workItem from="1662687704567" duration="1231000" />
+      <workItem from="1662705521084" duration="1738000" />
+      <workItem from="1663033601761" duration="7625000" />
+      <workItem from="1663059354104" duration="22024000" />
+      <workItem from="1663205779089" duration="25822000" />
+      <workItem from="1663551702898" duration="31530000" />
+      <workItem from="1663917067388" duration="72000" />
+      <workItem from="1664345105164" duration="27574000" />
+      <workItem from="1665193947648" duration="33442000" />
+      <workItem from="1665366068650" duration="5024000" />
+      <workItem from="1665970917993" duration="440000" />
+      <workItem from="1666100706874" duration="3896000" />
+      <workItem from="1666151321095" duration="34846000" />
+      <workItem from="1666752862618" duration="70000" />
+      <workItem from="1666752945631" duration="225000" />
+      <workItem from="1666773313461" duration="2749000" />
+    </task>
+    <task id="LOCAL-00001" summary="统计模块添加">
+      <created>1659492956689</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1659492956689</updated>
+    </task>
+    <task id="LOCAL-00002" summary="统计模块添加">
+      <created>1659509711352</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1659509711352</updated>
+    </task>
+    <task id="LOCAL-00003" summary="统计模块_主页">
+      <created>1659583721460</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1659583721460</updated>
+    </task>
+    <task id="LOCAL-00004" summary="统计模块_主页">
+      <created>1659596694148</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1659596694148</updated>
+    </task>
+    <task id="LOCAL-00005" summary="统计模块_主页_报告">
+      <created>1660100169283</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1660100169283</updated>
+    </task>
+    <task id="LOCAL-00006" summary="检查模块_检查流程">
+      <created>1660809316273</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1660809316273</updated>
+    </task>
+    <task id="LOCAL-00007" summary="统计模块_主页_报告">
+      <created>1662010249248</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1662010249248</updated>
+    </task>
+    <task id="LOCAL-00008" summary="统计模块_主页_报告">
+      <created>1662428816339</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1662428816339</updated>
+    </task>
+    <task id="LOCAL-00009">
+      <created>1663120459498</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1663120459498</updated>
+    </task>
+    <task id="LOCAL-00010" summary="患者修改">
+      <created>1663227719553</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1663227719554</updated>
+    </task>
+    <task id="LOCAL-00011" summary="患者修改">
+      <created>1663295574718</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1663295574718</updated>
+    </task>
+    <task id="LOCAL-00012">
+      <created>1663553297395</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1663553297395</updated>
+    </task>
+    <task id="LOCAL-00013" summary="修改患者信息">
+      <created>1663560135307</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1663560135307</updated>
+    </task>
+    <task id="LOCAL-00014" summary="修改患者信息">
+      <created>1663564753360</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1663564753360</updated>
+    </task>
+    <task id="LOCAL-00015" summary="修改患者信息">
+      <created>1663731713531</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1663731713531</updated>
+    </task>
+    <task id="LOCAL-00016" summary="修改患者信息">
+      <created>1663742792013</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1663742792013</updated>
+    </task>
+    <task id="LOCAL-00017" summary="项目管理-&gt;表单库">
+      <created>1665284256955</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1665284256955</updated>
+    </task>
+    <task id="LOCAL-00018" summary="项目管理-&gt;表单库">
+      <created>1665296743398</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1665296743398</updated>
+    </task>
+    <task id="LOCAL-00019" summary="项目管理-&gt;表单库">
+      <created>1665301038256</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1665301038256</updated>
+    </task>
+    <task id="LOCAL-00020" summary="项目管理-&gt;表单库">
+      <created>1665369204555</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1665369204555</updated>
+    </task>
+    <task id="LOCAL-00021" summary="项目管理">
+      <created>1666151478559</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1666151478559</updated>
+    </task>
+    <task id="LOCAL-00022" summary="项目角色-用户级别">
+      <created>1666243838505</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1666243838505</updated>
+    </task>
+    <task id="LOCAL-00023" summary="项目角色-用户级别">
+      <created>1666246976472</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1666246976472</updated>
+    </task>
+    <task id="LOCAL-00024" summary="项目管理-&gt;表单库">
+      <created>1666250929334</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1666250929334</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="统计模块添加" />
+    <MESSAGE value="统计模块_主页" />
+    <MESSAGE value="检查模块_检查流程" />
+    <MESSAGE value="统计模块_主页_报告" />
+    <MESSAGE value="患者修改" />
+    <MESSAGE value="修改患者信息" />
+    <MESSAGE value="项目管理" />
+    <MESSAGE value="项目角色-用户级别" />
+    <MESSAGE value="项目管理-&gt;表单库" />
+    <option name="LAST_COMMIT_MESSAGE" value="项目管理-&gt;表单库" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints-defaults>
+        <breakpoint suspend="THREAD" type="java-line" />
+      </breakpoints-defaults>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/nmis_shhs$TomEE_9_0_22.ic" NAME="TomEE 9.0.22 Coverage Results" MODIFIED="1664509028127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/nmis_shhs$_JFinalSyngo_reportGenerator.ic" NAME="_JFinalSyngo_reportGenerator Coverage Results" MODIFIED="1659928892007" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.healta.model.*</FILTER>
+    </SUITE>
+  </component>
+</project>

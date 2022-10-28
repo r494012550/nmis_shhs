@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+<body>
+<div class="flex-container">
+	<div class="item">
+		<div class="item_header">今日预约数</div>
+		<div class="item_body" id="appoint_count" style="color:#fd7704">0</div>
+	</div>
+	<div class="item">
+		<div class="item_header">今日登记数</div>
+		<div class="item_body" id="reg_count" style="color:#fd7704">0</div>
+	</div>
+	<div class="item">
+		<div class="item_header">今日检查数</div>
+		<div class="item_body" id="exam_count" style="color:#fd7704">0</div>
+	</div>
+	<div class="item">
+		<div class="item_header">今日报告数</div>
+		<div class="item_body" id="report_count" style="color:#fd7704">0</div>
+	</div>
+	<div class="item">
+		<div class="item_header">今日初审数</div>
+		<div class="item_body" id="preaudit_count" style="color:#fd7704">0</div>
+	</div>
+	<div class="item">
+		<div class="item_header">今日审核数</div>
+		<div class="item_body" id="audit_count" style="color:#fd7704">0</div>
+	</div>
+	<div class="item">
+		<div class="item_header">查询条件</div>
+		<div style="color:#fd7704;text-align: center;">
+			<span id="time_span">2022-04-23</span>
+			<a href="#" class="easyui-linkbutton" data-options="plain:true" title="选择时间" style="height:20px;" onclick="selectTime();">
+				<i class="icon iconfont icon-shijian" style="color:#b0afc6;font-size:18px;"></i></a>
+			#if(userdac!=null && userdac.institution_ids !=null)
+			<select class="easyui-combobox" name="institution" id="institution_dac" style="width:90%;height:25px;" dac="true"
+					labelPosition="top" data-options="valueField:'id',textField:'name',url:'#(ctx)/dic/getInstitutionDAC',editable:false,
+					onLoadSuccess:function(data){if(data){$(this).combobox('select', data[0].id)}},
+					panelHeight:'auto',onChange:changeInstitution_db">
+			</select>
+			#end
+		</div>
+	</div>
+</div>
+<div class="flex-container">
+	<div class="item" style="width:50%;height:220px;">
+		<div id="container_totalNumOfSchOrReg" style="height:220px;" crossorigin="Anonymous"></div>
+	</div>
+	<div class="item" style="width:50%;height:220px;">
+		<div id="container_totalNumOfExam" style="height:220px;" crossorigin="Anonymous"></div>
+	</div>
+	<div class="item" style="width:50%;height:220px;">
+		<div id="container_totalNumOfReport" style="height:220px;" crossorigin="Anonymous"></div>
+	</div>
+</div>
+#if(revenueDashboard)
+<div class="flex-container">
+	<div class="item" style="width:50%;height:350px;">
+		<div id="container_eachEquipRevernue" style="height:350px;" crossorigin="Anonymous"></div>
+	</div>
+	<div class="item" style="width:50%;height:350px;">
+		<div id="container_modalityRevernue30Days" style="height:350px;" crossorigin="Anonymous"></div>
+	</div>
+	<div class="item" style="width:50%;height:350px;">
+		<div id="container_patientSourceRevernue30Days" style="height:350px;" crossorigin="Anonymous"></div>
+	</div>
+</div>
+<div class="flex-container">
+	<div class="item" style="width:100%;height:350px;">
+		<div id="container_eachEquipRevernue30Days" style="height:350px;" crossorigin="Anonymous"></div>
+	</div>
+</div>
+#end
+<div class="flex-container">
+	<div class="item" style="width:100%;height:400px;">
+		<div id="container_positiveRate" style="height:400px;" crossorigin="Anonymous"></div>
+	</div>
+</div>
+<div class="flex-container">
+	<div class="item" style="width:100%;height:#(usercount*25)px;">
+		<div id="container_online_time" style="height:#(usercount*25)px;" crossorigin="Anonymous"></div>
+	</div>
+</div>
+</body>
+</html>

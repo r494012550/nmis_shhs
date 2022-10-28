@@ -1,0 +1,113 @@
+<style type="text/css">
+.score_head{
+	text-align:center;
+	border:1px solid #CCC;
+	color: #888888;
+	height: 25px;
+	background:#ebeced;
+}
+.score_item{
+	text-align:center;
+	border:1px solid #CCC;
+	color: #888888;
+	height: 25px;
+}
+</style>
+<script>
+$(function(){
+	
+});
+function showPhysicianDetails(id,deptid,shiftid,worktimeid){
+	getJSON(window.localStorage.ctx+"/workforce/getPhysicianDetails",
+		{
+			id:id,
+			deptid:deptid,
+			shiftid:shiftid,
+			worktimeid:worktimeid
+		},
+		function(json){
+			console.log(json)
+		}
+	);
+}
+</script>
+
+<div>
+	<span style="width:300px;">报告医生报告数量列表：</span>
+	#if(shiftmap==null||shiftmap.size()==0)
+		<span style="font-weight: bold;">该科室的岗位还没有设置班次，请至“科室班次管理”设置班次。</span><br>
+	#else
+	<table style="width:100%;margin-left: -1px;">
+		<tr>
+			#for(x:shiftmap.get("23"))
+				#if(x.colspan>0)
+	        	<td class="score_head" colspan="#(x.colspan)">#(x.worktimename)</td>
+	        	#end
+	    	#end
+		</tr>
+		<tr>
+			#for(i=0;i<physicianlist.size();i++)
+	        <td class="score_item" colspan="1">
+	        	<a class="easyui-linkbutton" data-options="plain:true" 
+								onClick="showPhysicianDetails(#(physicianlist.get(i).getPhysician_id()),
+									#(physicianlist.get(i).getDept_id()),
+									#(physicianlist.get(i).getShiftid()),
+									#(physicianlist.get(i).getWorktimeid()))" style="height:20px">#(physicianlist.get(i).getPhysician_name())</a>
+	        </td>
+	    	#end
+		</tr>
+		<tr>
+			#for(i=0;i<physicianlist.size();i++)
+	        <td class="score_item" colspan="1">#(physicianlist.get(i).getReport_count())</td>
+	    	#end
+		</tr>
+	</table>
+	#end
+	#if(preauditphysicianlist!=null&&preauditphysicianlist.size()>0)
+	<span style="width:300px;">初审医生报告数量列表：</span>
+	<table style="width:100%;margin-left: -1px;">
+		<tr>
+			#for(x:shiftmap.get("27"))
+				#if(x.colspan>0)
+	        	<td class="score_head" colspan="#(x.colspan)">#(x.worktimename)</td>
+	        	#end
+	    	#end
+		</tr>
+		<tr>
+			#for(i=0;i<preauditphysicianlist.size();i++)
+	        <td class="score_item" colspan="1">#(preauditphysicianlist.get(i).getPhysician_name())</td>
+	    	#end
+		</tr>
+		<tr>
+			#for(i=0;i<preauditphysicianlist.size();i++)
+	        <td class="score_item" colspan="1">#(preauditphysicianlist.get(i).getReport_count())</td>
+	    	#end
+		</tr>
+	</table>
+	#end
+	
+	<span style="width:300px;">审核医生报告数量列表：</span>
+	#if(shiftmap==null||shiftmap.size()==0)
+		<span style="font-weight: bold;">该科室的岗位还没有设置班次，请至“科室班次管理”设置班次。</span>
+	#else
+	<table style="width:100%;margin-left: -1px;">
+		<tr>
+			#for(x:shiftmap.get("31"))
+				#if(x.colspan>0)
+	        	<td class="score_head" colspan="#(x.colspan)">#(x.worktimename)</td>
+	        	#end
+	    	#end
+		</tr>
+		<tr>
+			#for(i=0;i<auditphysicianlist.size();i++)
+	        <td class="score_item" colspan="1">#(auditphysicianlist.get(i).getPhysician_name())</td>
+	    	#end
+		</tr>
+		<tr>
+			#for(i=0;i<auditphysicianlist.size();i++)
+	        <td class="score_item" colspan="1">#(auditphysicianlist.get(i).getReport_count())</td>
+	    	#end
+		</tr>
+	</table>
+	#end
+</div>

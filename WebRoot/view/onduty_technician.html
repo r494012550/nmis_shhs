@@ -1,0 +1,128 @@
+<style type="text/css">
+        .shift_details_te{
+            float:left;
+            width:100%;
+            overflow-y: auto;
+			overflow-x: hidden;
+        }
+        
+        .shift_details_te td.drop{
+        	text-align:center;
+            border:1px solid #CCC;
+            background:#fafafa;
+            color:#444;
+            width:4%;
+            height:32px
+        }
+        .worktimes_shift_te{
+        	/* width:5%; */
+        	text-align:center;
+        	border:1px solid #CCC;
+        	color: #888888;
+        }
+        .blank_shift_te{
+        	width:3%;
+        }
+        .title_shift_te{
+        	text-align:center;
+        	width:11%;
+        	height:35px;
+        	border:1px solid #CCC;
+        	color: #888888;
+        }
+</style>
+<script>
+$(function(){
+
+		$('.right_shift td.drop').bind('contextmenu',function(e){
+			edititem_shift=e.target;
+			e.preventDefault();
+			if($(edititem_shift).attr("workdate")>(new Date()).format('yyyy-MM-dd')){
+				$('#mm_shift_td').menu('show', {
+					left: e.pageX,
+					top: e.pageY
+					});
+			}
+        });
+	});
+    </script>
+
+<div class="shift_details_te">
+	<table style="background:#ebeced;width:100%;margin-left: -1px;">
+		<tr>
+	        <td class="blank_shift_te"></td>
+	        <td class="blank_shift_te"></td>
+	        <td class="title_shift_te" colspan="#(shifts.size())">周一(#(weeklist[0]))</td>
+	        <td class="title_shift_te" colspan="#(shifts.size())">周二(#(weeklist[1]))</td>
+	        <td class="title_shift_te" colspan="#(shifts.size())">周三(#(weeklist[2]))</td>
+	        <td class="title_shift_te" colspan="#(shifts.size())">周四(#(weeklist[3]))</td>
+	        <td class="title_shift_te" colspan="#(shifts.size())">周五(#(weeklist[4]))</td>
+	        <td class="title_shift_te" style="color:#1a7bc9;" colspan="#(shifts.size())">周六(#(weeklist[5]))</td>
+	        <td class="title_shift_te" style="color:#1a7bc9;" colspan="#(shifts.size())">周日(#(weeklist[6]))</td>
+		</tr>
+		#if(post_shift_count>1)
+	    	<tr>
+	    		<td class="blank_shift_te"></td>
+	    		<td class="blank_shift_te"></td>
+	        #for(i=0;i<weeklist.length;i++)
+		        #for(j=0;j<shifts.size();j++)
+		        	#if(shifts.get(j).rowspan>0)
+		    		<td class="worktimes_shift_te" colspan="#(shifts.get(j).rowspan)">#(shifts.get(j).shiftname)</td>
+		    		#end
+		    	#end
+	    	#end
+	    	</tr>
+	    #end
+	    
+	     <tr>
+    		<td class="blank_shift_te"></td>
+    		<td class="blank_shift_te"></td>
+        #for(i=0;i<weeklist.length;i++)
+	        #for(j=0;j<shifts.size();j++)
+	    		<td class="worktimes_shift_te">#(shifts.get(j).name)</td>
+	    	#end
+    	#end
+    	</tr>
+		
+	    #if(post_shift_count==0)
+	    	<tr><td class="title_shift_te" colspan="#(shifts.size()*7+2)"><span style="font-weight: bold;">该科室的岗位还没有设置班次，请至“科室班次管理”设置班次。</span></td></tr>
+	    #end
+	    
+	    #for(i=0;i<modalitys.size();i++)
+		<tr>
+			#if(modalitys.get(i).groupid>0)
+			<td class="worktimes_shift_te" rowspan="#(modalitys.get(i).groupid)">#(modalitys.get(i).type)</td>
+			# end
+			<td class="worktimes_shift_te">#(modalitys.get(i).modality_name)<br/></td>
+
+			#for(j=0;j<weeklist.length;j++)
+				#for(k=0;k<shifts.size();k++)
+				<td class="drop" shiftid="#(shifts.get(k).shiftid)" shiftname="#(shifts.get(k).shiftname)" worktimeid="#(shifts.get(k).worktimeid)" 
+					starttime="#(shifts.get(k).starttime)" endtime="#(shifts.get(k).endtime)"
+					worktime_name="#(shifts.get(k).name)" workdate="#(weeklist[j])" modalityid="#(modalitys.get(i).id)">
+					
+					#set(swlist = map.get(shifts.get(k).shiftid+"-"+shifts.get(k).worktimeid+"-"+weeklist[j]+"-"+modalitys.get(i).id))
+					#if(swlist)
+						#for(l=0;l<swlist.size();l++)
+							<a class="easyui-menubutton" id="#(swlist.get(l).id)" data-options="#(weeklist[j].compareTo(today)>0?'menu:\'#mm_shift_item\',showEvent:\'click\',':'')hasDownArrow:false" 
+								onClick="editemp_shift=this;" style="height:20px" emid="#(swlist.get(l).employeeid)" modalityid="#(swlist.get(l).modalityid)">#(swlist.get(l).employeename)</a>
+						#end
+					#end
+				</td>
+				#end
+			#end
+			
+		</tr>
+		#end
+	</table>
+</div>
+<div id="mm_shift_td" class="easyui-menu" style="width:120px;">
+    <div onclick="employeeShift();">排班</div>
+    <div class="menu-sep"></div>
+    <div onclick="clearAllEmpl()">清空</div>
+</div>
+<div id="mm_shift_item" class="easyui-menu" style="width:120px;">
+    <div onclick="employeeShift();">排班</div>
+    <div class="menu-sep"></div>
+    <div onclick="removeEmployeeFromShift();">删除</div>
+</div>

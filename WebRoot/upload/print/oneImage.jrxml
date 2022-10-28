@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.0.final using JasperReports Library version 6.12.1-ac0eebdb29e4c0985457bab279a6db744d661530  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="oneImage" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c023bade-e214-4f5f-9a8e-fa9a86d62f8f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="nmis"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="imgid" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select i.id,i.imagefile,i.img_desc from syngoviaimage i where i.id=$P{imgid} and i.delflag=0 order by i.orderby]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+	</field>
+	<field name="imagefile" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="imagefile"/>
+	</field>
+	<field name="img_desc" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="img_desc"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="syngoviaimage"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="500" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="2" y="3" width="550" height="450" uuid="fac85e36-d709-4019-b8a9-d76faa92de70">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA["http://127.0.0.1:8080/report/image/image_GetViaImage?id="+$F{id}]]></imageExpression>
+			</image>
+			<textField isBlankWhenNull="true">
+				<reportElement x="2" y="460" width="550" height="30" uuid="5c4174e8-38f0-4b44-b282-31efbbb3b6f2"/>
+				<textElement>
+					<font fontName="宋体" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{img_desc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

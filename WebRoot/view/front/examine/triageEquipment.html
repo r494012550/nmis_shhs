@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>Insert title here</title>
+</head>
+<body>
+<div class="easyui-layout" data-options="fit:true,border:false">
+    <div data-options="region:'north',collapsible:false" title="同组设备" style="height:180px;padding:5px;">
+    
+	    <table class="mytablelaout">
+			<tr>
+			#for(equ:samegroup)
+				
+				<td><a class="easyui-linkbutton" data-options="toggle:true,group:'g1_exam_apply_triage'" onclick="modalityid_exam_apply_triage=#(equ.id);" style="width:150px;height:60px;">#(equ.modality_name)</a></td>
+				
+			#end
+			</tr>
+		</table>
+    </div>
+    
+    <div data-options="region:'center'" title="同类型设备" style="padding:5px;">
+        #for(equ:samemodality)
+				
+			<a class="easyui-linkbutton" data-options="toggle:true,group:'g1_exam_apply_triage'" onclick="modalityid_exam_apply_triage=#(equ.id);" style="width:150px;height:60px;">#(equ.modality_name)</a>
+				
+		#end
+    </div>
+</div>
+
+</body>
+</html>
